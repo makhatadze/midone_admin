@@ -131,9 +131,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="/var/www/html/cabinet.wft.group" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laravel-MyWebApp" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -171,7 +172,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603715482308</updated>
       <workItem from="1603715483467" duration="2085000" />
-      <workItem from="1603797429345" duration="3171000" />
+      <workItem from="1603797429345" duration="5166000" />
     </task>
     <servers />
   </component>
@@ -179,14 +180,26 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl" timestamp="1603799101290">
+    <state x="2510" y="214" width="802" height="686" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603800869142">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603799101290" />
+    <state x="2510" y="214" width="802" height="686" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603800869142" />
+    <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl" timestamp="1603800911833">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603800911833" />
+    <state width="261" height="506" key="HiddenNamespacesPopup" timestamp="1603800882512">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="261" height="506" key="HiddenNamespacesPopup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603800882512" />
     <state x="2710" y="478" width="401" height="158" key="NewPhpFileDialog" timestamp="1603798621572">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2710" y="478" width="401" height="158" key="NewPhpFileDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603798621572" />
+    <state x="2764" y="439" width="369" height="314" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1603802528670">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2764" y="439" width="369" height="314" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603802528670" />
     <state x="2607" y="292" width="618" height="522" key="find.popup" timestamp="1603800309705">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
