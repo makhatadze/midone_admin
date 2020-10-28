@@ -1,4 +1,4 @@
-@extends('backend/layout/' . $layout)
+@extends('backend/layout/login')
 
 @section('head')
     <title>Login - Midone - Laravel Admin Dashboard Starter Kit</title>

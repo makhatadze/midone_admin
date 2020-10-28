@@ -12,7 +12,7 @@
     </div>
     <div class="col-span-6 xxl:col-span-3 -mb-10 pb-10 mb-5">
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0 mt-5">
-            <a href="" class="button text-white bg-theme-1 shadow-md mr-2">პროდუქტის დამატება</a>
+            <a href="" class="button text-white bg-theme-1 shadow-md mr-2">Create New Role</a>
         </div>
         <div class="intro-y datatable-wrapper box p-5 mt-5">
             <table class="table table-report table-report--bordered display datatable w-full">
