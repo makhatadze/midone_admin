@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\PageController;
+use App\Http\Controllers\Backend\RolesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +26,13 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::middleware('auth')->group(function() {
-        Route::get('/', [PageController::class,'loadPage'])->name('dashboard');
-        Route::get('logout', [AuthController::class,'logout'])->name('logout');
-        Route::get('page/{layout}/{pageName}', [PageController::class,'loadPage'])->name('page');
+        Route::get('/', [PageController::class, 'loadPage'])->name('dashboard');
+        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('page/{layout}/{pageName}', [PageController::class, 'loadPage'])->name('page');
+
+        Route::resource('roles', RolesController::class)->middleware('can:isAdmin');
+
     });
+
 });
 
