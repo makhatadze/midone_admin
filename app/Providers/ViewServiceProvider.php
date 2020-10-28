@@ -26,5 +26,6 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer('*', 'App\Http\View\Composers\FakerComposer');
         View::composer('*', 'App\Http\View\Composers\LoggedInUserComposer');
+        View::composer('*', 'App\Http\View\Composers\MenuComposer');
     }
 }
