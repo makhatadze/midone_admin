@@ -10,17 +10,19 @@
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
+                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6"
+                     src="{{ asset('dist/images/logo.svg') }}">
                 <span class="hidden xl:block text-white text-lg ml-3 font-medium">Midone</span>
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
-                @foreach ($side_menu as $menu)
+                @foreach ($menuItems as $menu)
                     @if ($menu == 'devider')
                         <li class="side-nav__devider my-6"></li>
                     @else
                         <li>
-                            <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}" class="{{ $first_page_name == $menu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
+                            <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
+                               class="side-menu">
                                 <div class="side-menu__icon">
                                     <i data-feather="{{ $menu['icon'] }}"></i>
                                 </div>
@@ -32,10 +34,11 @@
                                 </div>
                             </a>
                             @if (isset($menu['sub_menu']))
-                                <ul class="{{ $first_page_name == $menu['page_name'] ? 'side-menu__sub-open' : '' }}">
+                                <ul class="">
                                     @foreach ($menu['sub_menu'] as $subMenu)
                                         <li>
-                                            <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}" class="{{ $second_page_name == $subMenu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
+                                            <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
+                                               class="side-menu">
                                                 <div class="side-menu__icon">
                                                     <i data-feather="activity"></i>
                                                 </div>
@@ -47,10 +50,11 @@
                                                 </div>
                                             </a>
                                             @if (isset($subMenu['sub_menu']))
-                                                <ul class="{{ $second_page_name == $subMenu['page_name'] ? 'side-menu__sub-open' : '' }}">
+                                                <ul class="">
                                                     @foreach ($subMenu['sub_menu'] as $lastSubMenu)
                                                         <li>
-                                                            <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}" class="{{ $third_page_name == $lastSubMenu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
+                                                            <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}"
+                                                               class="">
                                                                 <div class="side-menu__icon">
                                                                     <i data-feather="zap"></i>
                                                                 </div>

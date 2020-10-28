@@ -9,12 +9,13 @@
         </a>
     </div>
     <ul class="border-t border-theme-24 py-5 hidden">
-        @foreach ($side_menu as $menu)
+        @foreach ($menuItems as $menu)
             @if ($menu == 'devider')
                 <li class="menu__devider my-6"></li>
             @else
                 <li>
-                    <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}" class="{{ $first_page_name == $menu['page_name'] ? 'menu menu--active' : 'menu' }}">
+                    <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
+                       class="menu">
                         <div class="menu__icon">
                             <i data-feather="{{ $menu['icon'] }}"></i>
                         </div>
@@ -26,10 +27,11 @@
                         </div>
                     </a>
                     @if (isset($menu['sub_menu']))
-                        <ul class="{{ $first_page_name == $menu['page_name'] ? 'menu__sub-open' : '' }}">
+                        <ul class="">
                             @foreach ($menu['sub_menu'] as $subMenu)
                                 <li>
-                                    <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}" class="{{ $second_page_name == $subMenu['page_name'] ? 'menu menu--active' : 'menu' }}">
+                                    <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
+                                       class="menu">
                                         <div class="menu__icon">
                                             <i data-feather="activity"></i>
                                         </div>
@@ -41,10 +43,11 @@
                                         </div>
                                     </a>
                                     @if (isset($subMenu['sub_menu']))
-                                        <ul class="{{ $second_page_name == $subMenu['page_name'] ? 'menu__sub-open' : '' }}">
+                                        <ul class="">
                                             @foreach ($subMenu['sub_menu'] as $lastSubMenu)
                                                 <li>
-                                                    <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}" class="{{ $third_page_name == $lastSubMenu['page_name'] ? 'menu menu--active' : 'menu' }}">
+                                                    <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}"
+                                                       class="menu">
                                                         <div class="menu__icon">
                                                             <i data-feather="zap"></i>
                                                         </div>

@@ -1,45 +1,48 @@
-@extends('../layout/main')
+@extends('backend/layout/main')
 
 @section('head')
     @yield('subhead')
 @endsection
 
 @section('content')
-    @include('../layout/components/mobile-menu')
+    @include('backend/layout/components/mobile-menu')
     <div class="flex">
         <!-- BEGIN: Simple Menu -->
         <nav class="side-nav side-nav--simple">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
+                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6"
+                     src="{{ asset('dist/images/logo.svg') }}">
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
-                @foreach ($simple_menu as $menu)
+                @foreach ($menuItems as $menu)
                     @if ($menu == 'devider')
                         <li class="side-nav__devider my-6"></li>
                     @else
                         <li>
-                            <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}" class="{{ $first_page_name == $menu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
+                            <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
+                               class="side-menu">
                                 <div class="side-menu__icon">
                                     <i data-feather="{{ $menu['icon'] }}"></i>
                                 </div>
                                 <div class="side-menu__title">
-                                    {{ $menu['title'] }}  
+                                    {{ $menu['title'] }}
                                     @if (isset($menu['sub_menu']))
                                         <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
                                     @endif
                                 </div>
                             </a>
                             @if (isset($menu['sub_menu']))
-                                <ul class="{{ $first_page_name == $menu['page_name'] ? 'side-menu__sub-open' : '' }}">
+                                <ul class="">
                                     @foreach ($menu['sub_menu'] as $subMenu)
                                         <li>
-                                            <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}" class="{{ $second_page_name == $subMenu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
+                                            <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
+                                               class="side-menu">
                                                 <div class="side-menu__icon">
                                                     <i data-feather="activity"></i>
                                                 </div>
                                                 <div class="side-menu__title">
-                                                    {{ $subMenu['title'] }} 
+                                                    {{ $subMenu['title'] }}
                                                     @if (isset($subMenu['sub_menu']))
                                                         <i data-feather="chevron-down" class="side-menu__sub-icon"></i>
                                                     @endif
@@ -58,7 +61,7 @@
                                                         </li>
                                                     @endforeach
                                                 </ul>
-                                            @endif                                
+                                            @endif
                                         </li>
                                     @endforeach
                                 </ul>
@@ -71,7 +74,7 @@
         <!-- END: Simple Menu -->
         <!-- BEGIN: Content -->
         <div class="content">
-            @include('../layout/components/top-bar')
+            @include('backend/layout/components/top-bar')
             @yield('subcontent')
         </div>
         <!-- END: Content -->

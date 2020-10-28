@@ -1,11 +1,11 @@
-@extends('../layout/main')
+@extends('backend/layout/main')
 
 @section('head')
     @yield('subhead')
 @endsection
 
 @section('content')
-    @include('../layout/components/mobile-menu')
+    @include('backend/layout/components/mobile-menu')
     <!-- BEGIN: Top Bar -->
     <div class="border-b border-theme-24 -mt-10 md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 pt-3 md:pt-0 mb-10">
         <div class="top-bar-boxed flex items-center">
@@ -149,21 +149,22 @@
     <!-- BEGIN: Top Menu -->
     <nav class="top-nav">
         <ul>
-            @foreach ($top_menu as $menu)
+            @foreach ($menuItems as $menu)
                 <li>
-                    <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}" class="{{ $first_page_name == $menu['page_name'] ? 'top-menu top-menu--active' : 'top-menu' }}">
+                    <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
+                       class="top-menu">
                         <div class="top-menu__icon">
                             <i data-feather="{{ $menu['icon'] }}"></i>
                         </div>
                         <div class="top-menu__title">
-                            {{ $menu['title'] }}  
+                            {{ $menu['title'] }}
                             @if (isset($menu['sub_menu']))
                                 <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
                             @endif
                         </div>
                     </a>
                     @if (isset($menu['sub_menu']))
-                        <ul class="{{ $first_page_name == $menu['page_name'] ? 'top-menu__sub-open' : '' }}">
+                        <ul class="">
                             @foreach ($menu['sub_menu'] as $subMenu)
                                 <li>
                                     <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}" class="top-menu">
@@ -178,7 +179,7 @@
                                         </div>
                                     </a>
                                     @if (isset($subMenu['sub_menu']))
-                                        <ul class="{{ $second_page_name == $subMenu['page_name'] ? 'top-menu__sub-open' : '' }}">
+                                        <ul class="">
                                             @foreach ($subMenu['sub_menu'] as $lastSubMenu)
                                                 <li>
                                                     <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}" class="top-menu">
