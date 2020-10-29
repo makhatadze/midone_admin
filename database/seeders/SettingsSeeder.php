@@ -16,7 +16,7 @@ class SettingsSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'key' => 'active_menu',
-            'value' => 'side_menu'
+            'value' => 'side-menu'
         ]);
     }
 }
