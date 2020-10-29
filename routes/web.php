@@ -30,7 +30,11 @@ Route::prefix('admin')->group(function () {
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('page/{layout}/{pageName}', [PageController::class, 'loadPage'])->name('page');
 
-        Route::resource('roles', RolesController::class)->middleware('can:isAdmin');
+        Route::resource('roles', RolesController::class)
+            ->middleware('can:isAdmin')
+            ->name('index', 'rolesIndex')
+            ->name('create', 'rolesCreate')
+            ->name('store', 'rolesStore');
 
         // Create Ticket
 

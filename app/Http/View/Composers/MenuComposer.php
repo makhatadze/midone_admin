@@ -46,13 +46,13 @@ class MenuComposer
                 'icon' => 'key',
                 'page_name' => 'roles',
                 'title' => 'Roles',
-                'route' => '/roles'
+                'route' => route('rolesIndex')
             ],
             'createticket' => [
                 'icon' => 'file-text',
                 'page_name' => 'Create Ticket',
                 'title' => 'Create Ticket',
-                'route' => route('CreateTicket')
+                'route' => ''
             ],
         ];
 

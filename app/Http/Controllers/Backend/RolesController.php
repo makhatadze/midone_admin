@@ -34,7 +34,9 @@ class RolesController extends BackendController
      */
     public function create()
     {
-        return view('backend.directive.roles.create');
+        $permissions = Permission::all();
+
+        return view('backend.directive.roles.create')->with('permissions', $permissions);
     }
 
     /**
@@ -58,18 +60,19 @@ class RolesController extends BackendController
         $role->slug = $request->role_slug;
         $role->save();
 
-        $listOfPermissions = explode(',', $request->roles_permissions);//create array from separated/coma permissions
+        $listOfPermissions = $request->roles_permissions;
+
 
         foreach ($listOfPermissions as $permission) {
-            $permissions = new Permission();
-            $permissions->name = $permission;
-            $permissions->slug = strtolower(str_replace(" ", "-", $permission));
-            $permissions->save();
-            $role->permissions()->attach($permissions->id);
+            $permission = Permission::find($permission);
+            if ($permission == null) {
+                continue;
+            }
+            $role->permissions()->attach($permission);
             $role->save();
         }
 
-        return redirect('/roles');
+        return redirect('/roles')->with('success', 'Role Added Successfully');
 
     }
 

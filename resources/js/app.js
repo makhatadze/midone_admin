@@ -29,3 +29,13 @@ import showCode from './show-code'
 import sideMenu from './side-menu'
 import mobileMenu from './mobile-menu'
 import sideMenuTooltip from './side-menu-tooltip'
+import $ from './jquery'
+
+$(document).ready(function () {
+    $('#role_name').keyup(function (e) {
+        var str = $('#role_name').val();
+        str = str.replace(/\W+(?!$)/g, '-').toLowerCase(); //replace stapces with dash
+        $('#role_slug').val(str);
+        $('#role_slug').attr('placeholder', str);
+    });
+});

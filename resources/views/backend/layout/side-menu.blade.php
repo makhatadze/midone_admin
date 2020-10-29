@@ -21,7 +21,7 @@
                         <li class="side-nav__devider my-6"></li>
                     @else
                         <li>
-                            <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
+                            <a href="{{$menu['route']}}"
                                class="side-menu">
                                 <div class="side-menu__icon">
                                     <i data-feather="{{ $menu['icon'] }}"></i>

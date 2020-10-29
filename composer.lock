@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "457e6ffc757de65c3b06a75760fb66ae",
-    "packages": [
-        {
-            "name": "asm89/stack-cors",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/asm89/stack-cors.git",
-                "reference": "23f469e81c65e2fb7fc7bce371fbdc363fe32adf"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "e1f3d2d083b9007ecde30fa8b14f6f85",
+  "packages": [
+    {
+      "name": "asm89/stack-cors",
+      "version": "v2.0.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/asm89/stack-cors.git",
+        "reference": "23f469e81c65e2fb7fc7bce371fbdc363fe32adf"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/asm89/stack-cors/zipball/23f469e81c65e2fb7fc7bce371fbdc363fe32adf",
                 "reference": "23f469e81c65e2fb7fc7bce371fbdc363fe32adf",
@@ -1049,26 +1049,94 @@
                     "email": "taylor@laravel.com"
                 }
             ],
-            "description": "Powerful REPL for the Laravel framework.",
-            "keywords": [
-                "REPL",
-                "Tinker",
-                "laravel",
-                "psysh"
-            ],
-            "time": "2020-08-11T19:28:08+00:00"
+          "description": "Powerful REPL for the Laravel framework.",
+          "keywords": [
+            "REPL",
+            "Tinker",
+            "laravel",
+            "psysh"
+          ],
+          "time": "2020-08-11T19:28:08+00:00"
+        },
+    {
+      "name": "laravelcollective/html",
+      "version": "v6.2.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/LaravelCollective/html.git",
+        "reference": "3bb99be7502feb2129b375cd026ccb0fa4b66628"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/LaravelCollective/html/zipball/3bb99be7502feb2129b375cd026ccb0fa4b66628",
+        "reference": "3bb99be7502feb2129b375cd026ccb0fa4b66628",
+        "shasum": ""
+      },
+      "require": {
+        "illuminate/http": "^6.0|^7.0|^8.0",
+        "illuminate/routing": "^6.0|^7.0|^8.0",
+        "illuminate/session": "^6.0|^7.0|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "illuminate/view": "^6.0|^7.0|^8.0",
+        "php": ">=7.2.5"
+      },
+      "require-dev": {
+        "illuminate/database": "^6.0|^7.0|^8.0",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~7.1"
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "6.0-dev"
+        },
+        "laravel": {
+          "providers": [
+            "Collective\\Html\\HtmlServiceProvider"
+          ],
+          "aliases": {
+            "Form": "Collective\\Html\\FormFacade",
+            "Html": "Collective\\Html\\HtmlFacade"
+          }
+        }
+      },
+      "autoload": {
+        "psr-4": {
+          "Collective\\Html\\": "src/"
+        },
+        "files": [
+          "src/helpers.php"
+        ]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Adam Engebretson",
+          "email": "adam@laravelcollective.com"
         },
         {
-            "name": "league/commonmark",
-            "version": "1.5.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "a56e91e0fa1f6d0049153a9c34f63488f6b7ce61"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/a56e91e0fa1f6d0049153a9c34f63488f6b7ce61",
+          "name": "Taylor Otwell",
+          "email": "taylorotwell@gmail.com"
+        }
+      ],
+      "description": "HTML and Form Builders for the Laravel Framework",
+      "homepage": "https://laravelcollective.com",
+      "time": "2020-09-07T19:59:40+00:00"
+    },
+    {
+      "name": "league/commonmark",
+      "version": "1.5.6",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/thephpleague/commonmark.git",
+        "reference": "a56e91e0fa1f6d0049153a9c34f63488f6b7ce61"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/a56e91e0fa1f6d0049153a9c34f63488f6b7ce61",
                 "reference": "a56e91e0fa1f6d0049153a9c34f63488f6b7ce61",
                 "shasum": ""
             },

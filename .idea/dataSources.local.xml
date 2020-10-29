@@ -15,6 +15,7 @@
             <name qname="@" />
             <name qname="adminka" />
             <name qname="midone" />
+            <name qname="vito" />
           </node>
         </introspection-scope>
       </schema-mapping>
