@@ -37,7 +37,7 @@
                                 <ul class="">
                                     @foreach ($menu['sub_menu'] as $subMenu)
                                         <li>
-                                            <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
+                                            <a href=" {{ $subMenu['route'] }}"
                                                class="side-menu">
                                                 <div class="side-menu__icon">
                                                     <i data-feather="activity"></i>
