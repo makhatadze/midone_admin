@@ -46,7 +46,7 @@ class User extends Authenticatable
     // Profile
     public function profile()
     {
-        return $this->morphOne('App\Model\Profile', 'profileable');
+        return $this->morphOne('App\Models\Profile', 'profileable');
     }
 
 
