@@ -31,7 +31,6 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('isManager', function ($user) {
-
             return $user->roles->first()->slug == 'manager';
         });
 

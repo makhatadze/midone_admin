@@ -10,6 +10,7 @@
 
 namespace App\Traits;
 
+use App\Models\Permission;
 use App\Models\Role;
 
 trait HasRolesAndPermissions
@@ -37,7 +38,7 @@ trait HasRolesAndPermissions
      */
     public function permissions()
     {
-        return $this->belongsToMany(Role::class, 'users_roles');
+        return $this->belongsToMany(Permission::class, 'users_permissions');
     }
 
     /**
