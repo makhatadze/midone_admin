@@ -91,11 +91,19 @@ class RolesController extends BackendController
      *
      * @param Role $role
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
     public function edit(Role $role)
     {
-        return view('backend.directive.roles.edit', ['role' => $role]);
+        $permissions = Permission::all();
+
+        $rolePermissions = $role->permissions()->select('slug')->get()->toArray();
+
+        return view('backend.directive.roles.edit', [
+            'role' => $role,
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions
+        ]);
     }
 
     /**
@@ -114,25 +122,28 @@ class RolesController extends BackendController
             'role_slug' => 'required|max:255'
         ]);
 
+
         $role->name = $request->role_name;
         $role->slug = $request->role_slug;
         $role->save();
 
-        $role->permissions()->delete();
         $role->permissions()->detach();
 
-        $listOfPermissions = explode(',', $request->roles_permissions);//create array from separated/coma permissions
+        $listOfPermissions = $request->roles_permissions;
 
-        foreach ($listOfPermissions as $permission) {
-            $permissions = new Permission();
-            $permissions->name = $permission;
-            $permissions->slug = strtolower(str_replace(" ", "-", $permission));
-            $permissions->save();
-            $role->permissions()->attach($permissions->id);
-            $role->save();
+        if ($listOfPermissions) {
+            foreach ($listOfPermissions as $permission) {
+                $permission = Permission::find($permission);
+                if ($permission == null) {
+                    continue;
+                }
+                $role->permissions()->attach($permission);
+                $role->save();
+            }
         }
 
-        return redirect('/roles');
+
+        return redirect('/admin/roles');
     }
 
     /**
