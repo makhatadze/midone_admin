@@ -19,25 +19,29 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/directive/roles/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="Create departments heads table.">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/DepartmentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_04_112203_create_department_heads_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/users/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/layout/alerts.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/create-categories.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/create-departments.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/update-categories.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/update-departments.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/users/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/users/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/midone-admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/midone-admin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/RolesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/RolesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/HasRolesAndPermissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/HasRolesAndPermissions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/dist/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/dist/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/_app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/directive/roles/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/directive/roles/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/_modal.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_modal.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/side-menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -179,7 +183,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="ToolWindowCommit.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laravel-MyWebApp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../admin-panel" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -191,16 +195,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/Providers" />
-      <recent name="$PROJECT_DIR$/app/Models" />
-      <recent name="$PROJECT_DIR$/resources/views/module" />
-      <recent name="$PROJECT_DIR$/resources" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Backend" />
       <recent name="$PROJECT_DIR$/resources/views/backend" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/backend" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/backend/module/departments" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/module/users" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Backend" />
+      <recent name="$PROJECT_DIR$/app/Providers" />
+      <recent name="$PROJECT_DIR$/app/Models" />
     </key>
   </component>
   <component name="RunManager">
@@ -224,7 +229,19 @@
       <workItem from="1603867558561" duration="14819000" />
       <workItem from="1603893093156" duration="1115000" />
       <workItem from="1603955231892" duration="96000" />
-      <workItem from="1603956804152" duration="7613000" />
+      <workItem from="1603956804152" duration="14277000" />
+      <workItem from="1604297320729" duration="3777000" />
+      <workItem from="1604319220938" duration="9644000" />
+      <workItem from="1604384456561" duration="1532000" />
+      <workItem from="1604388371025" duration="7296000" />
+      <workItem from="1604396712250" duration="671000" />
+      <workItem from="1604404353959" duration="4557000" />
+      <workItem from="1604409238607" duration="4667000" />
+      <workItem from="1604414005279" duration="4000" />
+      <workItem from="1604415182193" duration="376000" />
+      <workItem from="1604466357793" duration="21996000" />
+      <workItem from="1604493806664" duration="39000" />
+      <workItem from="1604555829344" duration="6995000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor roles permissions migration. remove user_id and add permission_id.">
       <created>1603886105386</created>
@@ -289,7 +306,77 @@
       <option name="project" value="LOCAL" />
       <updated>1603969084506</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Create role create modal.">
+      <created>1603974225050</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1603974225050</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Change function for roles and menus.">
+      <created>1604395156827</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1604395156827</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Use polymorph to user and profile connection.">
+      <created>1604395200574</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1604395200574</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Change methods for roles and permission logics.">
+      <created>1604395452627</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1604395452627</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Create countries database and seeder for country resources.">
+      <created>1604395635400</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1604395635400</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add menu departments and users routes.">
+      <created>1604563084116</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563084116</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Models modify methods for create connection each other.">
+      <created>1604563137885</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563137885</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Create edit function for roles modify.">
+      <created>1604563210590</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563210590</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add country migration for create resource country codes.">
+      <created>1604563281791</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563281791</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Create departments heads table.">
+      <created>1604563517153</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563517153</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,7 +404,17 @@
     <MESSAGE value="Create Role module." />
     <MESSAGE value="Add layout for login." />
     <MESSAGE value="Change seeder and expire time." />
-    <option name="LAST_COMMIT_MESSAGE" value="Change seeder and expire time." />
+    <MESSAGE value="Create role create modal." />
+    <MESSAGE value="Change function for roles and menus." />
+    <MESSAGE value="Use polymorph to user and profile connection." />
+    <MESSAGE value="Change methods for roles and permission logics." />
+    <MESSAGE value="Create countries database and seeder for country resources." />
+    <MESSAGE value="Add menu departments and users routes." />
+    <MESSAGE value="Models modify methods for create connection each other." />
+    <MESSAGE value="Create edit function for roles modify." />
+    <MESSAGE value="Add country migration for create resource country codes." />
+    <MESSAGE value="Create departments heads table." />
+    <option name="LAST_COMMIT_MESSAGE" value="Create departments heads table." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -333,30 +430,37 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2566" y="266" width="802" height="686" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603866822018" />
-    <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603882469112">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604491596424">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603882469112" />
-    <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2" timestamp="1603969084387">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604491596424" />
+    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2" timestamp="1604563516975">
+      <screen x="0" y="193" width="1920" height="887" />
     </state>
-    <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969084387" />
-    <state x="2137" y="109" width="1538" height="903" key="DiffContextDialog" timestamp="1603969074381">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974224439" />
+    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563516975" />
+    <state x="2137" y="275" width="1538" height="894" key="DiffContextDialog" timestamp="1604563160012">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2137" y="109" width="1538" height="903" key="DiffContextDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969074381" />
-    <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl" timestamp="1603969366629">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2137" y="275" width="1538" height="894" key="DiffContextDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563160012" />
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl" timestamp="1604561724428">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
+    <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603982384141" />
     <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969366629" />
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604561724428" />
     <state width="261" height="506" key="HiddenNamespacesPopup" timestamp="1603969214348">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="261" height="506" key="HiddenNamespacesPopup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969214348" />
-    <state x="2710" y="478" width="401" height="158" key="NewPhpFileDialog" timestamp="1603969773917">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2710" y="644" width="401" height="158" key="NewPhpFileDialog" timestamp="1604473178619">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
+    <state x="2710" y="478" key="NewPhpFileDialog/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603975823383" />
     <state x="2710" y="478" width="401" height="158" key="NewPhpFileDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969773917" />
+    <state x="2710" y="644" width="401" height="158" key="NewPhpFileDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604473178619" />
     <state x="2673" y="236" width="475" height="642" key="RollbackChangesDialog" timestamp="1603970622922">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -365,22 +469,43 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603865692878" />
-    <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1603969089131">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604563518435">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
-    <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969089131" />
+    <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974226759" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563518435" />
     <state x="2764" y="439" width="369" height="328" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1603874072378">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2764" y="439" width="369" height="328" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603874072378" />
-    <state x="2607" y="292" width="618" height="522" key="find.popup" timestamp="1603969129213">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2648" y="526" width="526" height="393" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog" timestamp="1604562475061">
+      <screen x="1920" y="166" width="1920" height="1080" />
+    </state>
+    <state x="2648" y="526" width="526" height="393" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604562475061" />
+    <state x="107" y="251" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604411093087">
+      <screen x="0" y="193" width="1920" height="887" />
+    </state>
+    <state x="2092" y="293" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603979909659" />
+    <state x="107" y="251" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604411093087" />
+    <state x="507" y="193" width="1118" height="702" key="dock-window-1" timestamp="1604481421794">
+      <screen x="0" y="193" width="1920" height="887" />
+    </state>
+    <state x="507" y="193" width="1118" height="702" key="dock-window-1/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604481421794" />
+    <state x="2607" y="458" width="618" height="522" key="find.popup" timestamp="1604490448877">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2607" y="292" width="618" height="522" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969129213" />
-    <state x="2579" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1603874506403">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2607" y="458" width="618" height="522" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604490448877" />
+    <state x="2580" y="501" key="run.anything.popup" timestamp="1604473932228">
+      <screen x="1920" y="166" width="1920" height="1080" />
+    </state>
+    <state x="2580" y="335" key="run.anything.popup/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603981819564" />
+    <state x="2580" y="501" key="run.anything.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604473932228" />
+    <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup" timestamp="1604489962920">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2579" y="259" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603874506403" />
+    <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604489962920" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

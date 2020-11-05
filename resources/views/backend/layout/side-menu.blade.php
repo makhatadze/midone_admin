@@ -77,6 +77,7 @@
         <!-- BEGIN: Content -->
         <div class="content">
             @include('backend/layout/components/top-bar')
+            @include('.backend.layout.alerts')
             @yield('subcontent')
         </div>
         <!-- END: Content -->

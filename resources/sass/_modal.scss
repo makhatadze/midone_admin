@@ -1,12 +1,14 @@
+@import 'variables';
+
 .modal {
-    margin-top: -10000px;
-    margin-left: -10000px;
-    background: #00000080;
-    transition: visibility 0s linear 0.2s, opacity 0.2s 0s;
-    @apply invisible opacity-0 w-screen h-screen fixed left-0 top-0;
-    &.modal__overlap {
-        background: #000000a6;
-    }
+  margin-top: -10000px;
+  margin-left: -10000px;
+  background: #00000080;
+  transition: visibility 0s linear 0.2s, opacity 0.2s 0s;
+  @apply invisible opacity-0 w-screen h-screen fixed left-0 top-0;
+  &.modal__overlap {
+    background: #000000a6;
+  }
     &.show {
         transition: visibility 0s linear 0s, opacity 0.2s 0s;
         @apply visible opacity-100;
@@ -26,14 +28,19 @@
             &.modal__content--lg {
                 width: 600px;
             }
-            &.modal__content--xl {
-                width: 600px;
-            }
+
+          &.modal__content--xl {
+            width: 600px;
+          }
         }
-        @screen lg {
-            &.modal__content--xl {
-                width: 900px;
-            }
+      @screen lg {
+        &.modal__content--xl {
+          width: 900px;
         }
+      }
+
+      .help-block {
+        color: $red;
+      }
     }
 }
