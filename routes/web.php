@@ -73,7 +73,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('departments/delete-categories/{category}', [DepartmentController::class, 'deleteCategories'])
             ->name('deleteCategories')->middleware('can:categoriesDelete');
 
-        // Create Ticket
+        // Ticket
 
     });
 

@@ -62,9 +62,9 @@ class MenuComposer
             ],
             'createticket' => [
                 'icon' => 'file-text',
-                'page_name' => 'Create Ticket',
-                'title' => 'Create Ticket',
-                'route' => ''
+                'page_name' => 'Tickets',
+                'title' => 'Tickets',
+                'route' => route('ticketsIndex')
             ],
         ];
 

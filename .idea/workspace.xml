@@ -19,30 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="Create departments heads table.">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/DepartmentController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_04_112203_create_department_heads_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/users/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/layout/alerts.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/create-categories.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/create-departments.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/update-categories.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/update-departments.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/users/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/users/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" afterDir="false" />
+    <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Traits/HasRolesAndPermissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/HasRolesAndPermissions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dist/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dist/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_modal.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_modal.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/side-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FileController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -241,7 +224,7 @@
       <workItem from="1604415182193" duration="376000" />
       <workItem from="1604466357793" duration="21996000" />
       <workItem from="1604493806664" duration="39000" />
-      <workItem from="1604555829344" duration="6995000" />
+      <workItem from="1604555829344" duration="7436000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor roles permissions migration. remove user_id and add permission_id.">
       <created>1603886105386</created>
@@ -376,7 +359,28 @@
       <option name="project" value="LOCAL" />
       <updated>1604563517153</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Add permissions check functions.">
+      <created>1604563552411</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563552411</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Create user crud with modals.">
+      <created>1604563635469</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563635469</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add Crud Departments and Categories.">
+      <created>1604563662812</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563662812</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +418,10 @@
     <MESSAGE value="Create edit function for roles modify." />
     <MESSAGE value="Add country migration for create resource country codes." />
     <MESSAGE value="Create departments heads table." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create departments heads table." />
+    <MESSAGE value="Add permissions check functions." />
+    <MESSAGE value="Create user crud with modals." />
+    <MESSAGE value="Add Crud Departments and Categories." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Crud Departments and Categories." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -435,11 +442,11 @@
     </state>
     <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603882469112" />
     <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604491596424" />
-    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2" timestamp="1604563516975">
+    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2" timestamp="1604563662759">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974224439" />
-    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563516975" />
+    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563662759" />
     <state x="2137" y="275" width="1538" height="894" key="DiffContextDialog" timestamp="1604563160012">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -469,11 +476,11 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603865692878" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604563518435">
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604563664027">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974226759" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563518435" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563664027" />
     <state x="2764" y="439" width="369" height="328" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1603874072378">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -491,11 +498,11 @@
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="507" y="193" width="1118" height="702" key="dock-window-1/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604481421794" />
-    <state x="2607" y="458" width="618" height="522" key="find.popup" timestamp="1604490448877">
+    <state x="2607" y="458" width="618" height="522" key="find.popup" timestamp="1604563568972">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2607" y="292" width="618" height="522" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969129213" />
-    <state x="2607" y="458" width="618" height="522" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604490448877" />
+    <state x="2607" y="458" width="618" height="522" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563568972" />
     <state x="2580" y="501" key="run.anything.popup" timestamp="1604473932228">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
