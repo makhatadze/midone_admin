@@ -43,7 +43,7 @@ class MenuComposer
                 'route' => ''
             ],
             'roles' => [
-                'icon' => 'key',
+                'icon' => 'lock',
                 'page_name' => 'roles',
                 'title' => 'Roles',
                 'route' => route('rolesIndex')
@@ -53,6 +53,12 @@ class MenuComposer
                 'page_name' => 'users',
                 'title' => 'Users',
                 'route' => route('usersIndex')
+            ],
+            'departments' => [
+                'icon' => 'globe',
+                'page_name' => 'departments',
+                'title' => 'Departments',
+                'route' => route('departmentsIndex')
             ],
             'createticket' => [
                 'icon' => 'file-text',
