@@ -22,6 +22,8 @@ class CreateTicketsTable extends Migration
             $table->integer('level');
             $table->timestamp('deadline')->nullable();
             $table->boolean('confirm')->default(false);
+            $table->integer('process')->default(1);
+            $table->timestamp('closed_at')->nullable();
             $table->timestamps();
         });
     }

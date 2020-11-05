@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DepartmentController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\RolesController;
+use App\Http\Controllers\Backend\TicketsController;
 use App\Http\Controllers\Backend\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,7 +75,7 @@ Route::prefix('admin')->group(function () {
             ->name('deleteCategories')->middleware('can:categoriesDelete');
 
         // Ticket
-
+        Route::get('tickets', [TicketsController::class, 'index'])->name('ticketsIndex');
     });
 
 });

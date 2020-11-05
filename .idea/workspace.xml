@@ -20,12 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/tickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FileController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/TicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/TicketsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Ticket.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_29_085853_create_tickets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_29_085853_create_tickets_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +166,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="ToolWindowCommit.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../admin-panel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/backend/module/tickets" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -184,11 +184,11 @@
       <recent name="$PROJECT_DIR$/app/Http/Controllers/backend" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/backend/module/tickets" />
       <recent name="$PROJECT_DIR$/resources/views/backend/module/departments" />
       <recent name="$PROJECT_DIR$/resources/views/backend/module/users" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Backend" />
       <recent name="$PROJECT_DIR$/app/Providers" />
-      <recent name="$PROJECT_DIR$/app/Models" />
     </key>
   </component>
   <component name="RunManager">
@@ -224,7 +224,7 @@
       <workItem from="1604415182193" duration="376000" />
       <workItem from="1604466357793" duration="21996000" />
       <workItem from="1604493806664" duration="39000" />
-      <workItem from="1604555829344" duration="7436000" />
+      <workItem from="1604555829344" duration="8823000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor roles permissions migration. remove user_id and add permission_id.">
       <created>1603886105386</created>
@@ -380,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604563662812</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Add TicketsController and remove unused controllers.">
+      <created>1604563988101</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1604563988101</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +428,8 @@
     <MESSAGE value="Add permissions check functions." />
     <MESSAGE value="Create user crud with modals." />
     <MESSAGE value="Add Crud Departments and Categories." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Crud Departments and Categories." />
+    <MESSAGE value="Add TicketsController and remove unused controllers." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add TicketsController and remove unused controllers." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -437,16 +445,16 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2566" y="266" width="802" height="686" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603866822018" />
-    <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604491596424">
+    <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604564229653">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603882469112" />
-    <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604491596424" />
-    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2" timestamp="1604563662759">
+    <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604564229653" />
+    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2" timestamp="1604563988012">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974224439" />
-    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563662759" />
+    <state x="131" y="193" width="1729" height="887" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563988012" />
     <state x="2137" y="275" width="1538" height="894" key="DiffContextDialog" timestamp="1604563160012">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -468,19 +476,20 @@
     <state x="2710" y="478" key="NewPhpFileDialog/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603975823383" />
     <state x="2710" y="478" width="401" height="158" key="NewPhpFileDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969773917" />
     <state x="2710" y="644" width="401" height="158" key="NewPhpFileDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604473178619" />
-    <state x="2673" y="236" width="475" height="642" key="RollbackChangesDialog" timestamp="1603970622922">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2673" y="402" width="475" height="642" key="RollbackChangesDialog" timestamp="1604564226725">
+      <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2673" y="236" width="475" height="642" key="RollbackChangesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603970622922" />
+    <state x="2673" y="402" key="RollbackChangesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604564226725" />
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor" timestamp="1603865692878">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603865692878" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604563664027">
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604563990359">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974226759" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563664027" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563990359" />
     <state x="2764" y="439" width="369" height="328" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1603874072378">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -503,11 +512,11 @@
     </state>
     <state x="2607" y="292" width="618" height="522" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969129213" />
     <state x="2607" y="458" width="618" height="522" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604563568972" />
-    <state x="2580" y="501" key="run.anything.popup" timestamp="1604473932228">
+    <state x="2580" y="501" key="run.anything.popup" timestamp="1604564757256">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2580" y="335" key="run.anything.popup/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603981819564" />
-    <state x="2580" y="501" key="run.anything.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604473932228" />
+    <state x="2580" y="501" key="run.anything.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604564757256" />
     <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup" timestamp="1604489962920">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
