@@ -48,7 +48,7 @@
                         </td>
                         <td class="text-center border-b">
                             <div class="flex sm:justify-center items-center">
-                                <a class="flex items-center mr-3" href="/roles/{{ $role['id'] }}/edit"> <i
+                                <a class="flex items-center mr-3" href="{{route('rolesEdit',$role->id)}}"> <i
                                             data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                             </div>
                         </td>
