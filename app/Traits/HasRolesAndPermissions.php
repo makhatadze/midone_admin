@@ -67,4 +67,17 @@ trait HasRolesAndPermissions
 
         return false;
     }
+
+    /**
+     * Check if the user has Role
+     *
+     * @param String $permission
+     *
+     * @return boolean
+     */
+    public function hasPermission(string $permission)
+    {
+        return in_array($permission, array_column($this->permissions()->select('slug')->get()->toArray(), 'slug'));
+
+    }
 }
