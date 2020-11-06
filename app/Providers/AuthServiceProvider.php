@@ -1,5 +1,12 @@
 <?php
-
+/**
+ *  app/Providers/AuthServiceProvider.php
+ *
+ * User:
+ * Date-Time: 06.11.20
+ * Time: 10:49
+ * @author Vito Makhatadze <vitomaxatadze@gmail.com>
+ */
 namespace App\Providers;
 
 use App\Models\User;
@@ -38,34 +45,24 @@ class AuthServiceProvider extends ServiceProvider
             return $user->roles->first()->slug == 'content-editor';
         });
 
-        // Department Create
-        Gate::define('departmentCreate', function ($user) {
-            return $this->hasPermission($user, 'create');
+        // Read User
+        Gate::define('read_user', function ($user) {
+            return $this->hasPermission($user, 'read_user');
         });
 
-        //Department update
-        Gate::define('departmentsUpdate', function ($user) {
-            return $this->hasPermission($user, 'create');
+        // Create User
+        Gate::define('create_user', function ($user) {
+            return $this->hasPermission($user, 'create_user');
         });
 
-        //Department delete
-        Gate::define('departmentsDelete', function ($user) {
-            return $this->hasPermission($user, 'create');
+        // Create User
+        Gate::define('update_user', function ($user) {
+            return $this->hasPermission($user, 'update_user');
         });
 
-        //Category create
-        Gate::define('createCategories', function ($user) {
-            return $this->hasPermission($user, 'create');
-        });
-
-        //Category update
-        Gate::define('categoriesUpdate', function ($user) {
-            return $this->hasPermission($user, 'create');
-        });
-
-        //Category delete
-        Gate::define('categoriesDelete', function ($user) {
-            return $this->hasPermission($user, 'create');
+        // Delete User
+        Gate::define('delete_user', function ($user) {
+            return $this->hasPermission($user, 'delete_user');
         });
     }
 

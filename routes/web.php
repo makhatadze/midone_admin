@@ -43,13 +43,13 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('users', UsersController::class)
             ->middleware('role:admin,manager')
-            ->name('create', 'usersCreate')
-            ->name('edit', 'usersEdit')
+            ->name('create', 'usersCreate')->middleware('can:create_user')
+            ->name('edit', 'usersEdit')->middleware('can:update_user')
             ->name('update', 'usersUpdate');
 
-        Route::any('users', [UsersController::class, 'index'])->name('usersIndex');
-        Route::post('users/store', [UsersController::class, 'store'])->name('usersStore');
-        Route::delete('users/delete/{user}', [UsersController::class, 'destroy'])->name('usersDelete');
+        Route::any('users', [UsersController::class, 'index'])->name('usersIndex')->middleware('can:read_user');
+        Route::post('users/store', [UsersController::class, 'store'])->name('usersStore')->middleware('can:create_user');
+        Route::delete('users/delete/{user}', [UsersController::class, 'destroy'])->name('usersDelete')->middleware('can:delete_user');
 
 
         Route::get('departments', [DepartmentController::class, 'index'])
@@ -76,6 +76,9 @@ Route::prefix('admin')->group(function () {
 
         // Ticket
         Route::get('tickets', [TicketsController::class, 'index'])->name('ticketsIndex');
+        Route::get('tickets/departments/{department}', [TicketsController::class, 'departments'])->name('ticketsDepartments');
+        Route::post('tickets/store', [TicketsController::class, 'store'])->name('ticketsStore');
+
     });
 
 });

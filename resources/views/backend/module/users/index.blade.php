@@ -12,8 +12,10 @@
     </div>
     <div class="col-span-6 xxl:col-span-3 -mb-10 pb-10 mb-5">
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0 mt-5">
-            <a href="javascript:;" data-toggle="modal" data-target="#user_form_modal" id="create-user"
-               class="button text-white bg-theme-1 shadow-md mr-2">Create New User</a>
+            @if($loggedin_user->hasPermission('create_user'))
+                <a href="javascript:;" data-toggle="modal" data-target="#user_form_modal" id="create-user"
+                   class="button text-white bg-theme-1 shadow-md mr-2">Create New User</a>
+            @endif
         </div>
         <div class="intro-y datatable-wrapper box p-5 mt-5">
             <table class="table table-report table-report--bordered display datatable w-full">
@@ -54,10 +56,13 @@
                         </td>
                         <td class="text-center border-b">
                             @if($user->permissions->isNotEmpty())
-                                @foreach($user->permissions as $permission)
-                                    <span>
-                                        {{ $permission->name }}
-                                    </span>
+                                @foreach($user->permissions as $key => $permission)
+                                    @if($key < 3)
+                                        <span>{{ $permission->name }}</span>
+                                    @elseif($key == 3)
+                                        <span> ...</span>
+                                    @endif
+
                                 @endforeach
                             @endif
                         </td>
@@ -65,14 +70,19 @@
                             <div class="flex sm:justify-center items-center">
                                 <a class="flex items-center mr-3 user-view" href="javascript:;" id="{{$user->id}}"> <i
                                             data-feather="eye" class="w-4 h-4 mr-1" id="{{$user->id}}"></i> View </a>
-                                <a class="flex items-center mr-3 user-edit" href="javascript:;" id="{{$user->id}}"> <i
-                                            data-feather="check-square" class="w-4 h-4 mr-1" id="{{$user->id}}"></i>
-                                    Edit </a>
-                                <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal"
-                                   data-userid="{{$user['id']}}" onclick="deleteModal({{$user['id']}})"
-                                   data-target="#deleteModal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i>
-                                    Delete </a>
+                                @if($loggedin_user->hasPermission('update_user'))
+                                    <a class="flex items-center mr-3 user-edit" href="javascript:;" id="{{$user->id}}">
+                                        <i
+                                                data-feather="check-square" class="w-4 h-4 mr-1" id="{{$user->id}}"></i>
+                                        Edit </a>
+                                @endif
+                                @if($loggedin_user->hasPermission('delete_user'))
 
+                                    <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal"
+                                       data-userid="{{$user['id']}}" onclick="deleteModal({{$user['id']}})"
+                                       data-target="#deleteModal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i>
+                                        Delete </a>
+                                @endif
                             </div>
 
                         </td>

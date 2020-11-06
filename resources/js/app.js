@@ -30,7 +30,11 @@ import sideMenu from './side-menu'
 import mobileMenu from './mobile-menu'
 import sideMenuTooltip from './side-menu-tooltip'
 import $ from './jquery'
+
 require('./users/app')
+require('./tickets/app')
+
+
 $(document).ready(function () {
 
     // Autocomplete Role Name
