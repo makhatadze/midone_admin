@@ -40,31 +40,37 @@ class MenuComposer
                 'layout' => 'side-menu',
                 'page_name' => 'dashboard',
                 'title' => 'Dashboard',
-                'route' => ''
+                'route' => '',
+                'permission' => ''
             ],
             'roles' => [
                 'icon' => 'lock',
                 'page_name' => 'roles',
                 'title' => 'Roles',
-                'route' => route('rolesIndex')
+                'route' => route('rolesIndex'),
+                'permission' => ''
             ],
             'users' => [
                 'icon' => 'users',
                 'page_name' => 'users',
                 'title' => 'Users',
-                'route' => route('usersIndex')
+                'route' => route('usersIndex'),
+                'permission' => ''
+
             ],
             'departments' => [
                 'icon' => 'globe',
                 'page_name' => 'departments',
                 'title' => 'Departments',
-                'route' => route('departmentsIndex')
+                'route' => route('departmentsIndex'),
+                'permission' => 'read_department'
             ],
-            'createticket' => [
+            'my_tickets' => [
                 'icon' => 'file-text',
-                'page_name' => 'Tickets',
-                'title' => 'Tickets',
-                'route' => route('ticketsIndex')
+                'page_name' => 'My Tickets',
+                'title' => 'My Tickets',
+                'route' => route('ticketsIndex'),
+                'permission' => ''
             ],
         ];
 

@@ -17,7 +17,8 @@
             <div class="side-nav__devider my-6"></div>
             <ul>
                 @foreach ($menuItems as $menu)
-                    @if ($menu == 'devider')
+                    @if($menu['permission'] == '' || $loggedin_user->hasPermission($menu['permission']))
+                        @if ($menu == 'devider')
                         <li class="side-nav__devider my-6"></li>
                     @else
                         <li>
@@ -69,6 +70,7 @@
                                 </ul>
                             @endif
                         </li>
+                        @endif
                     @endif
                 @endforeach
             </ul>
