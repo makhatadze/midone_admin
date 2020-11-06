@@ -54,25 +54,25 @@ Route::prefix('admin')->group(function () {
 
         Route::get('departments', [DepartmentController::class, 'index'])
             ->name('departmentsIndex')
-            ->middleware('role:admin,manager');
+            ->middleware('can:read_department');
 
         Route::match(['get', 'post'], 'departments/create-departments', [DepartmentController::class, 'createDepartments'])
-            ->name('departmentsCreate')->middleware('can:departmentCreate');
+            ->name('departmentsCreate')->middleware('can:create_department');
 
         Route::match(['get', 'post'], 'departments/update-departments/{department}', [DepartmentController::class, 'updateDepartments'])
-            ->name('departmentsUpdate')->middleware('can:departmentsUpdate');
+            ->name('departmentsUpdate')->middleware('can:update_department');
 
         Route::delete('departments/delete-departments/{department}', [DepartmentController::class, 'deleteDepartments'])
             ->name('departmentsDelete')->middleware('can:departmentsDelete');
 
         Route::match(['get', 'post'], 'departments/create-categories', [DepartmentController::class, 'createCategories'])
-            ->name('createCategories')->middleware('can:createCategories');
+            ->name('createCategories')->middleware('can:delete_department');
 
         Route::match(['get', 'post'], 'departments/update-categories/{category}', [DepartmentController::class, 'categoriesUpdate'])
-            ->name('categoriesUpdate')->middleware('can:categoriesUpdate');
+            ->name('categoriesUpdate')->middleware('can:update_department');
 
         Route::delete('departments/delete-categories/{category}', [DepartmentController::class, 'deleteCategories'])
-            ->name('deleteCategories')->middleware('can:categoriesDelete');
+            ->name('deleteCategories')->middleware('can:delete_department');
 
         // Ticket
         Route::get('tickets', [TicketsController::class, 'index'])->name('ticketsIndex');

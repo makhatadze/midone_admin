@@ -12,7 +12,7 @@
     </div>
     <div class="flex">
         <div class="w-1/2 xxl:col-span-3 -mb-10 pb-10 mb-5 mr-5">
-            @if($loggedin_user->hasPermission('create'))
+            @if($loggedin_user->hasPermission('create_department'))
                 <div class="w-full sm:w-auto flex mt-4 sm:mt-0 mt-5">
                     <a href="{{route('departmentsCreate')}}" class="button text-white bg-theme-1 shadow-md mr-2">Create
                         New Department</a>
@@ -38,12 +38,12 @@
                             </td>
                             <td class="text-center border-b">
                                 <div class="flex sm:justify-center items-center">
-                                    @if($loggedin_user->hasPermission('create'))
+                                    @if($loggedin_user->hasPermission('update_department'))
                                         <a class="flex items-center mr-3"
                                            href="{{route('departmentsUpdate',$department->id)}}"> <i
                                                     data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                     @endif
-                                    @if($loggedin_user->hasPermission('create'))
+                                    @if($loggedin_user->hasPermission('delete_department'))
                                         <a class="flex items-center text-theme-6" href="javascript:;"
                                            data-toggle="modal" data-userid="{{$department['id']}}"
                                            onclick="deleteDepartmentModal({{$department['id']}})"
@@ -89,8 +89,10 @@
 
         <div class="w-1/2 xxl:col-span-3 -mb-10 pb-10 mb-5">
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0 mt-5">
+                @if($loggedin_user->hasPermission('create_department'))
                 <a href="{{route('createCategories')}}" class="button text-white bg-theme-1 shadow-md mr-2">Create New
                     Category</a>
+                @endif
             </div>
             <div class="intro-y datatable-wrapper box p-5 mt-5">
                 <table class="table table-report table-report--bordered display datatable w-full">
@@ -112,12 +114,12 @@
                             </td>
                             <td class="text-center border-b">
                                 <div class="flex sm:justify-center items-center">
-                                    @if($loggedin_user->hasPermission('create'))
+                                    @if($loggedin_user->hasPermission('update_department'))
                                         <a class="flex items-center mr-3"
                                            href="{{route('categoriesUpdate',$category->id)}}"> <i
                                                     data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                                     @endif
-                                    @if($loggedin_user->hasPermission('create'))
+                                    @if($loggedin_user->hasPermission('delete_department'))
                                         <a class="flex items-center text-theme-6" href="javascript:;"
                                            data-toggle="modal" data-userid="{{$category['id']}}"
                                            onclick="deleteCategoryModal({{$category['id']}})"

@@ -64,6 +64,26 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete_user', function ($user) {
             return $this->hasPermission($user, 'delete_user');
         });
+
+        // Read Department and Category
+        Gate::define('read_department', function ($user) {
+            return $this->hasPermission($user, 'read_department');
+        });
+
+        // Create Department and Category
+        Gate::define('create_department', function ($user) {
+            return $this->hasPermission($user, 'create_department');
+        });
+
+        // Update Department and Category
+        Gate::define('update_department', function ($user) {
+            return $this->hasPermission($user, 'update_department');
+        });
+
+        // Delete Department and Category
+        Gate::define('delete_department', function ($user) {
+            return $this->hasPermission($user, 'delete_department');
+        });
     }
 
     /**
