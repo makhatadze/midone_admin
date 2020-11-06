@@ -26,4 +26,10 @@ class Ticket extends Model
     {
         return $this->hasOne('App\Models\Department', 'id', 'department_id');
     }
+
+    // Message
+    public function message()
+    {
+        return $this->morphMany('App\Models\Message', 'messageable');
+    }
 }
