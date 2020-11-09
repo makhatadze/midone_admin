@@ -109,14 +109,15 @@ class UsersController extends BackendController
         if ($request->user_role != null && $request->user_role != '0') {
             $user->roles()->attach($request->user_role);
             $user->save();
-        }
 
-        if (count($request->permissions) > 0) {
-            foreach ($request->permissions as $permission) {
-                $user->permissions()->attach($permission);
-                $user->save();
+            if (count($request->permissions) > 0) {
+                foreach ($request->permissions as $permission) {
+                    $user->permissions()->attach($permission);
+                    $user->save();
+                }
             }
         }
+
 
         return redirect('/admin/users')->with('success', 'User successfully created!');
     }

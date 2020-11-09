@@ -217,8 +217,13 @@ $(document).ready(function () {
 
     $('.user-view').on('click', (e) => {
         let Cont = $('#user_view_modal');
-        $(':input', '#user_view_modal')
-            .val('')
+        $('.view-fullName').text('')
+        $('.view-birthday').text('')
+        $('.view-email').text('')
+        $('.view-role').text('')
+        $('.view-permissions').text('')
+
+
         $.ajax({
             url: `/admin/users/${e.target.id}`,
             method: 'get',
@@ -242,10 +247,11 @@ $(document).ready(function () {
                     (!permissions) ? permissions = `${el.name}` : permissions = `${permissions}, ${el.name}`
                 })
                 $('.view-permissions').text(permissions)
-
+an
             }
         });
         Cont.modal('show')
+
     })
     $('#btn-view-close').on('click', function () {
         $('#user_view_modal').modal('hide')
