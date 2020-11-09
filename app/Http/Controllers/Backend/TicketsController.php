@@ -129,7 +129,7 @@ class TicketsController extends BackendController
             $data['file'] = $request->file('file');
         }
 
-        Mail::to('v_makhatadze@cu.edu.ge')->send(new TicketMail($data));
+//        Mail::to('v_makhatadze@cu.edu.ge')->send(new TicketMail($data));
 
 
         return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
