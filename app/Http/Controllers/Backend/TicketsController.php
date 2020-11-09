@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Mail\TicketMail;
 use App\Models\Approve;
 use App\Models\Category;
 use App\Models\Department;
@@ -15,6 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Mail;
 
 class TicketsController extends BackendController
 {
@@ -110,6 +112,13 @@ class TicketsController extends BackendController
         $message->answer = false;
         $ticket->message()->save($message);
 
+        $data = [
+            'subject' => 'Create ticket',
+            'message' => $request->ticket_message,
+            'department' => Department::getName($request->ticket_department),
+            'user' => auth()->user()->name
+        ];
+
         if ($request->hasFile('file')) {
             $fileName = date('Ymhs') . $request->file('file')->getClientOriginalName();
             $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
@@ -117,7 +126,11 @@ class TicketsController extends BackendController
             $message->file()->create([
                 'name' => $fileName
             ]);
+            $data['file'] = $request->file('file');
         }
+
+//        Mail::to('v_makhatadze@cu.edu.ge')->send(new TicketMail($data));
+
 
         return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
 
