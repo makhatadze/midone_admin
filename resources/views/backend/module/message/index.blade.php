@@ -43,25 +43,6 @@
                             </div>
                         </div>
                 </div>
-                
-                {{-- Aproved Chats --}}
-                <div x-show="tab === 'aproved'" class="w-full col-span-2 block" >
-
-                        <div :class="{ 'bg-white border-l-4 border-indigo-700': chat === 'chat3' }" @click="chat = 'chat3'"  class="py-5 w-full hover:bg-white cursor-pointer  flex items-center px-4 ">
-                            <img src="{{asset('../img/user3.jpg')}}" class="w-12 h-12 rounded-full object-cover">
-                            <div class="ml-2">
-                                <h6 class="font-bold text-sm">Timūr Gurkānī</h6>
-                                <p  class="w-full text-xs font-normal" style="overflow: hidden;
-                                text-overflow: ellipsis;
-                                display: -webkit-box;
-                                -webkit-line-clamp: 1; /* number of lines to show */
-                                -webkit-box-orient: vertical;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ipsa repellendus ducimus voluptates, esse, iste rem iure voluptas architecto provident cumque molestias, beatae saepe nobis autem officia nulla quae eius!</p>
-                            </div>
-                        </div>
-
-                </div>
-
-
 
             </div>
         </div>

@@ -6,8 +6,10 @@ use App\Mail\TicketMail;
 use App\Models\Approve;
 use App\Models\Category;
 use App\Models\Department;
+use App\Models\File;
 use App\Models\Message;
 use App\Models\Ticket;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Contracts\Console\Application;
@@ -27,7 +29,7 @@ class TicketsController extends BackendController
      */
     public function index()
     {
-        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
+        $tickets = Ticket::where('user_id', auth()->user()->id)->with('user')->get();
 
         $departments = Department::all();
 
@@ -204,6 +206,38 @@ class TicketsController extends BackendController
 
     }
 
+
+    public function messages(Ticket $ticket)
+    {
+        $messages = $ticket->message()->with(['file', 'user'])->get();
+        return $messages;
+    }
+
+    public function downloadFile(File $file)
+    {
+        $pathToFile = asset('storage/tickets/' . $file->id . '/' . $file->name);
+
+
+        return response()->download($pathToFile);
+
+    }
+
+    public function sendMessage(Request $request, Ticket $ticket)
+    {
+        $request->validate([
+            'message' => 'required'
+        ]);
+
+        $message = new Message();
+        $message->body = $request->message;
+        $message->answer = false;
+        $message->user_id = auth()->user()->id;
+        $ticket->message()->save($message);
+        return [
+            'body' => $message->body,
+            'user' => User::getName(auth()->user()->id)
+        ];
+    }
 
     protected function confirm($department)
     {

@@ -83,4 +83,11 @@ class Ticket extends Model
             'department_id' => $department_id
         ];
     }
+
+    public function user()
+    {
+        return $this->hasmany('App\Models\User', 'id', 'user_id');
+
+    }
+
 }

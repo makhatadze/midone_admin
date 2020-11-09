@@ -28,4 +28,10 @@ class Message extends Model
     {
         return $this->morphMany('App\Models\File', 'fileable');
     }
+
+    public function user()
+    {
+        return $this->hasmany('App\Models\User', 'id', 'user_id');
+
+    }
 }

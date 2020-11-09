@@ -91,6 +91,12 @@ Route::prefix('admin')->group(function () {
         Route::post('tickets/approve/{ticket}', [TicketsController::class, 'ticketApprove'])->name('ticketApprove');
 
         Route::post('tickets/confirm/{ticket}', [TicketsController::class, 'ticketConfirm'])->name('ticketConfirm');
+
+        Route::get('tickets/messages/{ticket}', [TicketsController::class, 'messages'])->name('messages');
+
+        Route::get('tickets/download-file/{file}', [TicketsController::class, 'downloadFile'])->name('downloadFile');
+
+        Route::post('tickets/send-message/{ticket}', [TicketsController::class, 'sendMessage'])->name('sendMessage');
     });
 
 });
