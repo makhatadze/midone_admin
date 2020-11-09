@@ -54,10 +54,14 @@ class RolesController extends BackendController
             'role_slug' => 'required|max:255'
         ]);
 
+        if (strtolower($request->role_slug) == 'admin') {
+            return back()->with('warning', 'Role Slug can not be "admin"');
+        }
+
         $role = new Role();
 
         $role->name = $request->role_name;
-        $role->slug = $request->role_slug;
+        $role->slug = strtolower($request->role_slug);
         $role->save();
 
         $listOfPermissions = $request->roles_permissions;
