@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Approve;
 use App\Models\Category;
 use App\Models\Department;
 use App\Models\Message;
@@ -24,7 +25,7 @@ class TicketsController extends BackendController
      */
     public function index()
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
 
         $departments = Department::all();
 
@@ -117,4 +118,48 @@ class TicketsController extends BackendController
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Application|Factory|Response|View|Application|Factory|View
+     */
+    public function getAllTickets()
+    {
+        $authUser = auth()->user();
+        return view('backend.module.tickets.tickets', [
+            'tickets' => $authUser->getTickets(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @param Ticket $ticket
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|RedirectResponse|Redirector
+     */
+    public function ticketApprove(Request $request, Ticket $ticket)
+    {
+        $request->validate([
+            'department' => 'required|integer',
+            'approve' => 'integer|nullable'
+        ]);
+
+        $approve = new Approve();
+        $approve->ticket_id = $ticket->id;
+        $approve->department_id = $request->department;
+        $approve->user_id = auth()->user()->id;
+        $message = 'Ticket approved successfully';
+
+        if ($request->approve == null) {
+            $approve->status = false;
+            $message = 'Ticket rejected successfully';
+        }
+
+        $approve->save();
+
+        return redirect('/admin/tickets-all')->with('success', $message);
+
+    }
 }

@@ -79,6 +79,8 @@ Route::prefix('admin')->group(function () {
         Route::get('tickets/departments/{department}', [TicketsController::class, 'departments'])->name('ticketsDepartments');
         Route::post('tickets/store', [TicketsController::class, 'store'])->name('ticketsStore');
 
+        Route::get('tickets-all', [TicketsController::class, 'getAllTickets'])->name('getAllTickets');
+        Route::post('tickets/approve/{ticket}', [TicketsController::class, 'ticketApprove'])->name('ticketApprove');
     });
 
 });

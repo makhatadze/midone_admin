@@ -72,6 +72,13 @@ class MenuComposer
                 'route' => route('ticketsIndex'),
                 'permission' => ''
             ],
+            'all_tickets' => [
+                'icon' => 'navigation',
+                'page_name' => 'User Tickets',
+                'title' => 'User Tickets',
+                'route' => route('getAllTickets'),
+                'permission' => ''
+            ]
         ];
 
     }

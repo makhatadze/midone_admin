@@ -32,4 +32,55 @@ class Ticket extends Model
     {
         return $this->morphMany('App\Models\Message', 'messageable');
     }
+
+    public function getTicketLevelName()
+    {
+        if ($this->level == 1)
+            return 'Low';
+        if ($this->level == 2)
+            return 'Medium';
+        if ($this->level == 3)
+            return 'High';
+        return false;
+    }
+
+    public function getApproveDepartments()
+    {
+        $data = [];
+
+        // Get if Main Department approved
+        $data[0] = $this->getApproveArray($this->department_id);
+
+        if ($this->category_id) {
+            $category = Category::find($this->category_id);
+            if (count($category->departments) > 0) {
+                foreach ($category->departments as $dep) {
+                    $data [] = $this->getApproveArray($dep->id);
+                }
+            }
+        }
+        return $data;
+    }
+
+    protected function getApproveArray($department_id)
+    {
+        $approveDepartment = Approve::where([['department_id', $department_id], ['ticket_id', $this->id]])->first();
+        if ($approveDepartment != null) {
+            return [
+                'approved' => true,
+                'user' => User::getName($approveDepartment->user_id),
+                'department' => Department::getName($approveDepartment->department_id),
+                'created_at' => $approveDepartment->created_at,
+                'status' => $approveDepartment->status,
+                'department_id' => $department_id
+            ];
+        }
+        return [
+            'approved' => false,
+            'user' => '',
+            'department' => Department::getName($department_id),
+            'created_at' => '',
+            'department_id' => $department_id
+        ];
+    }
 }

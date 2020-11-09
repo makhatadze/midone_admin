@@ -30,4 +30,10 @@ class Department extends Model
     {
         return $this->belongsToMany(Category::class, 'department_categories');
     }
+
+    public static function getName($id)
+    {
+        $department = Department::find($id);
+        return $department ? $department->name : 'Department deleted';
+    }
 }
