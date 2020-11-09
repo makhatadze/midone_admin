@@ -3,6 +3,7 @@
 namespace App\Http\View\Composers;
 
 use App\Faker;
+use App\Models\Setting;
 use Illuminate\View\View;
 
 class LoggedInUserComposer
@@ -15,6 +16,8 @@ class LoggedInUserComposer
      */
     public function compose(View $view)
     {
-        $view->with('loggedin_user', request()->user());
+        $activeMenu = Setting::where('key', 'active_menu')->first();
+
+        $view->with('loggedin_user', request()->user())->with('activeMenu', $activeMenu->value);
     }
 }

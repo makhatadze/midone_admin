@@ -14,7 +14,7 @@
                 <li class="menu__devider my-6"></li>
             @else
                 <li>
-                    <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
+                    <a href="{{$menu['route']}}"
                        class="menu">
                         <div class="menu__icon">
                             <i data-feather="{{ $menu['icon'] }}"></i>
@@ -30,7 +30,7 @@
                         <ul class="">
                             @foreach ($menu['sub_menu'] as $subMenu)
                                 <li>
-                                    <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
+                                    <a href="{{$subMenu['route']}}"
                                        class="menu">
                                         <div class="menu__icon">
                                             <i data-feather="activity"></i>
@@ -46,7 +46,7 @@
                                         <ul class="">
                                             @foreach ($subMenu['sub_menu'] as $lastSubMenu)
                                                 <li>
-                                                    <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}"
+                                                    <a href="{{$subMenu['route']}}"
                                                        class="menu">
                                                         <div class="menu__icon">
                                                             <i data-feather="zap"></i>

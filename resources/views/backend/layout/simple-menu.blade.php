@@ -20,7 +20,7 @@
                         <li class="side-nav__devider my-6"></li>
                     @else
                         <li>
-                            <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
+                            <a href="{{$menu['route']}}"
                                class="side-menu">
                                 <div class="side-menu__icon">
                                     <i data-feather="{{ $menu['icon'] }}"></i>
@@ -36,7 +36,7 @@
                                 <ul class="">
                                     @foreach ($menu['sub_menu'] as $subMenu)
                                         <li>
-                                            <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
+                                            <a href="{{$menu['route']}}"
                                                class="side-menu">
                                                 <div class="side-menu__icon">
                                                     <i data-feather="activity"></i>
@@ -52,7 +52,7 @@
                                                 <ul class="{{ $second_page_name == $subMenu['page_name'] ? 'side-menu__sub-open' : '' }}">
                                                     @foreach ($subMenu['sub_menu'] as $lastSubMenu)
                                                         <li>
-                                                            <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}" class="{{ $third_page_name == $lastSubMenu['page_name'] ? 'side-menu side-menu--active' : 'side-menu' }}">
+                                                            <a href="{{$lastSubMenu['route']}}">
                                                                 <div class="side-menu__icon">
                                                                     <i data-feather="zap"></i>
                                                                 </div>
@@ -75,6 +75,7 @@
         <!-- BEGIN: Content -->
         <div class="content">
             @include('backend/layout/components/top-bar')
+            @include('.backend.layout.alerts')
             @yield('subcontent')
         </div>
         <!-- END: Content -->
