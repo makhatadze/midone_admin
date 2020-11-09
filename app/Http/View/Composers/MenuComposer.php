@@ -78,6 +78,13 @@ class MenuComposer
                 'title' => 'User Tickets',
                 'route' => route('getAllTickets'),
                 'permission' => ''
+            ],
+            'messages' => [
+                'icon' => 'message-square',
+                'page_name' => 'Messages',
+                'title' => 'Messages',
+                'route' => route('getAllMessages'),
+                'permission' => ''
             ]
         ];
 

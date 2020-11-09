@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\RolesController;
 use App\Http\Controllers\Backend\TicketsController;
 use App\Http\Controllers\Backend\UsersController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,10 @@ Route::prefix('admin')->group(function () {
             ->name('store', 'rolesStore')
             ->name('edit', 'rolesEdit')
             ->name('update', 'rolesUpdate');
+            
+        Route::get('/messages', [MessageController::class, 'index'])
+        ->middleware('can:isAdmin')
+        ->name('getAllMessages');
 
         Route::resource('users', UsersController::class)
             ->middleware('role:admin,manager')

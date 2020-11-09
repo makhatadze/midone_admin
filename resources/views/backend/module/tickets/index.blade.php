@@ -10,8 +10,8 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <div class="col-span-6 xxl:col-span-3 -mb-10 pb-10 mb-5">
-        <div class="w-full sm:w-auto flex mt-4 sm:mt-0 mt-5">
+    <div class="col-span-6 xxl:col-span-3  pb-10 mb-5">
+        <div class="w-full sm:w-auto flex  sm:mt-0 mt-5">
             <a href="javascript:;" id="create-ticket"
                class="button text-white bg-theme-1 shadow-md mr-2">Create New Ticket</a>
         </div>

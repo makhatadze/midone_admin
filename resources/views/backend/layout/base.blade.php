@@ -23,10 +23,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('../css/fonts.css') }}" />
     <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
-
 @yield('body')
 
 </html>
