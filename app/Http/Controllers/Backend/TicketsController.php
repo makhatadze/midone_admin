@@ -107,6 +107,7 @@ class TicketsController extends BackendController
         $message = new Message();
         $message->body = $request->ticket_message;
         $message->user_id = auth()->user()->id;
+        $message->answer = false;
         $ticket->message()->save($message);
 
         if ($request->hasFile('file')) {
