@@ -29,7 +29,11 @@ class TicketsController extends BackendController
 
         $departments = Department::all();
 
-        $categories = $departments[0]->categories()->get();
+        $categories = [];
+
+        if (count($departments) > 0) {
+            $categories = $departments[0]->categories()->get();
+        }
 
 
         return view('backend.module.tickets.index', [
