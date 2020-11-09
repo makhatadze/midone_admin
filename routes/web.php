@@ -81,6 +81,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('tickets-all', [TicketsController::class, 'getAllTickets'])->name('getAllTickets');
         Route::post('tickets/approve/{ticket}', [TicketsController::class, 'ticketApprove'])->name('ticketApprove');
+
+        Route::post('tickets/confirm/{ticket}', [TicketsController::class, 'ticketConfirm'])->name('ticketConfirm');
     });
 
 });
