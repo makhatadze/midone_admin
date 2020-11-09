@@ -44,14 +44,29 @@
                             <div class="flex items-center sm:justify-center "> {{$ticket->process}}</div>
                         </td>
                         <td class="border-b">
-                            <div class="flex items-center sm:justify-center "> {{$ticket->deadline}}</div>
+                            @if($ticket['deadline'] != null)
+                                <div class="flex items-center  sm:justify-center"> {{$ticket['deadline']}}</div>
+                                <div class="flex items-center  sm:justify-center text-gray-600 text-xs">
+                                    @if($ticket['closed_at'] != null)
+                                        <?php echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at']))
+                                            ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
+                                        ?>
+                                    @endif
+                                </div>
+                            @else
+                                <div class="flex items-center  sm:justify-center">No Deadline</div>
+
+                            @endif
                         </td>
                         <td class="border-b">
                             <div class="flex items-center sm:justify-center "> {{$ticket->created_at}}</div>
                         </td>
                         <td class="text-center border-b">
-                            <div class="flex sm:justify-center items-center">
-
+                            <div class="flex items-center  sm:justify-center"> {{$ticket['closed_at']}}</div>
+                            <div class="flex items-center  sm:justify-center text-blue-100-700 text-xs">
+                                @if($ticket['closed_at'] != null)
+                                    {{$ticket['confirm']}}
+                                @endif
                             </div>
 
                         </td>

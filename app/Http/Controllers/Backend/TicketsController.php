@@ -82,7 +82,7 @@ class TicketsController extends BackendController
 
         if ($request->hasFile('file')) {
             $request->validate([
-                'file' => 'required|mimes:pdf,xlx,csv,jpeg,png,bmp,gif,svg,webp|max:4096'
+                'file' => 'required|mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
             ]);
         }
 
@@ -107,6 +107,7 @@ class TicketsController extends BackendController
         $message = new Message();
         $message->body = $request->ticket_message;
         $message->user_id = auth()->user()->id;
+        $message->answer = false;
         $ticket->message()->save($message);
 
         if ($request->hasFile('file')) {
@@ -164,6 +165,35 @@ class TicketsController extends BackendController
         $approve->save();
 
         return redirect('/admin/tickets-all')->with('success', $message);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Ticket $ticket
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|RedirectResponse|Redirector
+     */
+    public function ticketConfirm(Ticket $ticket)
+    {
+
+        if ($ticket && auth()->user()->canConfirm($ticket)) {
+            $ticket->confirm = auth()->user()->name;
+            $ticket->closed_at = Carbon::now()->toDateTimeString();
+            $ticket->save();
+            return redirect('/admin/tickets-all')->with('success', 'Ticket successfully confirmed');
+
+        }
+
+        return redirect('/admin/tickets-all')->with('danger', 'Something wrong, Ticket not confirmed.');
+
+
+    }
+
+
+    protected function confirm($department)
+    {
 
     }
 }

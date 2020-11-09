@@ -11,7 +11,8 @@ class Message extends Model
 
     protected $fillable = [
         'user_id',
-        'body'
+        'body',
+        'answer'
     ];
     protected $table = 'messages';
 

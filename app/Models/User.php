@@ -178,7 +178,7 @@ class User extends Authenticatable
         return $data;
     }
 
-    protected function canConfirm($ticket)
+    public function canConfirm($ticket)
     {
         if ($ticket->closed_at) {
             return false;

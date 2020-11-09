@@ -7,6 +7,6 @@ import dtResponsive from 'datatables.net-responsive-dt'
     // Datatable
     $('.datatable').DataTable({
         responsive: true,
-        order: [[0, 'desc']]
+        order: [[0, 'desc']],
     })
 })($)

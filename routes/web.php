@@ -29,10 +29,13 @@ Route::prefix('admin')->group(function () {
         Route::post('register', [AuthController::class,'register'])->name('register');
     });
 
+
     Route::middleware('auth')->group(function() {
         Route::get('/', [PageController::class, 'loadPage'])->name('dashboard');
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('page/{layout}/{pageName}', [PageController::class, 'loadPage'])->name('page');
+
+        Route::get('active-menu/{activeMenu}', [PageController::class, 'activeMenu'])->name('activeMenu');
 
         Route::resource('roles', RolesController::class)
             ->middleware('can:isAdmin')
@@ -86,6 +89,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('tickets-all', [TicketsController::class, 'getAllTickets'])->name('getAllTickets');
         Route::post('tickets/approve/{ticket}', [TicketsController::class, 'ticketApprove'])->name('ticketApprove');
+
+        Route::post('tickets/confirm/{ticket}', [TicketsController::class, 'ticketConfirm'])->name('ticketConfirm');
     });
 
 });
