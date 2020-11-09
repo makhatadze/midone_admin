@@ -99,7 +99,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="overflow-y-scroll px-5 pt-5 flex-1" id="messenger-body">
+                        <div class="overflow-y-scroll px-5 pt-5 flex-1"
+                             style="max-height: 400px; display: flex; flex-direction: column-reverse"
+                             id="messenger-body">
                         </div>
                         <div class="pt-4 pb-10 sm:py-4 flex items-center border-t border-gray-200">
                             <textarea name="message-text"
@@ -236,6 +238,7 @@
             }).done(function (data) {
                 let content = '';
                 if (data) {
+                    data = data.reverse();
                     data.forEach(el => {
                         if (el.answer == 0) {
                             if (el.file.length > 0) {
@@ -295,7 +298,7 @@
                 axios.post(`tickets/send-message/${id}`, {
                     message: message,
                 }).then(res => {
-                    $('#messenger-body').append(`<div class="chat__box__text-box flex items-end float-left mb-4">
+                    $('#messenger-body').prepend(`<div class="chat__box__text-box flex items-end float-left mb-4">
                             <div class="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
                             <p>${res.data.user}</p>
                             </div>
