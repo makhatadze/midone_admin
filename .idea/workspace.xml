@@ -21,12 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/TicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/TicketsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/components/mobile-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/components/mobile-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/tickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/tickets/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/tickets/tickets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/tickets/tickets.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +277,7 @@
       <workItem from="1604984739192" duration="50000" />
       <workItem from="1604984890490" duration="626000" />
       <workItem from="1604985532834" duration="13000" />
-      <workItem from="1604985560200" duration="10817000" />
+      <workItem from="1604985560200" duration="12141000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor roles permissions migration. remove user_id and add permission_id.">
       <created>1603886105386</created>
@@ -606,7 +601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604998044549</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Add messenger created at">
+      <created>1605000824026</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1605000824026</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +637,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Crud Departments and Categories." />
     <MESSAGE value="Add TicketsController and remove unused controllers." />
     <MESSAGE value="Create tickets table with all parameters." />
     <MESSAGE value="Create permissions seeder." />
@@ -660,7 +661,8 @@
     <MESSAGE value="Block some menu items and routes by permissions." />
     <MESSAGE value="Remove admin role from public and create message anwer module." />
     <MESSAGE value="Create redirect url." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create redirect url." />
+    <MESSAGE value="Add messenger created at" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add messenger created at" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -681,11 +683,11 @@
     </state>
     <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603882469112" />
     <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604907325391" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1604998044490">
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1605000823721">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974224439" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604998044490" />
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605000823721" />
     <state x="2598" y="476" width="626" height="493" key="DUMP_DIALOG_DIMENSION_KEY" timestamp="1604901090829">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -720,11 +722,11 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603865692878" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604998046816">
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1605000826773">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974226759" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604998046816" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605000826773" />
     <state x="2764" y="605" width="369" height="349" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1604902498546">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>

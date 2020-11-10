@@ -90,7 +90,6 @@ class UsersController extends BackendController
             return true;
         }
 
-
         $user = new User;
         $user->name = $request->first_name . ' ' . $request->last_name;
         $user->email = $request->email;
@@ -109,7 +108,7 @@ class UsersController extends BackendController
             $user->roles()->attach($request->user_role);
             $user->save();
 
-            if (count($request->permissions) > 0) {
+            if ($request->permissions != null) {
                 foreach ($request->permissions as $permission) {
                     $user->permissions()->attach($permission);
                     $user->save();
