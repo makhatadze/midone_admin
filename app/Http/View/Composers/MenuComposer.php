@@ -35,27 +35,19 @@ class MenuComposer
     public function menuItems()
     {
         return [
-            'dashboard' => [
-                'icon' => 'home',
-                'layout' => 'side-menu',
-                'page_name' => 'dashboard',
-                'title' => 'Dashboard',
-                'route' => '',
-                'permission' => ''
-            ],
             'roles' => [
                 'icon' => 'lock',
                 'page_name' => 'roles',
                 'title' => 'Roles',
                 'route' => route('rolesIndex'),
-                'permission' => ''
+                'permission' => 'read_role'
             ],
             'users' => [
                 'icon' => 'users',
                 'page_name' => 'users',
                 'title' => 'Users',
                 'route' => route('usersIndex'),
-                'permission' => ''
+                'permission' => 'read_user'
 
             ],
             'departments' => [
@@ -77,14 +69,7 @@ class MenuComposer
                 'page_name' => 'User Tickets',
                 'title' => 'User Tickets',
                 'route' => route('getAllTickets'),
-                'permission' => ''
-            ],
-            'messages' => [
-                'icon' => 'message-square',
-                'page_name' => 'Messages',
-                'title' => 'Messages',
-                'route' => route('getAllMessages'),
-                'permission' => ''
+                'permission' => 'read_ticket'
             ]
         ];
 
