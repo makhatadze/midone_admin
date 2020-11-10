@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-    <title>Dashboard - Midone - Laravel Admin Dashboard Starter Kit</title>
+    <title>LLC - Create roles</title>
 @endsection
 
 @section('subcontent')

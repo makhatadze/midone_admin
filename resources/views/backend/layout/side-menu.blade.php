@@ -9,19 +9,19 @@
     <div class="flex">
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
-            <a href="" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6"
-                     src="{{ asset('dist/images/logo.svg') }}">
-                <span class="hidden xl:block text-white text-lg ml-3 font-medium">Midone</span>
+            <a href="/" class="intro-x flex items-center pl-5 pt-4">
+                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-25"
+                     src="{{ asset('logo.svg') }}">
             </a>
+
             <div class="side-nav__devider my-6"></div>
             <ul>
                 @foreach ($menuItems as $menu)
                     @if($menu['permission'] == '' || $loggedin_user->hasPermission($menu['permission']))
                         @if ($menu == 'devider')
-                        <li class="side-nav__devider my-6"></li>
-                    @else
-                        <li>
+                            <li class="side-nav__devider my-6"></li>
+                        @else
+                            <li>
                             <a href="{{$menu['route']}}"
                                class="side-menu">
                                 <div class="side-menu__icon">

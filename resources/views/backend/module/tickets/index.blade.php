@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-    <title>Dashboard - Midone - Laravel Admin Dashboard Starter Kit</title>
+    <title>LLC - My Tickets</title>
 @endsection
 
 @section('subcontent')
@@ -72,7 +72,7 @@
                         </td>
                         <td class="text-center border-b">
                             <div class="flex sm:justify-center items-center">
-                                <a class="flex items-center mr-3"
+                                <a class="flex items-center mr-3 cursor-pointer"
                                    onclick="showMessages({{$ticket['id']}},{{$ticket->user[0]}})"><i
                                             data-feather="eye" class="w-4 h-4 mr-1"></i> Message </a>
                             </div>
@@ -84,6 +84,7 @@
             </table>
         </div>
         <div class="modal" id="messagenger">
+            <input type="text" disabled hidden name="ticket_id">
             <div class="modal__content modal__content--xl p-10 text-center">
                 <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9">
                     <div class="chat__box box">
@@ -95,7 +96,9 @@
                                         <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
                                              src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
                                     </div>
-                                    <div class="font-medium text-base ml-2" id="messenger-user"></div>
+                                    <div class="font-medium text-base ml-2" id="messenger-user">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +111,7 @@
                                       class="chat__box__input input w-full h-16 resize-none border-transparent px-5 py-3 focus:shadow-none"
                                       rows="1" placeholder="Type your message..."></textarea>
 
-                            <a onclick="sendMessage({{$ticket->id}})"
+                            <a onclick="sendMessage()"
                                class="cursor-pointer w-8 h-8 sm:w-10 sm:h-10 block bg-theme-1 text-white rounded-full flex-none flex items-center justify-center mr-5">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -239,8 +242,9 @@
                 let content = '';
                 if (data) {
                     data = data.reverse();
-                    data.forEach(el => {
-                        if (el.answer == 0) {
+                    data.forEach((el, id) => {
+                        console.log(id)
+                        if (el.answer == 1) {
                             if (el.file.length > 0) {
                                 content = `${content}<div class="chat__box__text-box flex items-end float-left mb-4">
                                     <div class="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
@@ -263,50 +267,50 @@
                                 <div class="clear-both"></div>`
                         } else {
                             if (el.file.length > 0) {
-                                content = `${content}<div class="chat__box__text-box flex items-end float-right mb-4">
-
-                                    <a href="/storage/tickets/${el.file[0].id}/${el.file[0].name}" target="_blank" class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
-                                        File
-                                    </a>
-                                    <div class="w-20 h-10 hidden sm:block flex-none image-fit relative ml-5">
-                                        <p>${el.user.name}</p>
-                                    </div>
-                                </div><div class="clear-both"></div>`
+                                content = `${content}<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+                                <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
+                                       ${el.body}
+                                    <div class="mt-1 text-xs text-theme-25">59 secs ago</div>
+                                </div>
+                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                        <p>${el.user[0].name}</p>
+                                </div>
+                            </div>`
                             }
-                            content = `${content}<div class="chat__box__text-box flex items-end float-right mb-4">
-
-                                    <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
-                                        ${el.body}
-                                    </div>
-                                    <div class="w-20 h-10 hidden sm:block flex-none image-fit relative ml-5">
-                                        <p>${el.user.name}</p>
-                                    </div>
-                                </div><div class="clear-both"></div>`
+                            content = `${content}<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+                                <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
+                                       ${el.body}
+                                </div>
+                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                        <p>${el.user[0].name}</p>
+                                </div>
+                            </div>`
                         }
                     })
                     $('#messenger-body').html(content);
                     $('#messenger-user').text(user.name)
+                    $('input[name="ticket_id"]').val(data[0].messageable_id);
                     $('#messagenger').modal('show');
 
                 }
             });
         }
 
-        function sendMessage(id) {
+        function sendMessage() {
             let message = $('textarea[name="message-text"]').val();
+            let id = $('input[name="ticket_id"]').val()
             if (message.trim().length > 0) {
                 axios.post(`tickets/send-message/${id}`, {
                     message: message,
                 }).then(res => {
-                    $('#messenger-body').prepend(`<div class="chat__box__text-box flex items-end float-left mb-4">
-                            <div class="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
-                            <p>${res.data.user}</p>
-                            </div>
-                            <div class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md">
-                            ${res.data.body}
-                            </div>
-                            </div>
-                            <div class="clear-both"></div>`)
+                    $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+                                <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
+                                       ${res.data.body}
+                                </div>
+                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                        <p>${res.data.user}</p>
+                                </div>
+                            </div>`)
                     $('textarea[name="message-text"]').val('')
                 }).catch(err => {
                     alert('something wrong')

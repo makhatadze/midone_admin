@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-    <title>Dashboard - Midone - Laravel Admin Dashboard Starter Kit</title>
+    <title>LLC - User Tickets</title>
 @endsection
 
 @section('subcontent')
@@ -63,6 +63,9 @@
                         </td>
                         <td class="text-center border-b">
                             <div class="flex sm:justify-center items-center">
+                                <a class="flex items-center mr-3 cursor-pointer"
+                                   onclick="showMessages({{$ticket['id']}},'{{$ticket['user']}}')"><i
+                                            data-feather="eye" class="w-4 h-4 mr-1"></i> Message </a>
                                 <a class="flex items-center mr-3 user-view" href="javascript:;" data-toggle="modal"
                                    data-target="#ticket_view_modal-{{$ticket['id']}}"><i
                                             data-feather="eye" class="w-4 h-4 mr-1"></i> View </a>
@@ -199,7 +202,8 @@
                                     </div>
                                 @endif
                                 @if($ticket['closed_at'] == null && $ticket['can_confirm'] && !in_array(false, array_column($ticket['approve_departments'], 'approved')))
-                                    <a class="flex items-center text-theme-9" href="javascript:;" data-toggle="modal"
+                                    <a class="flex items-center text-theme-9 cursor-pointer" href="javascript:;"
+                                       data-toggle="modal"
                                        onclick="confirmModal({{$ticket['id']}})"
                                        data-target="#confirmModal"> <i data-feather="stop-circle"
                                                                        class="w-4 h-4 mr-1"></i>
@@ -212,6 +216,65 @@
                 @endforeach
                 </tbody>
             </table>
+            <div class="modal" id="messagenger">
+                <input type="text" disabled hidden name="ticket_id">
+                <div class="modal__content modal__content--xl p-10 text-center">
+                    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9">
+                        <div class="chat__box box">
+                            <!-- BEGIN: Chat Active -->
+                            <div class="h-full flex flex-col" style="">
+                                <div class="flex flex-col sm:flex-row border-b border-gray-200 px-5 py-4">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 sm:w-12 sm:h-12 flex-none image-fit relative">
+                                            <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
+                                                 src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
+                                        </div>
+                                        <div class="font-medium text-base ml-2" id="messenger-user">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overflow-y-scroll px-5 pt-5 flex-1"
+                                 style="max-height: 400px; display: flex; flex-direction: column-reverse"
+                                 id="messenger-body">
+                            </div>
+                            <div class="pt-4 pb-10 sm:py-4 flex items-center border-t border-gray-200">
+                            <textarea name="message-text"
+                                      class="chat__box__input input w-full h-16 resize-none border-transparent px-5 py-3 focus:shadow-none"
+                                      rows="1" placeholder="Type your message..."></textarea>
+
+                                <a onclick="sendMessage({{$ticket['id']}})"
+                                   class="cursor-pointer w-8 h-8 sm:w-10 sm:h-10 block bg-theme-1 text-white rounded-full flex-none flex items-center justify-center mr-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-send w-4 h-4">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- END: Chat Active -->
+                        <!-- BEGIN: Chat Default -->
+                        <div class="h-full flex items-center" style="display: none;">
+                            <div class="mx-auto text-center">
+                                <div class="w-16 h-16 flex-none image-fit rounded-full overflow-hidden mx-auto">
+                                    <img alt="Midone Tailwind HTML Admin Template"
+                                         src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
+                                </div>
+                                <div class="mt-3">
+                                    <div class="font-medium">Hey, John Travolta!</div>
+                                    <div class="text-gray-600 mt-1">Please select a chat to start messaging.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END: Chat Default -->
+                    </div>
+                </div>
+
+            </div>
+
             <div class="modal" id="confirmModal">
 
                 <div class="modal__content">
@@ -240,6 +303,91 @@
 
         </div>
         <script>
+            function showMessages(id, ticket) {
+                $('#messenger-body').html('');
+                $.ajax({
+                    url: `/admin/tickets/messages/${id}`,
+                    method: 'get',
+                    dataType: 'json',
+                }).done(function (data) {
+                    let content = '';
+                    if (data) {
+                        data = data.reverse();
+                        data.forEach((el, id) => {
+                            if (el.answer == 0) {
+                                if (el.file.length > 0) {
+                                    content = `${content}<div class="chat__box__text-box flex items-end float-left mb-4">
+                                    <div class="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
+                                        <p>${el.user[0].name}</p>
+                                    </div>
+                                    <a href="/storage/tickets/${el.file[0].fileable_id}/${el.file[0].name}" target=_blank class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md">
+                                        File - ${el.file[0].name}
+                                    </a>
+                                </div>
+                                <div class="clear-both"></div>`
+                                }
+                                content = `${content}<div class="chat__box__text-box flex items-end float-left mb-4">
+                                    <div class="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
+                                        <p>${el.user[0].name}</p>
+                                    </div>
+                                    <div class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md">
+                                       ${el.body}
+                                    </div>
+                                </div>
+                                <div class="clear-both"></div>`
+                            } else {
+                                if (el.file.length > 0) {
+                                    content = `${content}<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+                                <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
+                                     <a href="/storage/tickets/${el.file[0].fileable_id}/${el.file[0].name}" target=_blank class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md">
+                                       File - ${el.file[0].name}
+                                    </a>                                </div>
+                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                        <p>${el.user[0].name}</p>
+                                </div>
+                            </div>`
+                                }
+                                content = `${content}<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+                                <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
+                                       ${el.body}
+                                </div>
+                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                        <p>${el.user[0].name}</p>
+                                </div>
+                            </div>`
+                            }
+                        })
+                        $('input[name="ticket_id"]').val(data[0].messageable_id);
+                        $('#messenger-body').html(content);
+                        $('#messenger-user').text(ticket)
+                        $('#messagenger').modal('show');
+                    }
+                });
+            }
+
+            function sendMessage() {
+                let message = $('textarea[name="message-text"]').val();
+                let id = $('input[name="ticket_id"]').val()
+                if (message.trim().length > 0) {
+                    axios.post(`tickets/answer-message/${id}`, {
+                        message: message,
+                    }).then(res => {
+                        $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+                                <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
+                                       ${res.data.body}
+                                </div>
+                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                        <p>${res.data.user}</p>
+                                </div>
+                            </div>`)
+                        $('textarea[name="message-text"]').val('')
+                    }).catch(err => {
+                        alert('something wrong')
+                    })
+                }
+
+            }
+
             function confirmModal(e) {
                 $(document).ready(function () {
                     $('.ticket-confirm-form').attr('action', `tickets/confirm/${e}`)
