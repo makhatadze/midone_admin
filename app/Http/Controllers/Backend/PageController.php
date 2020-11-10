@@ -28,7 +28,7 @@ class PageController extends BackendController
      */
     public function loadPage($layout = 'side-menu', $pageName = 'dashboard')
     {
-        return view('backend/module/' . $pageName);
+        return redirect('admin/tickets');
     }
 
     /**

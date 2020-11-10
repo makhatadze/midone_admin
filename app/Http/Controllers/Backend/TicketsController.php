@@ -239,6 +239,23 @@ class TicketsController extends BackendController
         ];
     }
 
+    public function answerMessage(Request $request, Ticket $ticket)
+    {
+        $request->validate([
+            'message' => 'required'
+        ]);
+
+        $message = new Message();
+        $message->body = $request->message;
+        $message->answer = true;
+        $message->user_id = auth()->user()->id;
+        $ticket->message()->save($message);
+        return [
+            'body' => $message->body,
+            'user' => User::getName(auth()->user()->id)
+        ];
+    }
+
     protected function confirm($department)
     {
 

@@ -35,8 +35,7 @@ class UsersController extends BackendController
         $users = User::where('email', '!=', 'midone@left4code.com')->with('profile')->get();
 
         // Get Roles for user
-        $roles = Role::all();
-
+        $roles = Role::where('slug', '!=', 'admin')->get();
         // Get Countries
         $countries = Country::all();
 
@@ -56,7 +55,7 @@ class UsersController extends BackendController
     public function create(Request $request)
     {
         if ($request->ajax()) {
-            $roles = Role::where('id', $request->role)->first();
+            $roles = Role::where([['id', $request->role]])->first();
             $permissions = $roles->permissions;
 
             return $permissions;
@@ -137,7 +136,7 @@ class UsersController extends BackendController
             $rolePermissions = $rolePermissions->permissions;
         }
 
-        $allRoles = Role::all();
+        $allRoles = Role::where('slug', '!=', 'admin')->get();
         $country = [];
         if ($user->profile->country) {
             $country = Country::where('code', $user->profile->country)->get()->toArray();
@@ -166,7 +165,7 @@ class UsersController extends BackendController
             $rolePermissions = $rolePermissions->permissions;
         }
 
-        $allRoles = Role::all();
+        $allRoles = Role::where('slug', '!=', 'admin')->get();
         return [
             'user' => $user,
             'profile' => $user->profile,
