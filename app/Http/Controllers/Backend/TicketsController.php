@@ -235,6 +235,7 @@ class TicketsController extends BackendController
         $ticket->message()->save($message);
         return [
             'body' => $message->body,
+            'created_at' => $message->created_at,
             'user' => User::getName(auth()->user()->id)
         ];
     }
@@ -252,6 +253,7 @@ class TicketsController extends BackendController
         $ticket->message()->save($message);
         return [
             'body' => $message->body,
+            'created_at' => $message->created_at,
             'user' => User::getName(auth()->user()->id)
         ];
     }

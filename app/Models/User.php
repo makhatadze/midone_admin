@@ -10,6 +10,7 @@
 namespace App\Models;
 
 use App\Traits\HasRolesAndPermissions;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -92,13 +93,15 @@ class User extends Authenticatable
                     'confirm' => $ticket->confirm,
                     'approve_departments' => $ticket->getApproveDepartments(),
                     'closed_at' => $ticket->closed_at,
-                    'created_at' => $ticket->created_at,
+                    'created_at' => Carbon::createFromTimestamp($ticket->created_at),
                     'can_approve' => $this->canApprove($ticket),
                     'can_confirm' => $this->canConfirm($ticket)
                 ];
             }
         }
+
         return array_reverse($data);
+
     }
 
     public static function getName($id)

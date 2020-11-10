@@ -2,7 +2,7 @@
 <div class="mobile-menu md:hidden">
     <div class="mobile-menu-bar">
         <a href="" class="flex mr-auto">
-            <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
+            <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-20" src="{{ asset('logo.svg') }}">
         </a>
         <a href="javascript:;" id="mobile-menu-toggler">
             <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i>

@@ -243,25 +243,28 @@
                 if (data) {
                     data = data.reverse();
                     data.forEach((el, id) => {
-                        console.log(id)
                         if (el.answer == 1) {
                             if (el.file.length > 0) {
                                 content = `${content}<div class="chat__box__text-box flex items-end float-left mb-4">
-                                    <div class="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
+                                    <div class="w-auto h-10 hidden sm:block flex-none image-fit relative mr-5">
                                         <p>${el.user[0].name}</p>
                                     </div>
                                     <a href="/storage/tickets/${el.file[0].id}/${el.file[0].name}" target=_blank class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md">
                                        File
+                                    <div class="mt-1 text-xs text-gray-600">${getTime(el.created_at)}</div>
+
                                     </a>
                                 </div>
                                 <div class="clear-both"></div>`
                             }
                             content = `${content}<div class="chat__box__text-box flex items-end float-left mb-4">
-                                    <div class="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
+                                    <div class="w-auto h-10 hidden sm:block flex-none image-fit relative mr-5">
                                         <p>${el.user[0].name}</p>
                                     </div>
                                     <div class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md">
                                        ${el.body}
+                                    <div class="mt-1 text-xs text-gray-600">${getTime(el.created_at)}</div>
+
                                     </div>
                                 </div>
                                 <div class="clear-both"></div>`
@@ -270,9 +273,9 @@
                                 content = `${content}<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                                 <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                        ${el.body}
-                                    <div class="mt-1 text-xs text-theme-25">59 secs ago</div>
+                                    <div class="mt-1 text-xs text-theme-25">${getTime(el.created_at)}</div>
                                 </div>
-                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                <div class="w-auto h-10 hidden sm:block flex-none image-fit relative ml-5">
                                         <p>${el.user[0].name}</p>
                                 </div>
                             </div>`
@@ -280,8 +283,10 @@
                             content = `${content}<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                                 <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                        ${el.body}
+                                    <div class="mt-1 text-xs text-theme-25">${getTime(el.created_at)}</div>
+
                                 </div>
-                                <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                <div class="w-auto h-10 hidden sm:block flex-none image-fit relative ml-5">
                                         <p>${el.user[0].name}</p>
                                 </div>
                             </div>`
@@ -289,12 +294,41 @@
                     })
                     $('#messenger-body').html(content);
                     $('#messenger-user').text(user.name)
-                    $('input[name="ticket_id"]').val(data[0].messageable_id);
+                    $('input[name="ticket_id"]').val(id);
                     $('#messagenger').modal('show');
 
                 }
             });
         }
+
+        function getTime(time) {
+            let sec = (Math.floor(Date.now() / 1000) - (Math.floor(new Date(time) / 1000)))
+
+            if (parseInt(sec / 60) === 0) {
+                return `${sec} sec ago`
+            }
+
+            let min = parseInt(sec / (60));
+            if (min < 60) {
+                return `${min} min ago`
+            }
+
+            let hour = parseInt(min / (60 * 60));
+            if (hour < 24) {
+                return `${hour} hour ago`
+            }
+
+            let day = parseInt(min / (60 * 60 * 24))
+            if (day < 30) {
+                return `${day} day ago`
+            }
+
+            let month = parseInt(min / (60 * 60 * 24 * 30))
+            if (day > 0) {
+                return `${day} month ago`
+            }
+        }
+
 
         function sendMessage() {
             let message = $('textarea[name="message-text"]').val();
@@ -306,6 +340,8 @@
                     $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                                 <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                        ${res.data.body}
+                                    <div class="mt-1 text-xs text-theme-25">${getTime(res.data.created_at)}</div>
+
                                 </div>
                                 <div class="w-10 h-10 hidden sm:block flex-none image-fit relative ml-5">
                                         <p>${res.data.user}</p>

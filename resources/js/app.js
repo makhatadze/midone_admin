@@ -45,6 +45,4 @@ $(document).ready(function () {
         $('#role_slug').val(str);
         $('#role_slug').attr('placeholder', str);
     });
-
-
 });
