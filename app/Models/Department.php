@@ -36,4 +36,31 @@ class Department extends Model
         $department = Department::find($id);
         return $department ? $department->name : 'Department deleted';
     }
+
+    public static function getUserEmails($id, $data = [])
+    {
+        $department = Department::find($id);
+
+        $heads = $department->head()->select('email')->get()->toArray();
+        if (count($heads) > 0) {
+            foreach ($heads as $head) {
+                if (in_array($head['email'], $data)) {
+                    continue;
+                }
+                $data [] = $head['email'];
+            }
+        }
+
+        $staffs = $department->users()->select('email')->get()->toArray();
+        if (count($staffs) > 0) {
+            foreach ($staffs as $staff) {
+                if (in_array($staff['email'], $data)) {
+                    continue;
+                }
+                $data [] = $staff['email'];
+            }
+        }
+
+        return $data;
+    }
 }

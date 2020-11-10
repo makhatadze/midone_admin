@@ -115,10 +115,13 @@ class TicketsController extends BackendController
         $ticket->message()->save($message);
 
         $data = [
+            'id' => $ticket->id,
             'subject' => 'Create ticket',
             'message' => $request->ticket_message,
+            'deadline' => $ticket->deadline,
             'department' => Department::getName($request->ticket_department),
-            'user' => auth()->user()->name
+            'user' => auth()->user()->name,
+            'name' => $ticket->name
         ];
 
         if ($request->hasFile('file')) {
@@ -128,10 +131,11 @@ class TicketsController extends BackendController
             $message->file()->create([
                 'name' => $fileName
             ]);
-            $data['file'] = $request->file('file');
         }
-
-//        Mail::to('v_makhatadze@cu.edu.ge')->send(new TicketMail($data));
+        $emails = $this->getUserEmails($ticket);
+        if ($emails) {
+            Mail::to($emails)->send(new TicketMail($data));
+        }
 
 
         return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
@@ -258,8 +262,19 @@ class TicketsController extends BackendController
         ];
     }
 
-    protected function confirm($department)
-    {
 
+    private function getUserEmails(Ticket $ticket)
+    {
+        $emails = Department::getUserEmails($ticket->department_id);
+        if ($ticket->category_id) {
+            $category = Category::find($ticket->category_id);
+            $departments = $category->departments()->select('id')->get()->toArray();
+            if ($departments) {
+                foreach ($departments as $dep) {
+                    $emails = Department::getUserEmails($dep['id'], $emails);
+                }
+            }
+        }
+        return $emails;
     }
 }
