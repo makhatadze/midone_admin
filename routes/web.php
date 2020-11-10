@@ -97,6 +97,7 @@ Route::prefix('admin')->group(function () {
         Route::get('tickets/download-file/{file}', [TicketsController::class, 'downloadFile'])->name('downloadFile');
 
         Route::post('tickets/send-message/{ticket}', [TicketsController::class, 'sendMessage'])->name('sendMessage');
+        Route::post('tickets/answer-message/{ticket}', [TicketsController::class, 'answerMessage'])->name('answerMessage');
     });
 
 });

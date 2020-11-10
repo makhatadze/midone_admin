@@ -21,8 +21,27 @@
   <component name="ChangeListManager">
     <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/PageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/TicketsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/TicketsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/directive/roles/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/directive/roles/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/directive/roles/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/directive/roles/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/directive/roles/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/directive/roles/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/base.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/base.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/side-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/login/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/login/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/departments/create-categories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/create-categories.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/departments/create-departments.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/create-departments.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/departments/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/departments/update-categories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/update-categories.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/departments/update-departments.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/departments/update-departments.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/backend/module/tickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/tickets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/tickets/tickets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/tickets/tickets.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/users/create.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/users/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +229,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/storage/framework/views/5024e16a34fa313598b71b841159837928db157b.php" />
     <property name="database.data.extractors.current.export.id" value="SQL-Insert-Statements.sql.groovy" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../admin-panel" />
+    <property name="last_opened_file_path" value="/var/www/html/cabinet.wft.group" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -275,6 +294,10 @@
       <workItem from="1604671172482" duration="69000" />
       <workItem from="1604898373784" duration="13747000" />
       <workItem from="1604928840627" duration="3969000" />
+      <workItem from="1604984739192" duration="50000" />
+      <workItem from="1604984890490" duration="626000" />
+      <workItem from="1604985532834" duration="13000" />
+      <workItem from="1604985560200" duration="7627000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor roles permissions migration. remove user_id and add permission_id.">
       <created>1603886105386</created>
@@ -542,7 +565,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604910726773</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="add messenger.">
+      <created>1604933504947</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1604933504947</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +601,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create countries database and seeder for country resources." />
     <MESSAGE value="Add menu departments and users routes." />
     <MESSAGE value="Models modify methods for create connection each other." />
     <MESSAGE value="Create edit function for roles modify." />
@@ -596,7 +625,8 @@
     <MESSAGE value="Create menus with dinamicly." />
     <MESSAGE value="Add mailer." />
     <MESSAGE value="Add messenger to my tickets." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add messenger to my tickets." />
+    <MESSAGE value="add messenger." />
+    <option name="LAST_COMMIT_MESSAGE" value="add messenger." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -617,11 +647,11 @@
     </state>
     <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603882469112" />
     <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604907325391" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1604910726678">
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1604933504546">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974224439" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604910726678" />
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604933504546" />
     <state x="2598" y="476" width="626" height="493" key="DUMP_DIALOG_DIMENSION_KEY" timestamp="1604901090829">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -631,12 +661,12 @@
     </state>
     <state x="2137" y="109" width="1538" height="903" key="DiffContextDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969074381" />
     <state x="2137" y="275" width="1538" height="894" key="DiffContextDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604898400878" />
-    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl" timestamp="1604909089058">
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl" timestamp="1604986673535">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603982384141" />
     <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969366629" />
-    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604909089058" />
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604986673535" />
     <state width="261" height="506" key="HiddenNamespacesPopup" timestamp="1603969214348">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -656,11 +686,11 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603865692878" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604910727850">
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1604933506381">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974226759" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604910727850" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604933506381" />
     <state x="2764" y="605" width="369" height="349" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1604902498546">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -670,11 +700,11 @@
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2648" y="526" width="526" height="393" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604562475061" />
-    <state x="107" y="251" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604411093087">
+    <state x="107" y="227" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604985515686">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="2092" y="293" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603979909659" />
-    <state x="107" y="251" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604411093087" />
+    <state x="107" y="227" width="1648" height="853" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604985515686" />
     <state x="2525" y="327" width="772" height="791" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604906284315">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -688,11 +718,11 @@
     </state>
     <state x="2607" y="292" width="618" height="522" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969129213" />
     <state x="2607" y="458" width="618" height="548" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604927027684" />
-    <state x="2580" y="501" key="run.anything.popup" timestamp="1604641036622">
+    <state x="2580" y="501" key="run.anything.popup" timestamp="1604992660550">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2580" y="335" key="run.anything.popup/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603981819564" />
-    <state x="2580" y="501" key="run.anything.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604641036622" />
+    <state x="2580" y="501" key="run.anything.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604992660550" />
     <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup" timestamp="1604577025338">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
