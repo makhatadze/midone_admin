@@ -10,6 +10,7 @@
 
 namespace App\Http\View\Composers;
 
+use App\Models\Menu;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -28,8 +29,12 @@ class MenuComposer
     public function compose(View $view)
     {
         $currentUrl = URL::current();
-        $layout = Setting::where(['key' => 'active_menu'])->first();
-        $view->with('menuItems', $this->menuItems())->with('layout', $layout->value);
+        if (auth()->user() != null) {
+            $layout = Menu::where('user_id', auth()->user()->id)->first();
+            $layout = $layout->name;
+            $view->with('layout', $layout);
+        }
+        $view->with('menuItems', $this->menuItems());
     }
 
     public function menuItems()
