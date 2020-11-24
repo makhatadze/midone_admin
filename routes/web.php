@@ -69,10 +69,10 @@ Route::prefix('admin')->group(function () {
             ->name('departmentsUpdate')->middleware('can:update_department');
 
         Route::delete('departments/delete-departments/{department}', [DepartmentController::class, 'deleteDepartments'])
-            ->name('departmentsDelete')->middleware('can:departmentsDelete');
+            ->name('departmentsDelete')->middleware('can:delete_department');
 
         Route::match(['get', 'post'], 'departments/create-categories', [DepartmentController::class, 'createCategories'])
-            ->name('createCategories')->middleware('can:delete_department');
+            ->name('createCategories')->middleware('can:create_department');
 
         Route::match(['get', 'post'], 'departments/update-categories/{category}', [DepartmentController::class, 'categoriesUpdate'])
             ->name('categoriesUpdate')->middleware('can:update_department');

@@ -20,13 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/74e27914-1941-41ee-8792-a44437f8d491.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/View/Composers/MenuComposer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/top-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/top-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/tickets/tickets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/tickets/tickets.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/DepartmentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -285,14 +280,13 @@
       <workItem from="1604985532834" duration="13000" />
       <workItem from="1604985560200" duration="14573000" />
       <workItem from="1605009823911" duration="2199000" />
-      <workItem from="1605074236312" duration="1999000" />
-    </task>
-    <task id="LOCAL-00001" summary="Refactor roles permissions migration. remove user_id and add permission_id.">
-      <created>1603886105386</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1603886105386</updated>
+      <workItem from="1605074236312" duration="2040000" />
+      <workItem from="1605763808621" duration="817000" />
+      <workItem from="1605769454246" duration="2130000" />
+      <workItem from="1605853235865" duration="1395000" />
+      <workItem from="1605876276937" duration="563000" />
+      <workItem from="1606194809748" duration="629000" />
+      <workItem from="1606201676289" duration="708000" />
     </task>
     <task id="LOCAL-00002" summary="Add traits for roles and permission system.">
       <created>1603886209088</created>
@@ -630,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605011068356</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Change menus choice logic.">
+      <created>1605076267778</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1605076267779</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -659,7 +660,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create permissions seeder." />
     <MESSAGE value="Create tickets create modal." />
     <MESSAGE value="Block User routes using permissions." />
     <MESSAGE value="Block Department and Category routes using their permissions." />
@@ -684,7 +684,8 @@
     <MESSAGE value="Add messenger created at" />
     <MESSAGE value="create permission condition." />
     <MESSAGE value="Add mailer system." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add mailer system." />
+    <MESSAGE value="Change menus choice logic." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change menus choice logic." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -705,12 +706,12 @@
     </state>
     <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603882469112" />
     <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604907325391" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1605011068133">
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1605076267607">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974224439" />
     <state x="180" y="79" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@0.193.1920.887" timestamp="1605007051796" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605011068133" />
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605076267607" />
     <state x="2598" y="476" width="626" height="493" key="DUMP_DIALOG_DIMENSION_KEY" timestamp="1604901090829">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -720,12 +721,12 @@
     </state>
     <state x="2137" y="109" width="1538" height="903" key="DiffContextDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969074381" />
     <state x="2137" y="275" width="1538" height="894" key="DiffContextDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604997957905" />
-    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl" timestamp="1605010498678">
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl" timestamp="1605876837254">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603982384141" />
     <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969366629" />
-    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605010498678" />
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605876837254" />
     <state width="261" height="506" key="HiddenNamespacesPopup" timestamp="1603969214348">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -736,21 +737,21 @@
     <state x="2710" y="478" key="NewPhpFileDialog/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603975823383" />
     <state x="2710" y="478" width="401" height="158" key="NewPhpFileDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969773917" />
     <state x="2710" y="644" width="401" height="158" key="NewPhpFileDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604909740862" />
-    <state x="2673" y="402" width="453" height="604" key="RollbackChangesDialog" timestamp="1604908230110">
+    <state x="2673" y="402" width="453" height="604" key="RollbackChangesDialog" timestamp="1605771296621">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2673" y="236" width="475" height="642" key="RollbackChangesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603970622922" />
-    <state x="2673" y="402" width="453" height="604" key="RollbackChangesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604908230110" />
+    <state x="2673" y="402" width="453" height="604" key="RollbackChangesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605771296621" />
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor" timestamp="1603865692878">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603865692878" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1605011070247">
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1605076270399">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974226759" />
     <state x="590" y="418" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@0.193.1920.887" timestamp="1605007054275" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605011070247" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605076270399" />
     <state x="2764" y="605" width="369" height="349" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1604902498546">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -773,11 +774,11 @@
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="384" y="193" width="865" height="789" key="dock-window-1/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604899047894" />
-    <state x="2607" y="458" width="618" height="548" key="find.popup" timestamp="1604927027684">
+    <state x="2607" y="458" width="618" height="548" key="find.popup" timestamp="1606201871694">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2607" y="292" width="618" height="522" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969129213" />
-    <state x="2607" y="458" width="618" height="548" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604927027684" />
+    <state x="2607" y="458" width="618" height="548" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606201871694" />
     <state x="2580" y="501" key="run.anything.popup" timestamp="1604992660550">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
