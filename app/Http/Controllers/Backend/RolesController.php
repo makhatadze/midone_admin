@@ -155,7 +155,7 @@ class RolesController extends BackendController
      *
      * @param \App\Role $role
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Response|\Illuminate\Routing\Redirector
      */
     public function destroy(Role $role)
     {
@@ -165,6 +165,11 @@ class RolesController extends BackendController
 
 
         return redirect('/roles');
+    }
+
+    public function permissions(Role $role)
+    {
+        return $role->permissions;
     }
 
 

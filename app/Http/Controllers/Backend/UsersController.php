@@ -15,6 +15,7 @@ use App\Models\Menu;
 use App\Models\Profile;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -160,7 +161,7 @@ class UsersController extends BackendController
      *
      * @param User $user
      *
-     * @return User[]
+     * @return User[]|Application|Factory|View
      */
     public function edit(User $user)
     {
@@ -171,14 +172,17 @@ class UsersController extends BackendController
         }
 
         $allRoles = Role::where('slug', '!=', 'admin')->get();
-        return [
+
+        $countries = Country::all();
+        return view('backend.module.users.edit', [
             'user' => $user,
             'profile' => $user->profile,
             'roles' => $user->roles,
-            'permissions' => $user->permissions,
+            'permissions' => $user->permissions->toArray(),
             'rolePermissions' => $rolePermissions,
-            'allRoles' => $allRoles
-        ];
+            'allRoles' => $allRoles,
+            'countries' => $countries
+        ]);
     }
 
     /**
@@ -197,7 +201,6 @@ class UsersController extends BackendController
             'last_name' => 'required|max:255',
             'birthday' => 'date',
         ]);
-
         if ($user->email != $request->email) {
             $request->validate([
                 'email' => 'required|unique:users|email|max:255',
@@ -210,10 +213,6 @@ class UsersController extends BackendController
                 'password_confirmation' => 'required'
             ]);
         }
-
-        if (!$request->_token) {
-            return true;
-        }
         $user->name = $request->first_name . ' ' . $request->last_name;
         $user->email = $request->email;
         if ($request->password != null) {
@@ -225,7 +224,7 @@ class UsersController extends BackendController
             $profile = new Profile([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'birthday' => $request->birthday,
+                'birthday' => Carbon::parse($request->birthday),
                 'phone' => $request->phone,
                 'country' => $request->country,
             ]);

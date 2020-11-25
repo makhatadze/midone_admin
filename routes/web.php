@@ -42,16 +42,19 @@ Route::prefix('admin')->group(function () {
             ->name('store', 'rolesStore')
             ->name('edit', 'rolesEdit')
             ->name('update', 'rolesUpdate');
-            
+
+        Route::get('roles/permissions/{role}', [RolesController::class, 'permissions']);
+
         Route::get('/messages', [MessageController::class, 'index'])
-        ->middleware('can:isAdmin')
-        ->name('getAllMessages');
+            ->middleware('can:isAdmin')
+            ->name('getAllMessages');
 
         Route::resource('users', UsersController::class)
             ->middleware('role:admin,manager')
             ->name('create', 'usersCreate')->middleware('can:create_user')
             ->name('edit', 'usersEdit')->middleware('can:update_user')
             ->name('update', 'usersUpdate');
+
 
         Route::any('users', [UsersController::class, 'index'])->name('usersIndex')->middleware('can:read_user');
         Route::post('users/store', [UsersController::class, 'store'])->name('usersStore')->middleware('can:create_user');

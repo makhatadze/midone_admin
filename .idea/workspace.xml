@@ -20,8 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58b22a6b-1232-40b0-b2a9-2fce9efaeb60" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/module/users/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/DepartmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/RolesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/RolesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/module/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/module/users/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -210,7 +213,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/storage/framework/views/5024e16a34fa313598b71b841159837928db157b.php" />
     <property name="database.data.extractors.current.export.id" value="SQL-Insert-Statements.sql.groovy" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CRM-DIMOND" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -222,17 +225,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/backend/module/tickets" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/module/departments" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/module/users" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Backend" />
-      <recent name="$PROJECT_DIR$/app/Providers" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Backend" />
       <recent name="$PROJECT_DIR$/resources/views/backend" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/backend" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/backend/module/users" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/module/tickets" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/module/departments" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Backend" />
+      <recent name="$PROJECT_DIR$/app/Providers" />
     </key>
   </component>
   <component name="RunManager">
@@ -286,14 +289,9 @@
       <workItem from="1605853235865" duration="1395000" />
       <workItem from="1605876276937" duration="563000" />
       <workItem from="1606194809748" duration="629000" />
-      <workItem from="1606201676289" duration="708000" />
-    </task>
-    <task id="LOCAL-00002" summary="Add traits for roles and permission system.">
-      <created>1603886209088</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1603886209088</updated>
+      <workItem from="1606201676289" duration="818000" />
+      <workItem from="1606219492725" duration="3791000" />
+      <workItem from="1606280845878" duration="3137000" />
     </task>
     <task id="LOCAL-00003" summary="Add resource for roles routes.">
       <created>1603886731257</created>
@@ -631,7 +629,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605076267779</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Add department delete action.">
+      <created>1606202399376</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1606202399376</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +665,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create tickets create modal." />
     <MESSAGE value="Block User routes using permissions." />
     <MESSAGE value="Block Department and Category routes using their permissions." />
     <MESSAGE value="If users have not access some routes, hide this routes from sidebar" />
@@ -685,7 +689,8 @@
     <MESSAGE value="create permission condition." />
     <MESSAGE value="Add mailer system." />
     <MESSAGE value="Change menus choice logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Change menus choice logic." />
+    <MESSAGE value="Add department delete action." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add department delete action." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -706,12 +711,12 @@
     </state>
     <state x="2648" y="310" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603882469112" />
     <state x="2648" y="476" width="526" height="493" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604907325391" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1605076267607">
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2" timestamp="1606202399081">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
     <state x="2094" y="27" width="1729" height="995" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974224439" />
     <state x="180" y="79" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@0.193.1920.887" timestamp="1605007051796" />
-    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605076267607" />
+    <state x="180" y="79" width="1729" height="977" key="CommitChangelistDialog2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606202399081" />
     <state x="2598" y="476" width="626" height="493" key="DUMP_DIALOG_DIMENSION_KEY" timestamp="1604901090829">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -721,12 +726,12 @@
     </state>
     <state x="2137" y="109" width="1538" height="903" key="DiffContextDialog/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969074381" />
     <state x="2137" y="275" width="1538" height="894" key="DiffContextDialog/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604997957905" />
-    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl" timestamp="1605876837254">
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl" timestamp="1606282321650">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603982384141" />
     <state x="2698" y="310" width="426" height="493" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969366629" />
-    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605876837254" />
+    <state x="2698" y="476" width="426" height="493" key="FileChooserDialogImpl/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606282321650" />
     <state width="261" height="506" key="HiddenNamespacesPopup" timestamp="1603969214348">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -746,12 +751,12 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2404" y="188" width="1024" height="737" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603865692878" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1605076270399">
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2" timestamp="1606202401002">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2510" y="274" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603974226759" />
     <state x="590" y="418" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@0.193.1920.887" timestamp="1605007054275" />
-    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1605076270399" />
+    <state x="2510" y="440" width="802" height="565" key="Vcs.Push.Dialog.v2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606202401002" />
     <state x="2764" y="605" width="369" height="349" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1604902498546">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
@@ -770,25 +775,29 @@
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2525" y="327" width="772" height="791" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604906284315" />
-    <state x="384" y="193" width="865" height="789" key="dock-window-1" timestamp="1604899047894">
+    <state x="0" y="193" width="1407" height="538" maximized="true" key="dock-window-1" timestamp="1606220404822">
       <screen x="0" y="193" width="1920" height="887" />
     </state>
-    <state x="384" y="193" width="865" height="789" key="dock-window-1/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604899047894" />
-    <state x="2607" y="458" width="618" height="548" key="find.popup" timestamp="1606201871694">
+    <state x="0" y="193" width="1407" height="538" maximized="true" key="dock-window-1/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606220404822" />
+    <state x="83" y="193" width="1433" height="538" maximized="true" key="dock-window-2" timestamp="1606280894780">
+      <screen x="0" y="193" width="1920" height="887" />
+    </state>
+    <state x="83" y="193" width="1433" height="538" maximized="true" key="dock-window-2/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606280894780" />
+    <state x="2607" y="458" width="618" height="548" key="find.popup" timestamp="1606281924781">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2607" y="292" width="618" height="522" key="find.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603969129213" />
-    <state x="2607" y="458" width="618" height="548" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606201871694" />
+    <state x="2607" y="458" width="618" height="548" key="find.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606281924781" />
     <state x="2580" y="501" key="run.anything.popup" timestamp="1604992660550">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2580" y="335" key="run.anything.popup/1920.0.1920.1080/0.193.1920.887@1920.0.1920.1080" timestamp="1603981819564" />
     <state x="2580" y="501" key="run.anything.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604992660550" />
-    <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup" timestamp="1604577025338">
+    <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup" timestamp="1606222197891">
       <screen x="1920" y="166" width="1920" height="1080" />
     </state>
     <state x="2579" y="259" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1603874506403" />
-    <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1604577025338" />
+    <state x="2579" y="425" width="672" height="678" key="search.everywhere.popup/1920.166.1920.1080/0.193.1920.887@1920.166.1920.1080" timestamp="1606222197891" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
