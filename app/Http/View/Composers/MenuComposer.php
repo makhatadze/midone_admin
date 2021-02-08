@@ -11,9 +11,6 @@
 namespace App\Http\View\Composers;
 
 use App\Models\Menu;
-use App\Models\Setting;
-use App\Models\Menu;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
 
