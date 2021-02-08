@@ -83,7 +83,7 @@ class UsersController extends BackendController
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'birthday' => 'date',
-            'email' => 'required|unique:users|email|max:255',
+            'username' => 'required|unique:users|max:255',
             'password' => 'required|between:8,255|confirmed',
             'password_confirmation' => 'required'
         ]);
@@ -94,7 +94,7 @@ class UsersController extends BackendController
 
         $user = new User;
         $user->name = $request->first_name . ' ' . $request->last_name;
-        $user->email = $request->email;
+        $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->save();
         $profile = new Profile([
@@ -201,9 +201,9 @@ class UsersController extends BackendController
             'last_name' => 'required|max:255',
             'birthday' => 'date',
         ]);
-        if ($user->email != $request->email) {
+        if ($user->username != $request->username) {
             $request->validate([
-                'email' => 'required|unique:users|email|max:255',
+                'username' => 'required|unique:users|max:255',
             ]);
         }
 
@@ -214,7 +214,7 @@ class UsersController extends BackendController
             ]);
         }
         $user->name = $request->first_name . ' ' . $request->last_name;
-        $user->email = $request->email;
+        $user->username = $request->username;
         if ($request->password != null) {
             $user->password = Hash::make($request->password);
         }

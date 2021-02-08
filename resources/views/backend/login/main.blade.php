@@ -21,10 +21,10 @@
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Sign In</h2>
                     <div class="intro-x mt-8">
                         <form id="login-form">
-                            <input type="text" id="input-email" value=""
+                            <input type="text" id="input-username" value=""
                                    class="intro-x login__input input input--lg border border-gray-300 block"
-                                   placeholder="Email">
-                            <div id="error-email" class="input__error w-5/6 text-theme-6 mt-2"></div>
+                                   placeholder="Username">
+                            <div id="error-username" class="input__error w-5/6 text-theme-6 mt-2"></div>
                             <input type="password" id="input-password" value=""
                                    class="intro-x login__input input input--lg border border-gray-300 block mt-4"
                                    placeholder="Password">
@@ -49,23 +49,23 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             async function login() {
                 // Reset state
                 $('#login-form').find('.input').removeClass('border-theme-6')
                 $('#login-form').find('.input__error').html('')
 
                 // Post form
-                let email = $('#input-email').val()
+                let username = $('#input-username').val()
                 let password = $('#input-password').val()
                 let rememberMe = $('#input-remember-me').val()
-                
+
                 // Loading state
                 $('#btn-login').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()
                 await helper.delay(1500)
 
                 axios.post(`login`, {
-                    email: email,
+                    username: username,
                     password: password,
                     remember_me: rememberMe
                 }).then(res => {

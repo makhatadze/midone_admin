@@ -76,12 +76,12 @@
                             </span>
                         @endif
                     </div>
-                    <div class="relative mt-4 {{ $errors->has('email') ? ' has-error' : '' }}">
-                        {{ Form::label('email', 'Email', ['class' => 'font-helvetica']) }}
-                        {{ Form::text('email', $user->email, ['class' => 'input w-full border mt-2 col-span-2', 'no', 'placeholder'=>'Email...']) }}
-                        @if ($errors->has('email'))
+                    <div class="relative mt-4 {{ $errors->has('username') ? ' has-error' : '' }}">
+                        {{ Form::label('username', 'Username', ['class' => 'font-helvetica']) }}
+                        {{ Form::text('username', $user->username, ['class' => 'input w-full border mt-2 col-span-2', 'no', 'placeholder'=>'Username...']) }}
+                        @if ($errors->has('username'))
                             <span class="help-block">
-                                            {{ $errors->first('email') }}
+                                            {{ $errors->first('username') }}
                             </span>
                         @endif
                     </div>
