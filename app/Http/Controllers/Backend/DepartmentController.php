@@ -125,6 +125,7 @@ class DepartmentController extends BackendController
             if ($request->department_staff != null) {
                 foreach ($request->department_staff as $staff) {
                     if($request->department_heads != null) {
+
                         if (!in_array($staff, $request->department_heads)) {
                             $department->users()->attach($staff);
                             $department->save();
@@ -164,7 +165,6 @@ class DepartmentController extends BackendController
      */
     public function deleteDepartments(Department $department)
     {
-
         // Remove department staff
         $department->users()->detach();
 

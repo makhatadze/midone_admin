@@ -71,7 +71,10 @@
                                 <a class="flex items-center mr-3 user-view" href="javascript:;" id="{{$user->id}}"> <i
                                             data-feather="eye" class="w-4 h-4 mr-1" id="{{$user->id}}"></i> View </a>
                                 @if($loggedin_user->hasPermission('update_user'))
-                                        <a class="flex items-center mr-3"  href="{{route('usersEdit',$user->id)}}" id="{{$user->id}}">
+
+                                    <a class="flex items-center mr-3" href="{{route('usersEdit',$user->id)}}"
+                                       id="{{$user->id}}">
+
                                         <i
                                                 data-feather="check-square" class="w-4 h-4 mr-1" id="{{$user->id}}"></i>
                                         Edit </a>

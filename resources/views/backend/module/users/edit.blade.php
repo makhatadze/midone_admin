@@ -48,7 +48,9 @@
                         <div class="mt-2"><select name="country" class="select2 country-select2 w-full">
                                 <option value="">Select Country</option>
 
+
                             @foreach($countries as $country)
+
                                     <option {{($country->code == $user->profile->country) ? 'selected' : ''}} value="{{$country->code}}">{{$country->name}}</option>
                                 @endforeach
                             </select></div>
@@ -63,7 +65,11 @@
                 <div class="sm:grid grid-cols-2 gap-1 mb-4">
                     <div class="relative mt-4 {{ $errors->has('birthday') ? ' has-error' : '' }}">
                         <label>Birthday</label>
-                        <input name="birthday" type="date" value="{{Carbon\Carbon::parse($user->profile->birthday)->isoFormat('Y-MM-DD')}}" class="input w-full border mt-2 flex-1">
+
+                        <input name="birthday" type="date"
+                               value="{{Carbon\Carbon::parse($user->profile->birthday)->isoFormat('Y-MM-DD')}}"
+                               class="input w-full border mt-2 flex-1">
+
                         @if ($errors->has('birthday'))
                             <span class="help-block">
                                             {{ $errors->first('birthday') }}
@@ -102,33 +108,35 @@
                         @endif
                     </div>
                 </div>
-                    <div class="relative mt-4 {{ $errors->has('roles') ? ' has-error' : '' }}">
-                        <label>Role</label>
-                        <div class="mt-2 roles-container">
-                            <select name="user_role" id="roles-select2" onchange="roleChange(event)"
-                                    class="select2  w-full">
-                                <option value="0">Select Role...</option>
-                                @if($allRoles)
-                                    @foreach($allRoles as $role)
-                                        <option {{(count($roles) > 0 && $roles[0]->id == $role->id) ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
+
+                <div class="relative mt-4 {{ $errors->has('roles') ? ' has-error' : '' }}">
+                    <label>Role</label>
+                    <div class="mt-2 roles-container">
+                        <select name="user_role" id="roles-select2" onchange="roleChange(event)"
+                                class="select2  w-full">
+                            <option value="0">Select Role...</option>
+                            @if($allRoles)
+                                @foreach($allRoles as $role)
+                                    <option {{(count($roles) > 0 && $roles[0]->id == $role->id) ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                            @endif
+                        </select>
                     </div>
-                    <div class="relative mt-4 {{ $errors->has('roles') ? ' has-error' : '' }}" id="permissions_box">
-                        <label>Permissions</label>
-                        <div class="mt-2 permissions-list-container">
-                            <select name="permissions[]" data-placeholder="Select permissions" id="permissions-select2" class="select2 w-full"
-                                    multiple>
-                                @if(count($rolePermissions) > 0)
-                                    @foreach($rolePermissions as $permission)
-                                        <option {{in_array($permission->id,array_column($permissions,'id')) ? 'selected' : ''}}  value="{{$permission->id}}">{{$permission->name}}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
+                </div>
+                <div class="relative mt-4 {{ $errors->has('roles') ? ' has-error' : '' }}" id="permissions_box">
+                    <label>Permissions</label>
+                    <div class="mt-2 permissions-list-container">
+                        <select name="permissions[]" data-placeholder="Select permissions" id="permissions-select2"
+                                class="select2 w-full"
+                                multiple>
+                            @if(count($rolePermissions) > 0)
+                                @foreach($rolePermissions as $permission)
+                                    <option {{in_array($permission->id,array_column($permissions,'id')) ? 'selected' : ''}}  value="{{$permission->id}}">{{$permission->name}}</option>
+                                @endforeach
+                            @endif
+                        </select>
                     </div>
+                </div>
                 <div class="relative mt-5">
                     <button type="submit" name="user_add_submit"
                             class="button w-25 bg-theme-1 text-white font-helvetica">Update
@@ -149,7 +157,9 @@
                         method: 'get',
                         dataType: 'json',
                     }).done(function (data) {
+
                         if(data) {
+
                             console.log(data)
                             let content = '';
                             data.forEach(el => {
@@ -157,7 +167,9 @@
                             })
                             content = `<select name="permissions[]" data-placeholder="Select permissions" id="permissions-select2" class="select2 w-full"
                                     multiple> ${content}</select>`;
+
                             if($('#permissions_box').hasClass('none')) {
+
                                 $('#permissions_box').removeClass('none')
                             }
                             $('.permissions-list-container').html(content)

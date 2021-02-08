@@ -11,6 +11,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Country;
+use App\Models\Menu;
 use App\Models\Profile;
 use App\Models\Role;
 use App\Models\Menu;
@@ -110,7 +111,7 @@ class UsersController extends BackendController
         $menu->user_id = $user->id;
         $menu->name = 'side-menu';
         $menu->save();
-        
+
         if ($request->user_role != null && $request->user_role != '0') {
             $user->roles()->attach($request->user_role);
             $user->save();
