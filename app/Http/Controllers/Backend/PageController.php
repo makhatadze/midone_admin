@@ -9,15 +9,9 @@
  */
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Menu;
-use App\Models\Setting;
 use App\Models\Menu;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Route;
 
 class PageController extends BackendController
 {
