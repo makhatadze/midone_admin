@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\Menu;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -41,9 +42,9 @@ class PageController extends BackendController
     public function activeMenu(string $activeMenu)
     {
         if ($activeMenu == 'side-menu' || $activeMenu == 'top-menu' || $activeMenu == 'simple-menu') {
-            $settingMenu = Setting::where('key', 'active_menu')->first();
-            $settingMenu->value = $activeMenu;
-            $settingMenu->save();
+            $menu = Menu::where('user_id',auth()->user()->id)->first();
+            $menu->name = $activeMenu;
+            $menu->save();
             return back()->with('success', 'Active menu changed successfully');
         }
 

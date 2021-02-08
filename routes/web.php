@@ -43,6 +43,9 @@ Route::prefix('admin')->group(function () {
             ->name('edit', 'rolesEdit')
             ->name('update', 'rolesUpdate');
             
+        Route::get('roles/permissions/{role}',[RolesController::class,'permissions']);
+
+            
         Route::get('/messages', [MessageController::class, 'index'])
         ->middleware('can:isAdmin')
         ->name('getAllMessages');
@@ -69,10 +72,10 @@ Route::prefix('admin')->group(function () {
             ->name('departmentsUpdate')->middleware('can:update_department');
 
         Route::delete('departments/delete-departments/{department}', [DepartmentController::class, 'deleteDepartments'])
-            ->name('departmentsDelete')->middleware('can:departmentsDelete');
+            ->name('departmentsDelete')->middleware('can:delete_department');
 
         Route::match(['get', 'post'], 'departments/create-categories', [DepartmentController::class, 'createCategories'])
-            ->name('createCategories')->middleware('can:delete_department');
+            ->name('createCategories')->middleware('can:create_department');
 
         Route::match(['get', 'post'], 'departments/update-categories/{category}', [DepartmentController::class, 'categoriesUpdate'])
             ->name('categoriesUpdate')->middleware('can:update_department');
@@ -94,10 +97,11 @@ Route::prefix('admin')->group(function () {
 
         Route::get('tickets/download-file/{file}', [TicketsController::class, 'downloadFile'])->name('downloadFile');
 
-        Route::post('tickets/send-message/{ticket}', [TicketsController::class, 'sendMessage'])->name('sendMessage');
-        Route::post('tickets/answer-message/{ticket}', [TicketsController::class, 'answerMessage'])->name('answerMessage');
+        Route::post('tickets/send-message/{ticket}', [TicketsController::class, 'sendMessage'])
+            ->name('sendMessage');
+        Route::post('tickets/answer-message/{ticket}', [TicketsController::class, 'answerMessage'])
+            ->name('answerMessage');
 
-        Route::get('tickets/email', [TicketsController::class, 'test'])->name('answerMessage');
     });
 
 });

@@ -7,7 +7,7 @@
 @section('subcontent')
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto font-helvetica">
-            წვის ტიპის შექმნა </h2>
+            Update Role </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-8">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="relative mt-5">
                     <button type="submit" name="user_add_submit"
-                            class="button w-25 bg-theme-1 text-white font-helvetica">დამატება
+                            class="button w-25 bg-theme-1 text-white font-helvetica">Update
                     </button>
                 </div>
                 {!! Form::close() !!}

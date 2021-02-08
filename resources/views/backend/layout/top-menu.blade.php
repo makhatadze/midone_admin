@@ -54,10 +54,7 @@
                     Menu</a>
             @endif
         </div>
-    </div>
-    <!-- END: Notifications -->
-    <!-- BEGIN: Account Menu -->
-    <div class="intro-x dropdown w-8 h-8 relative">
+            <div class="intro-x dropdown w-8 h-8 relative">
         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110">
             <img alt="Midone Laravel Admin Dashboard Starter Kit"
                  src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
@@ -76,6 +73,10 @@
             </div>
         </div>
     </div>
+    </div>
+    <!-- END: Notifications -->
+    <!-- BEGIN: Account Menu -->
+
     <!-- END: Account Menu -->
     </div>
     </div>

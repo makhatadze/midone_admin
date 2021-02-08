@@ -24,7 +24,7 @@ class RolesController extends BackendController
      */
     public function index()
     {
-        $roles = Role::orderBy('id', 'desc')->get();
+        $roles = Role::where('slug','!=','admin')->orderBy('id', 'desc')->get();
 
         return view('backend.directive.roles.index', ['roles' => $roles]);
     }
@@ -76,7 +76,7 @@ class RolesController extends BackendController
             $role->save();
         }
 
-        return redirect('/roles')->with('success', 'Role Added Successfully');
+        return redirect('/admin/roles')->with('success', 'Role Added Successfully');
 
     }
 
@@ -164,8 +164,11 @@ class RolesController extends BackendController
         $role->permissions()->detach();
 
 
-        return redirect('/roles');
+        return redirect('/admin/roles');
     }
-
+    
+    public function permissions(Role $role) {
+        return $role->permissions;
+    }
 
 }

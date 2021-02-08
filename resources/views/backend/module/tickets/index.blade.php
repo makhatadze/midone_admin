@@ -313,17 +313,17 @@
                 return `${min} min ago`
             }
 
-            let hour = parseInt(min / (60 * 60));
+            let hour = parseInt(sec / (60 * 60));
             if (hour < 24) {
                 return `${hour} hour ago`
             }
 
-            let day = parseInt(min / (60 * 60 * 24))
+            let day = parseInt(sec / (60 * 60 * 24))
             if (day < 30) {
                 return `${day} day ago`
             }
 
-            let month = parseInt(min / (60 * 60 * 24 * 30))
+            let month = parseInt(sec / (60 * 60 * 24 * 30))
             if (day > 0) {
                 return `${day} month ago`
             }

@@ -70,7 +70,12 @@ class DepartmentController extends BackendController
 
             if ($request->department_staff != null) {
                 foreach ($request->department_staff as $staff) {
-                    if (!in_array($staff, $request->department_heads)) {
+                    if ($request->department_heads != null) {
+                        if (!in_array($staff, $request->department_heads)) {
+                            $department->users()->attach($staff);
+                            $department->save();
+                        }
+                    } else {
                         $department->users()->attach($staff);
                         $department->save();
                     }
@@ -116,10 +121,15 @@ class DepartmentController extends BackendController
                     $department->save();
                 }
             }
-
+            
             if ($request->department_staff != null) {
                 foreach ($request->department_staff as $staff) {
-                    if (!in_array($staff, $request->department_heads)) {
+                    if($request->department_heads != null) {
+                        if (!in_array($staff, $request->department_heads)) {
+                            $department->users()->attach($staff);
+                            $department->save();
+                        }
+                    } else {
                         $department->users()->attach($staff);
                         $department->save();
                     }
