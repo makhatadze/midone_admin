@@ -42,16 +42,13 @@ Route::prefix('admin')->group(function () {
             ->name('store', 'rolesStore')
             ->name('edit', 'rolesEdit')
             ->name('update', 'rolesUpdate');
-<<<<<<< HEAD
-            
+
         Route::get('roles/permissions/{role}',[RolesController::class,'permissions']);
 
             
-=======
 
         Route::get('roles/permissions/{role}', [RolesController::class, 'permissions']);
 
->>>>>>> b3b32c0200b755ee49cef56d80113ed9cab09351
         Route::get('/messages', [MessageController::class, 'index'])
             ->middleware('can:isAdmin')
             ->name('getAllMessages');
