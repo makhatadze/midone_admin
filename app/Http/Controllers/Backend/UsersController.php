@@ -34,7 +34,7 @@ class UsersController extends BackendController
      */
     public function index()
     {
-        $users = User::where('username', '!=', 'investgroup')->with('profile')->get();
+        $users = User::get();
 
         // Get Roles for user
         $roles = Role::where('slug', '!=', 'admin')->get();
