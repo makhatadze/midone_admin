@@ -7,12 +7,11 @@
  * Time: 13:34
  * @author Vito Makhatadze <vitomaxatadze@gmail.com>
  */
+
 namespace App\Models;
 
 use App\Traits\HasRolesAndPermissions;
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -83,7 +82,6 @@ class User extends Authenticatable
         $data = [];
         foreach ($tickets as $ticket) {
             if ($this->canAccessTicket($ticket)) {
-
                 $data [] = [
                     'id' => $ticket->id,
                     'user' => User::getName($ticket->user_id),
@@ -116,16 +114,17 @@ class User extends Authenticatable
         if ($this->hasRole('admin')) {
             return true;
         }
-
         $department = Department::find($ticket->department_id);
         if ($department != null) {
             $heads = $department->head()->get()->toArray();
-
+            $users = $department->users()->get()->toArray();
             if (count($heads) > 0 && in_array($this->id, array_column($heads, 'id'))) {
                 return true;
             }
+            if (count($users) > 0 && in_array($this->id, array_column($users, 'id'))) {
+                return true;
+            }
         }
-
         if ($ticket->category_id) {
             $categories = Category::find($ticket->category);
             if ($categories != null) {
