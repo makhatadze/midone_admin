@@ -5,7 +5,6 @@ window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'qwerty',
-    cluster: 'mt1',
     wsHost: window.location.hostname,
     wsPort: 6001,
     forceTLS: false,
@@ -26,6 +25,7 @@ window.Echo.join('users')
 
 window.Echo.private('ticket-created')
     .listen('TicketCreated', (e) => {
+        console.log(e)
         axios.get(`tickets/notification/${e.ticket.id}`,).then(res => {
             if (res.status === 200) {
                 notifyMe(res.data.message)

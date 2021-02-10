@@ -38,6 +38,7 @@ class TicketsController extends BackendController
             $categories = $departments[0]->categories()->get();
         }
         $ticket = Ticket::where('id', 2)->first();
+        TicketCreated::dispatch($ticket);
 
         return view('backend.module.tickets.index', [
             'tickets' => $tickets,
