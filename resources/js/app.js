@@ -1,3 +1,4 @@
+
 // 3rd Parties
 import bootstrap from './bootstrap'
 import chart from './chart'
@@ -34,7 +35,7 @@ import $ from './jquery'
 
 require('./users/app')
 require('./tickets/app')
-
+require('./socket/app')
 
 $(document).ready(function () {
 

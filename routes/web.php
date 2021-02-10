@@ -106,6 +106,9 @@ Route::prefix('admin')->group(function () {
         Route::post('tickets/answer-message/{ticket}', [TicketsController::class, 'answerMessage'])
             ->name('answerMessage');
 
+        Route::get('tickets/notification/{ticket}', [TicketsController::class, 'getNotification'])->name('getNotification');
+
+
     });
 
 });

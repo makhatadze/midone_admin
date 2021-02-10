@@ -103,6 +103,21 @@ class User extends Authenticatable
 
     }
 
+    public function getNotificationTicketCreated(Ticket $ticket): array
+    {
+        if (!$this->canAccessTicket($ticket)) {
+            abort(404);
+
+        }
+        if ($ticket->user_id === $this->id) {
+            abort(404);
+
+        }
+        return [
+            'message' => 'New Ticket Created',
+        ];
+    }
+
     public static function getName($id)
     {
         $user = User::find($id);

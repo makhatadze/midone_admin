@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Mail\TicketMail;
+use App\Events\TicketCreated;
 use App\Models\Approve;
 use App\Models\Category;
 use App\Models\Department;
@@ -18,7 +18,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Mail;
 
 class TicketsController extends BackendController
 {
@@ -38,7 +37,7 @@ class TicketsController extends BackendController
         if (count($departments) > 0) {
             $categories = $departments[0]->categories()->get();
         }
-
+        $ticket = Ticket::where('id', 2)->first();
 
         return view('backend.module.tickets.index', [
             'tickets' => $tickets,
@@ -137,6 +136,7 @@ class TicketsController extends BackendController
 //            Mail::to($emails)->send(new TicketMail($data));
 //        }
 
+        TicketCreated::dispatch($ticket);
 
         return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
 
@@ -262,6 +262,13 @@ class TicketsController extends BackendController
         ];
     }
 
+    public function getNotification(Ticket $ticket)
+    {
+        $authUser = auth()->user();
+
+        return $authUser->getNotificationTicketCreated($ticket);
+    }
+
 
     private function getUserEmails(Ticket $ticket)
     {
@@ -277,4 +284,6 @@ class TicketsController extends BackendController
         }
         return $emails;
     }
+
+
 }
