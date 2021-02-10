@@ -4,8 +4,8 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'qwerty',
-    wsHost: '144.76.13.148',
+    key: '408e2a04eafcb0437877',
+    wsHost: '127.0.0.1',
     wsPort: 6001,
     forceTLS: false,
     disableStats: true,
