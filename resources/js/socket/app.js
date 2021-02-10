@@ -10,7 +10,7 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
 });
-
+console.log(321312)
 
 window.Echo.join('users')
     .here((e) => {
