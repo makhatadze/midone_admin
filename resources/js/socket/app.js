@@ -5,12 +5,11 @@ window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'qwerty',
-    wsHost: '127.0.0.1',
+    wsHost: '144.76.13.148',
     wsPort: 6001,
     forceTLS: false,
     disableStats: true,
 });
-console.log(321312)
 
 window.Echo.join('users')
     .here((e) => {
