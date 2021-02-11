@@ -2,38 +2,38 @@ import Echo from "laravel-echo"
 
 window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: '408e2a04eafcb0437877',
-//     wsHost: '144.76.13.148',
-//     wsPort: 6001,
-//     forceTLS: false,
-//     disableStats: true,
-// });
-//
-// window.Echo.join('users')
-//     .here((e) => {
-//     })
-//     .joining((user) => {
-//     })
-//     .listen(('PostCreated'), (data) => {
-//         console.log(123)
-//     })
-//     .leaving((user) => {
-//     })
-//
-// window.Echo.private('ticket-created')
-//     .listen('TicketCreated', (e) => {
-//         console.log(e)
-//         axios.get(`tickets/notification/${e.ticket.id}`,).then(res => {
-//             if (res.status === 200) {
-//                 notifyMe(res.data.message)
-//             }
-//         }).catch(err => {
-//             console.log(err);
-//             console.log('error')
-//         })
-//     });
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '408e2a04eafcb0437877',
+    wsHost: '127.0.0.1',
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
+});
+
+window.Echo.join('users')
+    .here((e) => {
+    })
+    .joining((user) => {
+    })
+    .listen(('PostCreated'), (data) => {
+        console.log(123)
+    })
+    .leaving((user) => {
+    })
+
+window.Echo.private('ticket-created')
+    .listen('TicketCreated', (e) => {
+        console.log(e)
+        axios.get(`tickets/notification/${e.ticket.id}`,).then(res => {
+            if (res.status === 200) {
+                notifyMe(res.data.message)
+            }
+        }).catch(err => {
+            console.log(err);
+            console.log('error')
+        })
+    });
 
 function notifyMe(notification) {
     // Let's check if the browser supports notifications

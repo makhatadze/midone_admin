@@ -137,7 +137,7 @@ class TicketsController extends BackendController
 //            Mail::to($emails)->send(new TicketMail($data));
 //        }
 
-//        TicketCreated::dispatch($ticket);
+        TicketCreated::dispatch($ticket);
 
         return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
 
