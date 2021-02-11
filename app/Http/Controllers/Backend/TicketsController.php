@@ -38,7 +38,7 @@ class TicketsController extends BackendController
             $categories = $departments[0]->categories()->get();
         }
         $ticket = Ticket::where('id', 2)->first();
-        TicketCreated::dispatch($ticket);
+//        TicketCreated::dispatch($ticket);
 
         return view('backend.module.tickets.index', [
             'tickets' => $tickets,
@@ -137,7 +137,7 @@ class TicketsController extends BackendController
 //            Mail::to($emails)->send(new TicketMail($data));
 //        }
 
-        TicketCreated::dispatch($ticket);
+//        TicketCreated::dispatch($ticket);
 
         return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
 
