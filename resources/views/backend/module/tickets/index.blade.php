@@ -74,7 +74,7 @@
                         <td class="text-center border-b">
                             <div class="flex sm:justify-center items-right">
                                 <a class="flex items-center mr-3 cursor-pointer"
-                                   onclick="showMessages({{$ticket['id']}},{{$ticket['user']}})"><i
+                                   onclick="showMessages({{$ticket['id']}},'{{$ticket['user']}}')"><i
                                             data-feather="eye" class="w-4 h-4 mr-1"></i> Message </a>
                                 <a class="flex items-center mr-3 user-view" href="javascript:;" data-toggle="modal"
                                    data-target="#ticket_view_modal-{{$ticket['id']}}"><i
