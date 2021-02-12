@@ -37,7 +37,7 @@ class UsersController extends BackendController
         $users = User::where('username', '!=', 'investgroup')->get();
 
         // Get Roles for user
-        $roles = Role::where('slug', '!=', 'admin')->get();
+        $roles = Role::get();
         // Get Countries
         $countries = Country::all();
 
@@ -142,7 +142,7 @@ class UsersController extends BackendController
             $rolePermissions = $rolePermissions->permissions;
         }
 
-        $allRoles = Role::where('slug', '!=', 'admin')->get();
+        $allRoles = Role::get();
         $country = [];
         if ($user->profile->country) {
             $country = Country::where('code', $user->profile->country)->get()->toArray();
@@ -171,7 +171,7 @@ class UsersController extends BackendController
             $rolePermissions = $rolePermissions->permissions;
         }
 
-        $allRoles = Role::where('slug', '!=', 'admin')->get();
+        $allRoles = Role::get();
 
         $countries = Country::all();
         return view('backend.module.users.edit', [
