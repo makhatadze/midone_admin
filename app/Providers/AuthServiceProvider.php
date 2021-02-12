@@ -97,6 +97,9 @@ class AuthServiceProvider extends ServiceProvider
 
     private function hasPermission($user, $permission)
     {
+        if ($user->hasRole('admin')) {
+            return true;
+        }
         return in_array($permission, array_column($user->permissions()->select('slug')->get()->toArray(), 'slug'));
     }
 }
