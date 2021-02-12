@@ -78,7 +78,7 @@ class User extends Authenticatable
 
     public function getTickets($owner = false)
     {
-        $tickets = $owner ? Ticket::where('user_id', $this->id)->get() : Ticket::get();
+        $tickets = $owner ? Ticket::where('user_id', $this->id)->get() : Ticket::where('user_id', '!=', $this->id)->get();
         $data = [];
         foreach ($tickets as $ticket) {
             if ($this->canAccessTicket($ticket)) {
@@ -93,9 +93,10 @@ class User extends Authenticatable
                     'process' => $ticket->process,
                     'approve_departments' => $ticket->getApproveDepartments(),
                     'closed_at' => $ticket->closed_at,
-                    'created_at' => Carbon::createFromTimestamp($ticket->created_at),
+                    'created_at' => $ticket->created_at,
                     'can_approve' => $this->canApprove($ticket),
-                    'can_confirm' => $this->canConfirm($ticket)
+                    'can_confirm' => $this->canConfirm($ticket),
+                    'can_un_confirm' => $this->canUnConfirm($ticket)
                 ];
             }
         }
@@ -128,6 +129,9 @@ class User extends Authenticatable
     protected function canAccessTicket($ticket)
     {
         if ($this->hasRole('admin')) {
+            return true;
+        }
+        if ($this->id === $ticket->user_id) {
             return true;
         }
         $department = Department::find($ticket->department_id);
@@ -202,12 +206,28 @@ class User extends Authenticatable
         if ($this->hasRole('admin')) {
             return true;
         }
-
+        if ($this->hasPermission('confirm_ticket')) {
+            return true;
+        }
         if ($this->id === $ticket->user_id) {
             return true;
         }
         return false;
     }
 
+    public function canUnConfirm($ticket)
+    {
+        if ($this->hasRole('admin')) {
+            return true;
+        }
+        if ($this->hasPermission('un_confirm_ticket')) {
+            return true;
+        }
+        if ($this->id === $ticket->user_id) {
+            return true;
+        }
+
+        return false;
+    }
 
 }

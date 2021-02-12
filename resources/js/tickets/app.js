@@ -12,6 +12,10 @@ $(document).ready(function () {
             $('.help-ticket-message').html(errors['ticket_message'][0])
             $('.error-ticket-message').addClass('has-error')
         }
+        if (errors['ticket_name']) {
+            $('.help-ticket-name').html(errors['ticket_name'][0])
+            $('.error-ticket-name').addClass('has-error')
+        }
     }
 
     async function ticketCreate() {
@@ -47,7 +51,6 @@ $(document).ready(function () {
 
         }).catch(err => {
             $('#btn-ticket-create').html('Create')
-            console.log(err.response.data.errors)
             if (err.response.data.errors) {
                 let errors = err.response.data.errors;
                 setTicketErrors(errors);

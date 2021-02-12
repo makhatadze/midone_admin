@@ -24,6 +24,7 @@
                     <th class="border-b-2 text-center whitespace-no-wrap">level</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">deadline</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">created at</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">closed at</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">tools</th>
                 </tr>
                 </thead>
@@ -54,12 +55,25 @@
                                 </div>
                             @else
                                 <div class="flex items-center  sm:justify-center">No Deadline</div>
-
                             @endif
 
                         </td>
                         <td class="border-b">
                             <div class="flex items-center sm:justify-center "> {{$ticket['created_at']}}</div>
+                        </td>
+                        <td class="text-center border-b">
+                            <div class="flex items-center  sm:justify-center">
+                                @if($ticket['confirm'] != '0'&& $ticket['closed_at'])
+                                    {{$ticket['closed_at']}}
+                                @elseif($ticket['confirm'] != '0')
+                                    Un Confirmed by
+                                @endif
+                            </div>
+                            <div class="flex items-center  sm:justify-center text-blue-100-700 text-xs">
+                                @if($ticket['confirm'] != '0')
+                                    {{$ticket['confirm']}}
+                                @endif
+                            </div>
                         </td>
                         <td class="text-center border-b">
                             <div class="flex sm:justify-center items-center">
@@ -201,23 +215,27 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if($ticket['can_confirm'] && !in_array(false, array_column($ticket['approve_departments'], 'approved')))
+                                @if(!in_array(false, array_column($ticket['approve_departments'], 'approved')))
                                     @if($ticket['confirm'] && $ticket['closed_at'])
-                                        <a class="flex items-center text-theme-9 cursor-pointer" href="javascript:;"
-                                           data-toggle="modal"
-                                           onclick="confirmModal({{$ticket['id']}})"
-                                           data-target="#confirmModal"> <i data-feather="stop-circle"
-                                                                           class="w-4 h-4 mr-1"></i>
-                                            Un Confirm
-                                        </a>
+                                        @if($ticket['can_un_confirm'])
+                                            <a class="flex items-center text-theme-9 cursor-pointer" href="javascript:;"
+                                               data-toggle="modal"
+                                               onclick="confirmModal({{$ticket['id']}})"
+                                               data-target="#confirmModal"> <i data-feather="stop-circle"
+                                                                               class="w-4 h-4 mr-1"></i>
+                                                Un Confirm
+                                            </a>
+                                        @endif
                                     @else
-                                        <a class="flex items-center text-theme-9 cursor-pointer" href="javascript:;"
-                                           data-toggle="modal"
-                                           onclick="confirmModal({{$ticket['id']}})"
-                                           data-target="#confirmModal"> <i data-feather="stop-circle"
-                                                                           class="w-4 h-4 mr-1"></i>
-                                            Confirm
-                                        </a>
+                                        @if($ticket['can_confirm'])
+                                            <a class="flex items-center text-theme-9 cursor-pointer" href="javascript:;"
+                                               data-toggle="modal"
+                                               onclick="confirmModal({{$ticket['id']}})"
+                                               data-target="#confirmModal"> <i data-feather="stop-circle"
+                                                                               class="w-4 h-4 mr-1"></i>
+                                                Confirm
+                                            </a>
+                                        @endif
                                     @endif
                                 @endif
                             </div>

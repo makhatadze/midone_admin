@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Events\TicketCreated;
 use App\Models\Approve;
 use App\Models\Category;
 use App\Models\Department;
@@ -78,6 +77,12 @@ class TicketsController extends BackendController
             'ticket_message' => 'required|string',
             'ticket_level' => 'required'
         ]);
+
+        if (!$request->ticket_category) {
+            $request->validate([
+                'ticket_name' => 'required|string|max:255'
+            ]);
+        }
 
         if (!$request->_token) {
             return true;
@@ -198,23 +203,24 @@ class TicketsController extends BackendController
     public function ticketConfirm(Ticket $ticket)
     {
 
-        if ($ticket && auth()->user()->canConfirm($ticket)) {
-            $ticket->confirm = auth()->user()->name;
-            if ($ticket->closed_at === null) {
-                $ticket->closed_at = Carbon::now()->toDateTimeString();
-                $message = 'Ticket successfully confirmed';
-            } else {
-                $ticket->closed_at = null;
-                Approve::where('ticket_id', $ticket->id)->delete();
-                $message = 'Ticket successfully Un Confirmed';
+
+        if ($ticket->closed_at === null) {
+            if (!auth()->user()->canConfirm($ticket)) {
+                return redirect('/admin/tickets-all')->with('danger', 'You can not access this action');
             }
-            $ticket->save();
-            return redirect('/admin/tickets-all')->with('success', $message);
-
+            $ticket->closed_at = Carbon::now()->toDateTimeString();
+            $message = 'Ticket successfully confirmed';
+        } else {
+            if (!auth()->user()->canUnConfirm($ticket)) {
+                return redirect('/admin/tickets-all')->with('danger', 'You can not access this action');
+            }
+            $ticket->closed_at = null;
+            Approve::where('ticket_id', $ticket->id)->delete();
+            $message = 'Ticket successfully Un Confirmed';
         }
-
-        return redirect('/admin/tickets-all')->with('danger', 'Something wrong, Ticket not confirmed.');
-
+        $ticket->confirm = auth()->user()->name;
+        $ticket->save();
+        return redirect('/admin/tickets-all')->with('success', $message);
 
     }
 
