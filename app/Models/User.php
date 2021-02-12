@@ -76,9 +76,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Department::class, 'department_heads');
     }
 
-    public function getTickets()
+    public function getTickets($owner = false)
     {
-        $tickets = Ticket::all();
+        $tickets = $owner ? Ticket::where('user_id', $this->id)->get() : Ticket::get();
         $data = [];
         foreach ($tickets as $ticket) {
             if ($this->canAccessTicket($ticket)) {
@@ -90,6 +90,7 @@ class User extends Authenticatable
                     'deadline' => $ticket->deadline,
                     'level' => $ticket->getTicketLevelName(),
                     'confirm' => $ticket->confirm,
+                    'process' => $ticket->process,
                     'approve_departments' => $ticket->getApproveDepartments(),
                     'closed_at' => $ticket->closed_at,
                     'created_at' => Carbon::createFromTimestamp($ticket->created_at),
@@ -198,15 +199,11 @@ class User extends Authenticatable
 
     public function canConfirm($ticket)
     {
-        if ($ticket->closed_at) {
-            return false;
-        }
         if ($this->hasRole('admin')) {
             return true;
         }
-        $department = Department::find($ticket->department_id);
-        $heads = $department->head()->get()->toArray();
-        if (count($heads) > 0 && in_array($this->id, array_column($heads, 'id'))) {
+
+        if ($this->id === $ticket->user_id) {
             return true;
         }
         return false;

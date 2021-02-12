@@ -22,7 +22,6 @@
                     <th class="border-b-2 whitespace-no-wrap">Id</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">title</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">department</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">status</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">deadline</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">created at</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">closed at</th>
@@ -33,16 +32,13 @@
                 @foreach($tickets as $ticket)
                     <tr>
                         <td class="border-b">
-                            <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $ticket->id }}</div>
+                            <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $ticket['id'] }}</div>
                         </td>
                         <td class="border-b">
-                            <div class="flex items-center sm:justify-center "> {{$ticket->name}}</div>
+                            <div class="flex items-center sm:justify-center "> {{$ticket['name']}}</div>
                         </td>
                         <td class="border-b">
-                            <div class="flex items-center sm:justify-center "> {{$ticket->department->name}}</div>
-                        </td>
-                        <td class="border-b">
-                            <div class="flex items-center sm:justify-center "> {{$ticket->process}}</div>
+                            <div class="flex items-center sm:justify-center "> {{$ticket['department']}}</div>
                         </td>
                         <td class="border-b">
                             @if($ticket['deadline'] != null)
@@ -56,25 +52,121 @@
                                 </div>
                             @else
                                 <div class="flex items-center  sm:justify-center">No Deadline</div>
-
                             @endif
                         </td>
                         <td class="border-b">
-                            <div class="flex items-center sm:justify-center "> {{$ticket->created_at}}</div>
+                            <div class="flex items-center sm:justify-center "> {{$ticket['created_at']}}</div>
                         </td>
                         <td class="text-center border-b">
-                            <div class="flex items-center  sm:justify-center"> {{$ticket['closed_at']}}</div>
+                            <div class="flex items-center  sm:justify-center">
+                                @if($ticket['confirm'] != '0'&& $ticket['closed_at'])
+                                    {{$ticket['closed_at']}}
+                                @elseif($ticket['confirm'] != '0')
+                                    Un Confirmed by
+                                @endif
+                            </div>
                             <div class="flex items-center  sm:justify-center text-blue-100-700 text-xs">
-                                @if($ticket['closed_at'] != null)
+                                @if($ticket['confirm'] != '0')
                                     {{$ticket['confirm']}}
                                 @endif
                             </div>
                         </td>
                         <td class="text-center border-b">
-                            <div class="flex sm:justify-center items-center">
+                            <div class="flex sm:justify-center items-right">
                                 <a class="flex items-center mr-3 cursor-pointer"
-                                   onclick="showMessages({{$ticket['id']}},{{$ticket->user[0]}})"><i
+                                   onclick="showMessages({{$ticket['id']}},{{$ticket['user']}})"><i
                                             data-feather="eye" class="w-4 h-4 mr-1"></i> Message </a>
+                                <a class="flex items-center mr-3 user-view" href="javascript:;" data-toggle="modal"
+                                   data-target="#ticket_view_modal-{{$ticket['id']}}"><i
+                                            data-feather="eye" class="w-4 h-4 mr-1"></i> View </a>
+                                <div class="modal" id="ticket_view_modal-{{$ticket['id']}}">
+                                    <div class="modal__content">
+                                        <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200">
+                                            <h2 class="font-medium text-base mr-auto" id="user-form-title">Ticket
+                                                N{{$ticket['id']}} - {{$ticket['name']}}</h2>
+                                        </div>
+                                        <div class="md:flex bg-white rounded-lg p-6 pt-3">
+                                            <div class="text-center md:text-left">
+                                                <h3 class="text-lg">Created by: {{$ticket['user']}}</h3>
+                                                <hr>
+                                                <div class="text-gray-700 mt-1">
+                                                    Department: {{$ticket['department']}}</div>
+                                                <hr>
+                                                <div class="text-gray-700 mt-1">
+                                                    Deadline: {{$ticket['deadline'] ? $ticket['deadline'] : 'No Deadline'}}
+                                                    @if($ticket['deadline'] != null && $ticket['closed_at'] != null)
+
+                                                        <?php echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at']))
+                                                            ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
+                                                        ?>
+
+                                                    @endif
+                                                </div>
+                                                <hr>
+                                                <div class="text-gray-700 mt-1">Created
+                                                    At: {{$ticket['created_at']}}</div>
+                                                <hr>
+                                                <div class="text-gray-700 mt-1">Level: {{$ticket['level']}}</div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <div class="md:flex bg-white rounded-lg p-6 pt-3">
+                                            <div class="text-center md:text-left">
+                                                @if($ticket['closed_at'] != null)
+                                                    <h3 class="text-lg">Confirm By: {{$ticket['confirm']}} - Confirm
+                                                        At {{$ticket['closed_at']}}</h3>
+                                                @else
+                                                    <h3 class="text-lg">Confirm: Not Yet</h3>
+                                                @endif
+                                                <hr>
+                                                @foreach($ticket['approve_departments'] as $approve)
+                                                    @if (!$approve['approved'])
+                                                        <div class="text-gray-700 mt-1">Department
+                                                            Group: {{$approve['department']}}</div>
+                                                        <div class="text-gray-700 mt-1">Ticket Status: Pending
+                                                        </div>
+                                                        <hr>
+                                                    @else
+                                                        <div class="text-gray-700 mt-1">
+                                                            Status: {{$approve['status'] ? 'Approved' : 'Rejected'}}</div>
+                                                        <div class="text-gray-700 mt-1">Department
+                                                            Group: {{$approve['department']}}</div>
+                                                        <div class="text-gray-700 mt-1">Created
+                                                            By: {{$approve['user']}}</div>
+                                                        <div class="text-gray-700 mt-1">Created
+                                                            At: {{$approve['created_at']}}</div>
+                                                        <hr>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="px-5 py-3 text-right border-t border-gray-200">
+                                            <button type="button" data-dismiss="modal"
+                                                    class="button w-20 border text-gray-700 mr-1">Close
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @if(!in_array(false, array_column($ticket['approve_departments'], 'approved')))
+                                    @if($ticket['confirm'] && $ticket['closed_at'])
+                                        <a class="flex items-center text-theme-9 cursor-pointer" href="javascript:;"
+                                           data-toggle="modal"
+                                           onclick="confirmModal({{$ticket['id']}})"
+                                           data-target="#confirmModal"> <i data-feather="stop-circle"
+                                                                           class="w-4 h-4 mr-1"></i>
+                                            Un Confirm
+                                        </a>
+                                    @else
+                                        <a class="flex items-center text-theme-9 cursor-pointer" href="javascript:;"
+                                           data-toggle="modal"
+                                           onclick="confirmModal({{$ticket['id']}})"
+                                           data-target="#confirmModal"> <i data-feather="stop-circle"
+                                                                           class="w-4 h-4 mr-1"></i>
+                                            Confirm
+                                        </a>
+                                    @endif
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -220,15 +312,40 @@
                             <input name="file" type="file"/>
 
                         </div>
-                    </div>
-                    <div class="px-5 py-3 text-right border-t border-gray-200">
-                        <button type="button" id="btn-ticket-close" class="button w-20 border text-gray-700 mr-1">Cancel
-                        </button>
-                        <button type="button" id="btn-ticket-create" class="button w-20 bg-theme-1 text-white">Create
-                        </button>
-                    </div>
+                </div>
+                <div class="px-5 py-3 text-right border-t border-gray-200">
+                    <button type="button" id="btn-ticket-close" class="button w-20 border text-gray-700 mr-1">Cancel
+                    </button>
+                    <button type="button" id="btn-ticket-create" class="button w-20 bg-theme-1 text-white">Create
+                    </button>
+                </div>
             </form>
         </div>
+        <div class="modal" id="confirmModal">
+
+            <div class="modal__content">
+                <div class="p-5 text-center">
+                    <i data-feather="check-circle" class="w-16 h-16 text-theme-9 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">Are you sure?</div>
+                </div>
+                <form method="POST" action="" class="ticket-confirm-form">
+
+                    <div class="px-5 pb-8 text-center">
+
+                        <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 mr-1">
+                            close
+                        </button>
+                        @method('POST')
+                        @csrf()
+                        <button type="button" class="button w-24 mr-1 mb-2 bg-theme-9 text-white"
+                                onclick="$(this).closest('form').submit();">Confirm
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -354,5 +471,12 @@
             }
 
         }
+
+        function confirmModal(e) {
+            $(document).ready(function () {
+                $('.ticket-confirm-form').attr('action', `tickets/confirm/${e}`)
+            })
+        }
+
     </script>
 @endsection

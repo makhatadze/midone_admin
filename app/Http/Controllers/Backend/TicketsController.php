@@ -39,9 +39,9 @@ class TicketsController extends BackendController
         }
         $ticket = Ticket::where('id', 2)->first();
 //        TicketCreated::dispatch($ticket);
-
+        $authUser = auth()->user();
         return view('backend.module.tickets.index', [
-            'tickets' => $tickets,
+            'tickets' => $authUser->getTickets(true),
             'departments' => $departments,
             'categories' => $categories
         ]);
@@ -200,9 +200,16 @@ class TicketsController extends BackendController
 
         if ($ticket && auth()->user()->canConfirm($ticket)) {
             $ticket->confirm = auth()->user()->name;
-            $ticket->closed_at = Carbon::now()->toDateTimeString();
+            if ($ticket->closed_at === null) {
+                $ticket->closed_at = Carbon::now()->toDateTimeString();
+                $message = 'Ticket successfully confirmed';
+            } else {
+                $ticket->closed_at = null;
+                Approve::where('ticket_id', $ticket->id)->delete();
+                $message = 'Ticket successfully Un Confirmed';
+            }
             $ticket->save();
-            return redirect('/admin/tickets-all')->with('success', 'Ticket successfully confirmed');
+            return redirect('/admin/tickets-all')->with('success', $message);
 
         }
 
