@@ -146,11 +146,16 @@ class User extends Authenticatable
             }
         }
         if ($ticket->category_id) {
-            $categories = Category::find($ticket->category);
+            $categories = Category::find($ticket->category_id);
+
             if ($categories != null) {
-                $departments = $categories->departments()->get()->toArray();
+                $departments = $categories->departments()->get();
                 if (count($departments) > 0) {
                     foreach ($departments as $dep) {
+                        $heads = $dep->head()->get()->toArray();
+                        if (count($heads) > 0 && in_array($this->id, array_column($heads, 'id'))) {
+                            return true;
+                        }
                         $staff = $dep->users()->get()->toArray();
                         if (count($staff) > 0 && in_array($this->id, array_column($staff, 'id'))) {
                             return true;
