@@ -41,7 +41,7 @@
                             <div class="flex items-center sm:justify-center "> {{$ticket['department']}}</div>
                         </td>
                         <td class="border-b">
-                            <div class="flex items-center sm:justify-center "> {{$ticket['level']}}</div>
+                            <div class="flex items-center sm:justify-center {{$ticket['level']}}"> {{$ticket['level']}}</div>
                         </td>
                         <td class="border-b">
                             @if($ticket['deadline'] != null)
