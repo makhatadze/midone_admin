@@ -20,6 +20,10 @@ use Illuminate\Routing\Redirector;
 
 class TicketsController extends BackendController
 {
+    private $filters = [
+        'status' => 'filter-ticket-status'
+    ];
+    
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +31,7 @@ class TicketsController extends BackendController
      */
     public function index()
     {
-        $tickets = Ticket::where('user_id', auth()->user()->id)->with('user')->get();
+        //  $tickets = Ticket::where('user_id', auth()->user()->id)->with('user')->get();
 
         $departments = Department::all();
 
@@ -36,11 +40,23 @@ class TicketsController extends BackendController
         if (count($departments) > 0) {
             $categories = $departments[0]->categories()->get();
         }
-        $ticket = Ticket::where('id', 2)->first();
-//        TicketCreated::dispatch($ticket);
+
+        // get tickets
+
+        $filteredOption = request()->cookie($this->filters['status']);
+
+        if (!in_array($filteredOption, ['success', 'pending', 'closed'])) {
+            $filteredOption = null;
+        }
         $authUser = auth()->user();
+        $tickets = (empty($filteredOption) || is_null($filteredOption)) ?
+                $authUser->getTickets(true) : $authUser->getTickets(true, $filteredOption);
+
+        //$ticket = Ticket::where('id', 2)->first();
+        //TicketCreated::dispatch($ticket);
+
         return view('backend.module.tickets.index', [
-            'tickets' => $authUser->getTickets(true),
+            'tickets' => $tickets,
             'departments' => $departments,
             'categories' => $categories
         ]);
@@ -155,10 +171,20 @@ class TicketsController extends BackendController
      */
     public function getAllTickets()
     {
+        $filteredOption = request()->cookie($this->filters['status']);
+
+        if (!in_array($filteredOption, ['success', 'pending', 'closed'])) {
+            $filteredOption = null;
+        }
+
         $authUser = auth()->user();
+        $tickets = (empty($filteredOption) || is_null($filteredOption)) ?
+                $authUser->getTickets() : $authUser->getTickets(false, $filteredOption);
+
         return view('backend.module.tickets.tickets', [
-            'tickets' => $authUser->getTickets(),
+            'tickets' => $tickets,
         ]);
+
     }
 
     /**

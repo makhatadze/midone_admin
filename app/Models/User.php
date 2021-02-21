@@ -76,11 +76,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Department::class, 'department_heads');
     }
 
-    public function getTickets($owner = false)
+    public function getTickets($owner = false, string $filter = '')
     {
-        $tickets = $owner ? Ticket::where('user_id', $this->id)->get() : Ticket::where('user_id', '!=', $this->id)->get();
+        $tickets = $owner ? Ticket::where('user_id', $this->id) : Ticket::where('user_id', '!=', $this->id);
+
+        if (in_array($filter, ['closed', 'success', 'pending'])) {
+            $tickets->{$filter}();
+        }
+
         $data = [];
-        foreach ($tickets as $ticket) {
+        foreach ($tickets->get() as $ticket) {
             if ($this->canAccessTicket($ticket)) {
                 $data [] = [
                     'id' => $ticket->id,
@@ -102,8 +107,8 @@ class User extends Authenticatable
         }
 
         return array_reverse($data);
-
     }
+
 
     public function getNotificationTicketCreated(Ticket $ticket): array
     {
