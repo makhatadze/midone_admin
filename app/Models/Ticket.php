@@ -89,5 +89,20 @@ class Ticket extends Model
         return $this->hasmany('App\Models\User', 'id', 'user_id');
 
     }
-
+    
+    public function scopeClosed($query)
+    {
+        return $query->whereNotNull('closed_at');
+    }
+     
+     
+     public function scopeSuccess($query)
+     {
+         return $query->where(DB::raw('closed_at'), '<=', DB::raw('deadline'));
+     }
+     
+     public function scopePending($query)
+     {
+         return $query->whereNull('closed_at');        
+     }
 }
