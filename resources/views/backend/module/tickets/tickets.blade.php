@@ -48,7 +48,7 @@
                                 <div class="flex items-center  sm:justify-center"> {{$ticket['deadline']}}</div>
                                 <div class="flex items-center  sm:justify-center text-gray-600 text-xs">
                                     @if($ticket['closed_at'] != null)
-                                        <?php echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at']))
+                                        <?php echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) >= \Carbon\Carbon::createFromTimestamp($ticket['closed_at']))
                                             ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
                                         ?>
                                     @endif
