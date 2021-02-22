@@ -123,7 +123,11 @@ class TicketsController extends BackendController
             $ticket->name = $category->name;
         }
         if ($request->ticket_deadline != null) {
-            $deadline = $request->ticket_deadline . ' ' . $request->ticket_deadline_time;
+            $time = '23:59:59';
+            if ($request->ticket_deadline_time) {
+                $time = $request->ticket_deadline_time . ':59';
+            }
+            $deadline = $request->ticket_deadline . ' ' . $time;
             $ticket->deadline = Carbon::parse($deadline);
         }
 
