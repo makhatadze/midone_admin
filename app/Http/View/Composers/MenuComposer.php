@@ -75,6 +75,13 @@ class MenuComposer
                 'title' => 'User Tickets',
                 'route' => route('getAllTickets'),
                 'permission' => 'read_ticket'
+            ],
+            'ticket_exports' => [
+                'icon' => 'file-text',
+                'page_name' => 'Ticket Export Log',
+                'title' => 'Ticket Export Log',
+                'route' => route('ticketExportLog'),
+                'permission' => ''
             ]
         ];
 
