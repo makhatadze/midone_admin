@@ -87,7 +87,7 @@ class Ticket extends Model
 
     public function user()
     {
-        return $this->hasmany('App\Models\User', 'id', 'user_id');
+        return $this->hasone('App\Models\User', 'id', 'user_id');
 
     }
     
