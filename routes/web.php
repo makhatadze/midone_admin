@@ -107,6 +107,8 @@ Route::prefix('admin')->group(function () {
             ->name('answerMessage');
 
         Route::get('tickets/notification/{ticket}', [TicketsController::class, 'getNotification'])->name('getNotification');
+        
+        Route::get('tickets/export',[TicketsController::class,'exportToExcel'])->name('exportToExcel');
 
 
     });
