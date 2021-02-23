@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use App\Exports\TicketsExport;
+use App\Models\Exports;
 
 class TicketsController extends BackendController
 {
@@ -350,7 +351,13 @@ class TicketsController extends BackendController
         }
         
         $ticketExport = (new TicketsExport)->setIds($ticketIds)->download();
-
+       
+        $export = new Exports;
+        $export->user_id = auth()->user()->id;
+        $export->ticket_ids = serialize($ticketIds);
+        
+        $export->save();
+        
         return $ticketExport;
     }
 
