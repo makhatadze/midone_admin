@@ -110,7 +110,7 @@ Route::prefix('admin')->group(function () {
         
         Route::get('tickets/export',[TicketsController::class,'exportToExcel'])->name('exportToExcel');
 
-
+        Route::get('tickets/export-log',[TicketsController::class,'exportLog'])->name('ticketExportLog');
     });
 
 });
