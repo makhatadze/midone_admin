@@ -12,6 +12,7 @@ class EncryptCookies extends Middleware
      * @var array
      */
     protected $except = [
-        'filter-ticket-status'
+        'filter-ticket-status',
+        'ticket-export-ids'
     ];
 }
