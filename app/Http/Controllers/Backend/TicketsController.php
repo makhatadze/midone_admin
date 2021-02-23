@@ -360,6 +360,11 @@ class TicketsController extends BackendController
         
         return $ticketExport;
     }
+    
+    public function exportLog()
+    {
+        //
+    }
 
     private function checkTicketIds($ticketIds) 
     {
