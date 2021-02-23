@@ -17,6 +17,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use App\Exports\TicketsExport;
 
 class TicketsController extends BackendController
 {
@@ -327,6 +328,45 @@ class TicketsController extends BackendController
             }
         }
         return $emails;
+    }
+    
+    public function exportToExcel(Request $request) 
+    {
+        $referer = $request->server('HTTP_REFERER');
+        
+        $refererParts = explode('/',$referer);
+        $refererPath = end($refererParts );
+        
+        if (false === in_array($refererPath,['tickets','tickets-all'])) {
+            return redirect('/');
+        }
+        
+        $ticketIdCookie = $request->cookie('ticket-export-ids');
+
+        $ticketIds = json_decode($ticketIdCookie);
+
+        if ( false === $this->checkTicketIds($ticketIds) ) {
+            return redirect('/')->with('danger', 'Provide Correct ticket Ids!');
+        }
+        
+        $ticketExport = (new TicketsExport)->setIds($ticketIds)->download();
+
+        return $ticketExport;
+    }
+
+    private function checkTicketIds($ticketIds) 
+    {
+        if (!is_array($ticketIds) || empty($ticketIds)) {
+            return false;
+        }
+
+        foreach ($ticketIds as $id) {
+            if (!ctype_digit($id)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
