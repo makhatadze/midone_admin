@@ -12,7 +12,12 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\FromQuery;
 
 class TicketsExport implements
-FromQuery, ShouldAutoSize, WithEvents, WithHeadings, WithMapping {
+      FromQuery, 
+      ShouldAutoSize, 
+      WithEvents, 
+      WithHeadings, 
+      WithMapping 
+{
 
     use Exportable;
 
@@ -20,12 +25,23 @@ FromQuery, ShouldAutoSize, WithEvents, WithHeadings, WithMapping {
 
     private $ticketIds  = [];
     
+    private $withCurrentUser = null;
+    
     public function query() 
     {
         
+        $tickets = Ticket::query();
+        
         $ticketIds = $this->getTicketIds();
         
-        $tickets = Ticket::query()->WhereIn('id',$ticketIds);
+        if (false === empty($ticketIds)) {
+            $tickets->WhereIn('id',$ticketIds);
+        }
+        
+        if (false === is_null($this->withCurrentUser)) {
+           $userId = auth()->user()->id;
+           ($this->withCurrentUser) ? $tickets->where('user_id','=',$userId) : $tickets->where('user_id','!=',$userId);
+        }
         
         return $tickets;
     }
@@ -40,14 +56,13 @@ FromQuery, ShouldAutoSize, WithEvents, WithHeadings, WithMapping {
         
         $clientMessageModel = $ticket->message->get(0);
         
-        
         $mapping = [
             $ticket->id,
             $ticket->name,
-            $ticket->department->name,
+            ($ticket->department) ? $ticket->department->name : '',
             $ticketLevels[$ticket->level],
             $ticket->deadline,
-            $ticket->user->username,
+            ($ticket->user) ? $ticket->user->username : '',
             $clientMessageModel->body,
             $clientMessageModel->created_at->format('l jS \\of F Y h:i:s A')
         ];
@@ -87,5 +102,12 @@ FromQuery, ShouldAutoSize, WithEvents, WithHeadings, WithMapping {
     public function getTicketIds() : array
     {
         return $this->ticketIds;
+    }
+    
+    public function setWithCurrentUser(bool $withUser)
+    {
+        $this->withCurrentUser = $withUser;
+        
+        return $this;
     }
 }
