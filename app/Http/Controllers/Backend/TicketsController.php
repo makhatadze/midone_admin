@@ -333,6 +333,7 @@ class TicketsController extends BackendController
     
     public function exportToExcel(Request $request) 
     {
+        
         $referer = $request->server('HTTP_REFERER');
         
         $refererParts = explode('/',$referer);
@@ -351,19 +352,53 @@ class TicketsController extends BackendController
         }
         
         $ticketExport = (new TicketsExport)->setIds($ticketIds)->download();
-       
-        $export = new Exports;
-        $export->user_id = auth()->user()->id;
-        $export->ticket_ids = serialize($ticketIds);
-        
-        $export->save();
+        $this->saveExportLog($ticketIds);
         
         return $ticketExport;
     }
     
+    private function saveExportLog($ticketIds)
+    {
+        if (false === is_array($ticketIds) || false === is_string($ticketIds)) {
+            return;
+        }
+   
+        $export = new Exports;
+        $export->user_id = auth()->user()->id;
+        $export->ticket_ids = (is_array($ticketIds)) ? serialize($ticketIds) : $ticketIds;
+        
+        $export->save();
+    }
+    
+    public function exportAll(Request $request)
+    {
+        $referer = $request->server('HTTP_REFERER');
+        
+        $refererParts = explode('/',$referer);
+        $refererPath = end($refererParts );
+        
+        if (false === in_array($refererPath,['tickets','tickets-all'])) {
+            return redirect('/');
+        }
+        
+        $withUser = ($refererPath === 'tickets-all') ? false : true;
+        $exported = ($refererPath === 'tickets-all') ? 'All Tickets' : 'Own Tickets';
+        
+        $ticketExport = (new TicketsExport)->setWithCurrentUser($withUser)->download();
+       
+        $this->saveExportLog($exported);
+        
+        return $ticketExport;
+        
+    }
+    
     public function exportLog()
     {
-        //
+        $exportLogs = Exports::all();
+        
+        return view('backend.module.tickets.exports', [
+            'exportLogs' => $exportLogs
+        ]);  
     }
 
     private function checkTicketIds($ticketIds) 
@@ -380,6 +415,4 @@ class TicketsController extends BackendController
 
         return true;
     }
-
-
 }
