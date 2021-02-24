@@ -359,7 +359,7 @@ class TicketsController extends BackendController
     
     private function saveExportLog($ticketIds)
     {
-        if (false === is_array($ticketIds) || false === is_string($ticketIds)) {
+        if (false === is_array($ticketIds) && false === is_string($ticketIds)) {
             return;
         }
    
