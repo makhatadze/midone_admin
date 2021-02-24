@@ -39,7 +39,8 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('isManager', function ($user) {
             return $user->roles->first()->slug == 'manager';
-        });
+        })
+        ;
 
         Gate::define('isContentEditor', function ($user) {
             return $user->roles->first()->slug == 'content-editor';
@@ -83,6 +84,11 @@ class AuthServiceProvider extends ServiceProvider
         // Delete Department and Category
         Gate::define('delete_department', function ($user) {
             return $this->hasPermission($user, 'delete_department');
+        });
+        
+        // Read Export Logs
+        Gate::define('read_log', function ($user) {
+            return $this->hasPermission($user, 'read_log');
         });
     }
 

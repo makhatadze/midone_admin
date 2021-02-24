@@ -81,7 +81,7 @@ class MenuComposer
                 'page_name' => 'Ticket Export Log',
                 'title' => 'Ticket Export Log',
                 'route' => route('ticketExportLog'),
-                'permission' => ''
+                'permission' => 'read_log'
             ]
         ];
 

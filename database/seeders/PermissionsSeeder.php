@@ -29,13 +29,14 @@ class PermissionsSeeder extends Seeder
             array('name' => 'Delete Department-Category', 'slug' => 'delete_department'),
             array('name' => 'Read Ticket', 'slug' => 'read_ticket'),
             array('name' => 'Confirm Ticket', 'slug' => 'confirm_ticket'),
+            array('name' => 'Read Log', 'slug' => 'read_log')
         );
 
         DB::table('permissions')->insert($permissions);
 
         DB::table('users')->insert([
             'name' => 'test test',
-            'email' => 'midone@left4code.com',
+            'username' => 'midone@left4code.com',
             'password' => '$2y$10$zcczx.ly4nKT0G8O4eisE.QRDIvcTLPsXAZMs9zFLCFVIm3QR8Dru',
             'status' => true,
         ]);
@@ -45,10 +46,10 @@ class PermissionsSeeder extends Seeder
             'slug' => 'admin'
         ]);
 
-        DB::table('users_roles')->insert([
-            'user_id' => 1,
-            'role_id' => 1
-        ]);
+//        DB::table('users_roles')->insert([
+//            'user_id' => 1,
+//            'role_id' => 1
+//        ]);
 
         foreach ($permissions as $key => $item) {
             DB::table('roles_permissions')->insert([
