@@ -15,6 +15,11 @@
         <a href="javascript:;" id="create-ticket"
            class="button text-white bg-theme-1 shadow-md mr-2">Create New Ticket</a>
     </div>
+    
+    <div class="w-full sm:w-auto flex  sm:mt-0 mt-5">
+      <a href="{{ route('exportAll') }}" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: green; margin-top: 10px;">Export My Tickets</a>
+    </div>
+    
     <div class="intro-y datatable-wrapper box p-5 mt-5">
         <table class="table table-report table-report--bordered display datatable w-full">
             <thead>
