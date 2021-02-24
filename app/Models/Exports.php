@@ -10,4 +10,9 @@ class Exports extends Model
     use HasFactory;
     
     protected $table = 'ticket_exports';
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
