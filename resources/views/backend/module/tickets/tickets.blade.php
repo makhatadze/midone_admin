@@ -298,6 +298,7 @@
                             </a>
                         </div>
                     </div>
+                    <input id="msgfile" name="msgattachment" type="file" style="position:absolute;left:0px;bottom: -30px" />
                     <!-- END: Chat Active -->
                     <!-- BEGIN: Chat Default -->
                     <div class="h-full flex items-center" style="display: none;">
@@ -315,7 +316,7 @@
                     <!-- END: Chat Default -->
                 </div>
             </div>
-
+ 
         </div>
 
         <div class="modal" id="confirmModal">
@@ -443,14 +444,23 @@
         }
 
 
-        function sendMessage() {
-        let message = $('textarea[name="message-text"]').val();
-        let id = $('input[name="ticket_id"]').val()
-                if (message.trim().length > 0) {
-        axios.post(`tickets/answer-message/${id}`, {
-        message: message,
-        }).then(res => {
-        $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+function sendMessage() {
+    let message = $('textarea[name="message-text"]').val();
+    let id = $('input[name="ticket_id"]').val()
+    var formData = new FormData();
+    
+    formData.append('message', message);
+    formData.append('attachment', false);
+ 
+        // add file 
+    let attachment = document.getElementById('msgfile')
+    if (attachment.files.length > 0) {
+        formData.set('attachment', attachment.files[0]);
+    }
+
+    if (message.trim().length > 0) {
+        axios.post(`tickets/answer-message/${id}`,formData).then(res => {
+            $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                             <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                    ${res.data.body}
                                 <div class="mt-1 text-xs text-theme-25">${getTime(res.data.created_at)}</div>
@@ -460,13 +470,13 @@
                                     <p>${res.data.user}</p>
                             </div>
                         </div>`)
-                $('textarea[name="message-text"]').val('')
+            $('textarea[name="message-text"]').val('')
         }).catch(err => {
-        alert('something wrong')
+            alert('something wrong')
         })
-        }
+    }
 
-        }
+}
 
         function confirmModal(e) {
         $(document).ready(function () {
