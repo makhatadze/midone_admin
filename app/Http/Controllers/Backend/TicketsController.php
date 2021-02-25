@@ -23,7 +23,8 @@ use App\Models\Exports;
 class TicketsController extends BackendController
 {
     private $filters = [
-        'status' => 'filter-ticket-status'
+        'status' => 'filter-ticket-status',
+        'department' => 'filter-ticket-department'
     ];
     
     /**
@@ -179,13 +180,13 @@ class TicketsController extends BackendController
     {
         $filteredOption = request()->cookie($this->filters['status']);
 
-        if (!in_array($filteredOption, ['success', 'pending', 'closed'])) {
-            $filteredOption = null;
-        }
+        $filteredOptions = $this->getActiveFilters();
+        // check if filter has correct value TODO...
 
         $authUser = auth()->user();
-        $tickets = (empty($filteredOption) || is_null($filteredOption)) ?
-                $authUser->getTickets() : $authUser->getTickets(false, $filteredOption);
+        
+        $tickets = (empty($filteredOptions)) ?
+                $authUser->getTickets() : $authUser->getTickets(false, $filteredOptions);
 
         return view('backend.module.tickets.tickets', [
             'tickets' => $tickets,
@@ -414,5 +415,13 @@ class TicketsController extends BackendController
         }
 
         return true;
+    }
+    
+    private function getActiveFilters()
+    {
+       return array_filter(request()->cookie(), function ($value,$filter) {
+            return (in_array($filter,$this->filters) && !empty($value));
+        },ARRAY_FILTER_USE_BOTH);
+        
     }
 }
