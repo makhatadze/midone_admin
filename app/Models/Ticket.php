@@ -96,14 +96,18 @@ class Ticket extends Model
         return $query->whereNotNull('closed_at');
     }
      
+    public function scopeSuccess($query)
+    {
+        return $query->where(DB::raw('closed_at'), '<=', DB::raw('deadline'));
+    }
      
-     public function scopeSuccess($query)
-     {
-         return $query->where(DB::raw('closed_at'), '<=', DB::raw('deadline'));
-     }
+    public function scopePending($query)
+    {
+        return $query->whereNull('closed_at');        
+    }
      
-     public function scopePending($query)
-     {
-         return $query->whereNull('closed_at');        
-     }
+    public function scopeDepartment($query,$departmentId)
+    {
+        return $query->where('department_id','=',$departmentId);
+    }
 }
