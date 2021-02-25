@@ -45,8 +45,6 @@ Route::prefix('admin')->group(function () {
 
         Route::get('roles/permissions/{role}',[RolesController::class,'permissions']);
 
-            
-
         Route::get('roles/permissions/{role}', [RolesController::class, 'permissions']);
 
         Route::get('/messages', [MessageController::class, 'index'])
@@ -86,6 +84,8 @@ Route::prefix('admin')->group(function () {
 
         Route::delete('departments/delete-categories/{category}', [DepartmentController::class, 'deleteCategories'])
             ->name('deleteCategories')->middleware('can:delete_department');
+        
+        Route::post('departments/list',[DepartmentController::class,'listDepartments'])->name('listDepartments');
 
         // Ticket
         Route::get('tickets', [TicketsController::class, 'index'])->name('ticketsIndex');
@@ -115,6 +115,5 @@ Route::prefix('admin')->group(function () {
         Route::get('tickets/export-all',[TicketsController::class,'exportAll'])->name('exportAll');
         
     });
-
 });
 
