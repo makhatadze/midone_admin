@@ -293,5 +293,15 @@ class DepartmentController extends BackendController
         return redirect('admin/departments')->with('success', 'Category deleted successfully');
 
     }
+    
+    
+    public function listDepartments(Request $request)
+    {
+        if (false === $request->ajax()) {
+            return redirect('/');
+        }
+        
+        return response()->json(Department::all('id','name')->toArray());
+    }
 
 }
