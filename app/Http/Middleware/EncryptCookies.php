@@ -13,6 +13,7 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
         'filter-ticket-status',
-        'ticket-export-ids'
+        'ticket-export-ids',
+        'filter-ticket-department'
     ];
 }
