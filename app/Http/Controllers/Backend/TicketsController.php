@@ -262,9 +262,7 @@ class TicketsController extends BackendController
     {
         $pathToFile = asset('storage/tickets/' . $file->id . '/' . $file->name);
 
-
         return response()->download($pathToFile);
-
     }
 
     public function sendMessage(Request $request, Ticket $ticket)
@@ -277,7 +275,9 @@ class TicketsController extends BackendController
         $message->body = $request->message;
         $message->answer = false;
         $message->user_id = auth()->user()->id;
+
         $ticket->message()->save($message);
+
         return [
             'body' => $message->body,
             'created_at' => $message->created_at,
@@ -291,11 +291,29 @@ class TicketsController extends BackendController
             'message' => 'required'
         ]);
 
+        if ($request->hasFile('attachment')) {
+            $request->validate([
+                'attachment' => 'mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
+            ]);
+        }
+        
         $message = new Message();
+       
         $message->body = $request->message;
         $message->answer = true;
         $message->user_id = auth()->user()->id;
+        
         $ticket->message()->save($message);
+        
+        if ( $request->hasFile('attachment') ) {
+            $fileName = date('Ymhs') . $request->file('attachment')->getClientOriginalName();
+            $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
+            $request->file('attachment')->move($destination, $fileName);
+            $message->file()->create([
+                'name' => $fileName
+            ]);
+        }
+        
         return [
             'body' => $message->body,
             'created_at' => $message->created_at,
