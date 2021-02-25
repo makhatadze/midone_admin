@@ -45,15 +45,11 @@ class TicketsController extends BackendController
         }
 
         // get tickets
-
-        $filteredOption = request()->cookie($this->filters['status']);
-
-        if (!in_array($filteredOption, ['success', 'pending', 'closed'])) {
-            $filteredOption = null;
-        }
+        $filteredOptions = $this->getActiveFilters();
+        
         $authUser = auth()->user();
-        $tickets = (empty($filteredOption) || is_null($filteredOption)) ?
-                $authUser->getTickets(true) : $authUser->getTickets(true, $filteredOption);
+        $tickets = (empty($filteredOptions)) ?
+                $authUser->getTickets(true) : $authUser->getTickets(true, $filteredOptions);
 
         //$ticket = Ticket::where('id', 2)->first();
         //TicketCreated::dispatch($ticket);
@@ -178,8 +174,6 @@ class TicketsController extends BackendController
      */
     public function getAllTickets()
     {
-        $filteredOption = request()->cookie($this->filters['status']);
-
         $filteredOptions = $this->getActiveFilters();
         // check if filter has correct value TODO...
 
