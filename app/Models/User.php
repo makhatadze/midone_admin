@@ -76,14 +76,27 @@ class User extends Authenticatable
         return $this->belongsToMany(Department::class, 'department_heads');
     }
 
-    public function getTickets($owner = false, string $filter = '')
+    public function getTickets($owner = false, array $activeFilters = [])
     {
+        // we should find out which scope methods should be applied.
+        $filterScopes = $this->getFilterScopes();
+        
         $tickets = $owner ? Ticket::where('user_id', $this->id) : Ticket::where('user_id', '!=', $this->id);
 
-        if (in_array($filter, ['closed', 'success', 'pending'])) {
-            $tickets->{$filter}();
+        foreach ($activeFilters as $filter => $value) {
+            if (!array_key_exists($filter,$filterScopes)) {
+                continue;
+            }
+            $filterScopeData = $filterScopes[$filter];
+            
+            if (false === $filterScopeData['hasParam']) {
+                $tickets->{$value}();
+                continue;
+            }
+            $methodToExecute = $filterScopeData['scopeMethod'];
+            $tickets->{$methodToExecute}($value);
         }
-
+       
         $data = [];
         foreach ($tickets->get() as $ticket) {
             if ($this->canAccessTicket($ticket)) {
@@ -238,6 +251,17 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+    
+    private function getFilterScopes()
+    {
+        return [
+            'filter-ticket-status' => [ 'hasParam' => false],
+            'filter-ticket-department' => [
+                'hasParam' => true,
+                'scopeMethod' => 'department'
+                ]
+        ];
     }
 
 }
