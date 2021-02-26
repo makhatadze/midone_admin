@@ -488,6 +488,21 @@
                                     <p>${res.data.user}</p>
                             </div>
                         </div>`)
+                                        if (attachment.files.length > 0) {
+        $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+                            <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
+                                 <a href="/storage/tickets/${res.data.message_id}/${res.data.filename}" target=_blank class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md" style="background-color: #1C3FAA;color: white;">
+                                   File - ${res.data.filename}
+                                </a>
+                                <div class="mt-1 text-xs text-theme-25">${getTime(res.data.created_at)}</div>
+
+                            </div>
+                            <div class="w-auto h-10 hidden sm:block flex-none image-fit relative ml-5">
+                                    <p>${res.data.user}</p>
+                            </div>
+                        </div>`);
+        attachment.value = '';
+        }
             $('textarea[name="message-text"]').val('')
     }).catch(err => {
     alert('something wrong')

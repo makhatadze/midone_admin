@@ -285,6 +285,12 @@ class TicketsController extends BackendController
 
         $ticket->message()->save($message);
 
+        $response = [
+            'body' => $message->body,
+            'created_at' => $message->created_at,
+            'user' => User::getName(auth()->user()->id)
+        ];
+        
         if ( $request->hasFile('attachment') ) {
             $fileName = date('Ymhs') . $request->file('attachment')->getClientOriginalName();
             $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
@@ -292,13 +298,14 @@ class TicketsController extends BackendController
             $message->file()->create([
                 'name' => $fileName
             ]);
+            
+            $response = array_merge($response,[
+                'message_id' => $message->id,
+                'filename'  => $fileName
+            ]);
         }
         
-        return [
-            'body' => $message->body,
-            'created_at' => $message->created_at,
-            'user' => User::getName(auth()->user()->id)
-        ];
+        return $response;
     }
 
     public function answerMessage(Request $request, Ticket $ticket)
