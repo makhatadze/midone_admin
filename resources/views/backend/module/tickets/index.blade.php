@@ -229,6 +229,7 @@
                         </a>
                     </div>
                 </div>
+                <input id="msgfile" name="msgattachment" type="file" style="position:absolute;left:0px;bottom: -30px" />
                 <!-- END: Chat Active -->
                 <!-- BEGIN: Chat Default -->
                 <div class="h-full flex items-center" style="display: none;">
@@ -464,10 +465,19 @@
     function sendMessage() {
     let message = $('textarea[name="message-text"]').val();
     let id = $('input[name="ticket_id"]').val()
+    var formData = new FormData();
+    
+    formData.append('message', message);
+    formData.append('attachment', false);
+ 
+        // add file 
+    let attachment = document.getElementById('msgfile')
+    if (attachment.files.length > 0) {
+        formData.set('attachment', attachment.files[0]);
+    }
+
             if (message.trim().length > 0) {
-    axios.post(`tickets/send-message/${id}`, {
-    message: message,
-    }).then(res => {
+    axios.post(`tickets/send-message/${id}`, formData).then(res => {
     $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                             <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                    ${res.data.body}
