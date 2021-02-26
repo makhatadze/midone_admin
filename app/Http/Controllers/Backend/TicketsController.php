@@ -19,13 +19,13 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use App\Exports\TicketsExport;
 use App\Models\Exports;
+use App\Traits\TicketFilters;
 
 class TicketsController extends BackendController
 {
-    private $filters = [
-        'status' => 'filter-ticket-status',
-        'department' => 'filter-ticket-department'
-    ];
+    use TicketFilters;
+    
+    
     
     /**
      * Display a listing of the resource.
@@ -461,8 +461,8 @@ class TicketsController extends BackendController
     
     private function getActiveFilters()
     {
-       return array_filter(request()->cookie(), function ($value,$filter) {
-            return (in_array($filter,$this->filters) && !empty($value));
+       return array_filter(request()->cookie(), function ($value,$filter) {  
+           return $this->validateFilter($filter,$value);
         },ARRAY_FILTER_USE_BOTH);
         
     }
