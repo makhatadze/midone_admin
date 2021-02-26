@@ -14,11 +14,11 @@
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0 mt-5">
         <h1>Ticket List</h1>
     </div>
-    
-     <div class="w-full sm:w-auto flex  sm:mt-0 mt-5">
-      <a href="{{ route('exportAll') }}" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: green; margin-top: 10px;">Export All Tickets</a>
+
+    <div class="w-full sm:w-auto flex  sm:mt-0 mt-5">
+        <a href="{{ route('exportAll') }}" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: green; margin-top: 10px;">Export All Tickets</a>
     </div>
-    
+
     <div class="intro-y datatable-wrapper box p-5 mt-5">
         <table class="table table-report table-report--bordered display datatable w-full">
             <thead>
@@ -31,7 +31,7 @@
                     <th class="border-b-2 text-center whitespace-no-wrap">created at</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">closed at</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">tools</th>
-                    
+
                     <th class="border-b-2 text-center whitespace-no-wrap">
                         <button class="button text-white bg-theme-1 shadow-md mr-2" onclick="exportTicket()" style="background-color: green">Export to Excel</button>
                     </th>
@@ -58,7 +58,7 @@
                         <div class="flex items-center  sm:justify-center text-gray-600 text-xs">
                             @if($ticket['closed_at'] != null)
                             <?php
-                            echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) >= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
+                               echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) >= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
                             ?>
                             @endif
                         </div>
@@ -110,7 +110,7 @@
                                                 @if($ticket['deadline'] != null && $ticket['closed_at'] != null)
 
                                                 <?php
-                                                echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
+                                                   echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
                                                 ?>
 
                                                 @endif
@@ -250,7 +250,7 @@
                         </div>
 
                     </td>
-                           <td class="border-b">
+                    <td class="border-b">
                         <div class="flex items-center sm:justify-center">
                             <input type="checkbox" class="dt-checkboxes" value="{{ $ticket['id'] }}">
                         </div>
@@ -316,7 +316,7 @@
                     <!-- END: Chat Default -->
                 </div>
             </div>
- 
+
         </div>
 
         <div class="modal" id="confirmModal">
@@ -444,23 +444,21 @@
         }
 
 
-function sendMessage() {
-    let message = $('textarea[name="message-text"]').val();
-    let id = $('input[name="ticket_id"]').val()
-    var formData = new FormData();
-    
-    formData.append('message', message);
-    formData.append('attachment', false);
- 
+  function sendMessage() {
+        let message = $('textarea[name="message-text"]').val();
+        let id = $('input[name="ticket_id"]').val()
+                var formData = new FormData();
+        formData.append('message', message);
+        formData.append('attachment', false);
         // add file 
-    let attachment = document.getElementById('msgfile')
-    if (attachment.files.length > 0) {
+        let attachment = document.getElementById('msgfile')
+                if (attachment.files.length > 0) {
         formData.set('attachment', attachment.files[0]);
-    }
+        }
 
-    if (message.trim().length > 0) {
-        axios.post(`tickets/answer-message/${id}`,formData).then(res => {
-            $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+        if (message.trim().length > 0) {
+        axios.post(`tickets/answer-message/${id}`, formData).then(res => {
+        $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                             <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                    ${res.data.body}
                                 <div class="mt-1 text-xs text-theme-25">${getTime(res.data.created_at)}</div>
@@ -470,10 +468,8 @@ function sendMessage() {
                                     <p>${res.data.user}</p>
                             </div>
                         </div>`);
-                 
-                 console.log(attachment.files);
-            if ( attachment.files.length > 0 ) {
-                $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+        if (attachment.files.length > 0) {
+        $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                             <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                  <a href="/storage/tickets/${res.data.message_id}/${res.data.filename}" target=_blank class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md" style="background-color: #1C3FAA;color: white;">
                                    File - ${res.data.filename}
@@ -485,39 +481,36 @@ function sendMessage() {
                                     <p>${res.data.user}</p>
                             </div>
                         </div>`);
-            }
-            $('textarea[name="message-text"]').val('')
+        attachment.value = '';
+        }
+        $('textarea[name="message-text"]').val('')
         }).catch(err => {
-            alert('something wrong')
+        alert('something wrong')
         })
-    }
+        }
 
-}
+        }
 
         function confirmModal(e) {
         $(document).ready(function () {
         $('.ticket-confirm-form').attr('action', `tickets/confirm/${e}`)
         })
         }
-        
-     function exportTicket () {
-       $checkBoxes = $(".table input:checkbox:checked");
-       
-       if ($checkBoxes.length === 0) {
-           alert('You have to check tickets for export.');
-           return;
-       }
-       
-       $ticketIds = $checkBoxes.map(function () {
-           return $(this).attr('value')
-       }).get();
 
-      let cookieKey = 'ticket-export-ids';
-      document.cookie = cookieKey + '=' + encodeURIComponent(JSON.stringify($ticketIds));
-      
-      window.location.href = '{{ route("exportToExcel") }}';
-      
-    }
+        function exportTicket () {
+        $checkBoxes = $(".table input:checkbox:checked");
+        if ($checkBoxes.length === 0) {
+        alert('You have to check tickets for export.');
+        return;
+        }
+
+        $ticketIds = $checkBoxes.map(function () {
+        return $(this).attr('value')
+        }).get();
+        let cookieKey = 'ticket-export-ids';
+        document.cookie = cookieKey + '=' + encodeURIComponent(JSON.stringify($ticketIds));
+        window.location.href = '{{ route("exportToExcel") }}';
+        }
 
     </script>
-@endsection
+    @endsection
