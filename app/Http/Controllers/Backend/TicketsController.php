@@ -1,469 +1,537 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+   namespace App\Http\Controllers\Backend;
 
-use App\Models\Approve;
-use App\Models\Category;
-use App\Models\Department;
-use App\Models\File;
-use App\Models\Message;
-use App\Models\Ticket;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Contracts\Auth\Factory;
-use Illuminate\Contracts\Console\Application;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Redirector;
-use App\Exports\TicketsExport;
-use App\Models\Exports;
-use App\Traits\TicketFilters;
+   use App\Models\Approve;
+   use App\Models\Category;
+   use App\Models\Department;
+   use App\Models\File;
+   use App\Models\Message;
+   use App\Models\Ticket;
+   use App\Models\User;
+   use Carbon\Carbon;
+   use Illuminate\Contracts\Auth\Factory;
+   use Illuminate\Contracts\Console\Application;
+   use Illuminate\Contracts\View\View;
+   use Illuminate\Http\RedirectResponse;
+   use Illuminate\Http\Request;
+   use Illuminate\Http\Response;
+   use Illuminate\Routing\Redirector;
+   use App\Exports\TicketsExport;
+   use App\Models\Exports;
+   use App\Traits\TicketFilters;
 
-class TicketsController extends BackendController
-{
-    use TicketFilters;
-    
-    
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|Response|View|Application|Factory|View
-     */
-    public function index()
-    {
-        //  $tickets = Ticket::where('user_id', auth()->user()->id)->with('user')->get();
+   class TicketsController extends BackendController
+   {
 
-        $departments = Department::all();
+       use TicketFilters;
 
-        $categories = [];
+       /**
+        * Display a listing of the resource.
+        *
+        * @return Application|Factory|Response|View|Application|Factory|View
+        */
+       public function index()
+       {
+           //  $tickets = Ticket::where('user_id', auth()->user()->id)->with('user')->get();
 
-        if (count($departments) > 0) {
-            $categories = $departments[0]->categories()->get();
-        }
+           $departments = Department::all();
 
-        // get tickets
-        $filteredOptions = $this->getActiveFilters();
-        
-        $authUser = auth()->user();
-        $tickets = (empty($filteredOptions)) ?
-                $authUser->getTickets(true) : $authUser->getTickets(true, $filteredOptions);
+           $categories = [];
 
-        //$ticket = Ticket::where('id', 2)->first();
-        //TicketCreated::dispatch($ticket);
+           if (count($departments) > 0) {
+               $categories = $departments[0]->categories()->get();
+           }
 
-        return view('backend.module.tickets.index', [
-            'tickets' => $tickets,
-            'departments' => $departments,
-            'categories' => $categories
-        ]);
-    }
+           // get tickets
+           $filteredOptions = $this->getActiveFilters();
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Department $department
-     *
-     * @return array
-     */
-    public function departments(Request $request, Department $department)
-    {
-        if ($request->ajax()) {
-            return Category::where('department_id', $department->id)->get()->toArray();
-        }
-    }
+           $authUser = auth()->user();
+           $tickets = (empty($filteredOptions)) ?
+                   $authUser->getTickets(true) : $authUser->getTickets(true, $filteredOptions);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     *
-     * @return bool|Application|RedirectResponse|Redirector
-     */
-    public function store(Request $request)
-    {
+           //$ticket = Ticket::where('id', 2)->first();
+           //TicketCreated::dispatch($ticket);
+
+           return view('backend.module.tickets.index', [
+               'tickets' => $tickets,
+               'departments' => $departments,
+               'categories' => $categories
+           ]);
+       }
+
+       /**
+        * Display a listing of the resource.
+        *
+        * @param Department $department
+        *
+        * @return array
+        */
+       public function departments(Request $request, Department $department)
+       {
+           if ($request->ajax()) {
+               return Category::where('department_id', $department->id)->get()->toArray();
+           }
+       }
+
+       /**
+        * Store a newly created resource in storage.
+        *
+        * @param Request $request
+        *
+        * @return bool|Application|RedirectResponse|Redirector
+        */
+       public function store(Request $request)
+       {
 //        validate the fields
-        $request->validate([
-            'ticket_department' => 'required|integer',
-            'ticket_category' => 'integer|nullable',
-            'ticket_name' => 'string|max:255|nullable',
-            'ticket_message' => 'required|string',
-            'ticket_level' => 'required'
-        ]);
+           $request->validate([
+               'ticket_department' => 'required|integer',
+               'ticket_category' => 'integer|nullable',
+               'ticket_name' => 'string|max:255|nullable',
+               'ticket_message' => 'required|string',
+               'ticket_level' => 'required'
+           ]);
 
-        if (!$request->ticket_category) {
-            $request->validate([
-                'ticket_name' => 'required|string|max:255'
-            ]);
-        }
+           if (!$request->ticket_category) {
+               $request->validate([
+                   'ticket_name' => 'required|string|max:255'
+               ]);
+           }
 
-        if (!$request->_token) {
-            return true;
-        }
+           if (!$request->_token) {
+               return true;
+           }
 
 
-        if ($request->hasFile('file')) {
-            $request->validate([
-                'file' => 'required|mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
-            ]);
-        }
+           if ($request->hasFile('file')) {
+               $request->validate([
+                   'file' => 'required|mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
+               ]);
+           }
 
-        $ticket = new Ticket();
-        $ticket->user_id = auth()->user()->id;
-        $ticket->department_id = $request->ticket_department;
-        $ticket->name = $request->ticket_name;
-        $ticket->level = $request->ticket_level;
-        if ($request->ticket_category != null && $request->ticket_category != '0') {
-            $ticket->category_id = $request->ticket_category;
-            $category = Category::where('id', $request->ticket_category)->first();
+           $ticket = new Ticket();
+           $ticket->user_id = auth()->user()->id;
+           $ticket->department_id = $request->ticket_department;
+           $ticket->name = $request->ticket_name;
+           $ticket->level = $request->ticket_level;
+           if ($request->ticket_category != null && $request->ticket_category != '0') {
+               $ticket->category_id = $request->ticket_category;
+               $category = Category::where('id', $request->ticket_category)->first();
 
-            $ticket->name = $category->name;
-        }
-        if ($request->ticket_deadline != null) {
-            $time = '23:59:59';
-            if ($request->ticket_deadline_time) {
-                $time = $request->ticket_deadline_time . ':59';
-            }
-            $deadline = $request->ticket_deadline . ' ' . $time;
-            $ticket->deadline = Carbon::parse($deadline);
-        }
+               $ticket->name = $category->name;
+           }
+           if ($request->ticket_deadline != null) {
+               $time = '23:59:59';
+               if ($request->ticket_deadline_time) {
+                   $time = $request->ticket_deadline_time . ':59';
+               }
+               $deadline = $request->ticket_deadline . ' ' . $time;
+               $ticket->deadline = Carbon::parse($deadline);
+           }
 
-        $ticket->save();
+           $ticket->save();
 
-        $message = new Message();
-        $message->body = $request->ticket_message;
-        $message->user_id = auth()->user()->id;
-        $message->answer = false;
-        $ticket->message()->save($message);
+           $message = new Message();
+           $message->body = $request->ticket_message;
+           $message->user_id = auth()->user()->id;
+           $message->answer = false;
+           $ticket->message()->save($message);
 
-        $data = [
-            'id' => $ticket->id,
-            'subject' => 'Create ticket',
-            'message' => $request->ticket_message,
-            'deadline' => $ticket->deadline,
-            'department' => Department::getName($request->ticket_department),
-            'user' => auth()->user()->name,
-            'name' => $ticket->name
-        ];
+           $data = [
+               'id' => $ticket->id,
+               'subject' => 'Create ticket',
+               'message' => $request->ticket_message,
+               'deadline' => $ticket->deadline,
+               'department' => Department::getName($request->ticket_department),
+               'user' => auth()->user()->name,
+               'name' => $ticket->name
+           ];
 
-        if ($request->hasFile('file')) {
-            $fileName = date('Ymhs') . $request->file('file')->getClientOriginalName();
-            $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
-            $request->file('file')->move($destination, $fileName);
-            $message->file()->create([
-                'name' => $fileName
-            ]);
-        }
-        $emails = $this->getUserEmails($ticket);
+           if ($request->hasFile('file')) {
+               $fileName = date('Ymhs') . $request->file('file')->getClientOriginalName();
+               $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
+               $request->file('file')->move($destination, $fileName);
+               $message->file()->create([
+                   'name' => $fileName
+               ]);
+           }
+           $emails = $this->getUserEmails($ticket);
 //        if ($emails) {
 //            Mail::to($emails)->send(new TicketMail($data));
 //        }
-
 //        TicketCreated::dispatch($ticket);
 
-        return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
+           return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
+       }
 
-    }
+       /**
+        * Display a listing of the resource.
+        *
+        * @return Application|Factory|Response|View|Application|Factory|View
+        */
+       public function getAllTickets()
+       {
+           $filteredOptions = $this->getActiveFilters();
+           // check if filter has correct value TODO...
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|Response|View|Application|Factory|View
-     */
-    public function getAllTickets()
-    {
-        $filteredOptions = $this->getActiveFilters();
-        // check if filter has correct value TODO...
+           $authUser = auth()->user();
 
-        $authUser = auth()->user();
-        
-        $tickets = (empty($filteredOptions)) ?
-                $authUser->getTickets() : $authUser->getTickets(false, $filteredOptions);
+           $tickets = (empty($filteredOptions)) ?
+                   $authUser->getTickets() : $authUser->getTickets(false, $filteredOptions);
 
-        return view('backend.module.tickets.tickets', [
-            'tickets' => $tickets,
-        ]);
+           return view('backend.module.tickets.tickets', [
+               'tickets' => $tickets,
+           ]);
+       }
 
-    }
+       /**
+        * Display a listing of the resource.
+        *
+        * @param Request $request
+        * @param Ticket $ticket
+        *
+        * @return \Illuminate\Contracts\Foundation\Application|RedirectResponse|Redirector
+        */
+       public function ticketApprove(Request $request, Ticket $ticket)
+       {
+           $request->validate([
+               'department' => 'required|integer',
+               'approve' => 'integer|nullable'
+           ]);
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @param Ticket $ticket
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|RedirectResponse|Redirector
-     */
-    public function ticketApprove(Request $request, Ticket $ticket)
-    {
-        $request->validate([
-            'department' => 'required|integer',
-            'approve' => 'integer|nullable'
-        ]);
+           $approve = new Approve();
+           $approve->ticket_id = $ticket->id;
+           $approve->department_id = $request->department;
+           $approve->user_id = auth()->user()->id;
+           $message = 'Ticket approved successfully';
 
-        $approve = new Approve();
-        $approve->ticket_id = $ticket->id;
-        $approve->department_id = $request->department;
-        $approve->user_id = auth()->user()->id;
-        $message = 'Ticket approved successfully';
+           if ($request->approve == null) {
+               $approve->status = false;
+               $message = 'Ticket rejected successfully';
+           }
 
-        if ($request->approve == null) {
-            $approve->status = false;
-            $message = 'Ticket rejected successfully';
-        }
+           $approve->save();
 
-        $approve->save();
+           return redirect('/admin/tickets-all')->with('success', $message);
+       }
 
-        return redirect('/admin/tickets-all')->with('success', $message);
-
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Ticket $ticket
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|RedirectResponse|Redirector
-     */
-    public function ticketConfirm(Ticket $ticket)
-    {
+       /**
+        * Display a listing of the resource.
+        *
+        * @param Ticket $ticket
+        *
+        * @return \Illuminate\Contracts\Foundation\Application|RedirectResponse|Redirector
+        */
+       public function ticketConfirm(Ticket $ticket)
+       {
 
 
-        if ($ticket->closed_at === null) {
-            if (!auth()->user()->canConfirm($ticket)) {
-                return redirect('/admin/tickets-all')->with('danger', 'You can not access this action');
-            }
-            $ticket->closed_at = Carbon::now()->toDateTimeString();
-            $message = 'Ticket successfully confirmed';
-        } else {
-            if (!auth()->user()->canUnConfirm($ticket)) {
-                return redirect('/admin/tickets-all')->with('danger', 'You can not access this action');
-            }
-            $ticket->closed_at = null;
-            Approve::where('ticket_id', $ticket->id)->delete();
-            $message = 'Ticket successfully Un Confirmed';
-        }
-        $ticket->confirm = auth()->user()->name;
-        $ticket->save();
-        return redirect('/admin/tickets-all')->with('success', $message);
+           if ($ticket->closed_at === null) {
+               if (!auth()->user()->canConfirm($ticket)) {
+                   return redirect('/admin/tickets-all')->with('danger', 'You can not access this action');
+               }
+               $ticket->closed_at = Carbon::now()->toDateTimeString();
+               $message = 'Ticket successfully confirmed';
+           } else {
+               if (!auth()->user()->canUnConfirm($ticket)) {
+                   return redirect('/admin/tickets-all')->with('danger', 'You can not access this action');
+               }
+               $ticket->closed_at = null;
+               Approve::where('ticket_id', $ticket->id)->delete();
+               $message = 'Ticket successfully Un Confirmed';
+           }
+           $ticket->confirm = auth()->user()->name;
+           $ticket->save();
+           return redirect('/admin/tickets-all')->with('success', $message);
+       }
 
-    }
+       public function messages(Ticket $ticket)
+       {
+           $messages = $ticket->message()->with(['file', 'user'])->get();
+           return $messages;
+       }
+
+       public function downloadFile(File $file)
+       {
+           $pathToFile = asset('storage/tickets/' . $file->id . '/' . $file->name);
+
+           return response()->download($pathToFile);
+       }
+
+       public function sendMessage(Request $request, Ticket $ticket)
+       {
+
+           $request->validate([
+               'message' => 'required'
+           ]);
+
+           if ($request->hasFile('attachment')) {
+               $request->validate([
+                   'attachment' => 'mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
+               ]);
+           }
+
+           $message = new Message();
+           $message->body = $request->message;
+           $message->answer = false;
+           $message->user_id = auth()->user()->id;
+
+           $ticket->message()->save($message);
+
+           $response = [
+               'body' => $message->body,
+               'created_at' => $message->created_at,
+               'user' => User::getName(auth()->user()->id)
+           ];
+
+           if ($request->hasFile('attachment')) {
+               $fileName = date('Ymhs') . $request->file('attachment')->getClientOriginalName();
+               $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
+               $request->file('attachment')->move($destination, $fileName);
+               $message->file()->create([
+                   'name' => $fileName
+               ]);
+
+               $response = array_merge($response, [
+                   'message_id' => $message->id,
+                   'filename' => $fileName
+               ]);
+           }
+
+           return $response;
+       }
+
+       public function answerMessage(Request $request, Ticket $ticket)
+       {
+           $request->validate([
+               'message' => 'required'
+           ]);
+
+           if ($request->hasFile('attachment')) {
+               $request->validate([
+                   'attachment' => 'mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
+               ]);
+           }
+
+           $message = new Message();
+
+           $message->body = $request->message;
+           $message->answer = true;
+           $message->user_id = auth()->user()->id;
+
+           $ticket->message()->save($message);
+
+           $response = [
+               'body' => $message->body,
+               'created_at' => $message->created_at,
+               'user' => User::getName(auth()->user()->id)
+           ];
+
+           if ($request->hasFile('attachment')) {
+               $fileName = date('Ymhs') . $request->file('attachment')->getClientOriginalName();
+               $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
+               $request->file('attachment')->move($destination, $fileName);
+               $message->file()->create([
+                   'name' => $fileName
+               ]);
+
+               $response = array_merge($response, [
+                   'message_id' => $message->id,
+                   'filename' => $fileName
+               ]);
+           }
+
+           return $response;
+       }
+
+       public function getNotification(Ticket $ticket)
+       {
+           $authUser = auth()->user();
+
+           return $authUser->getNotificationTicketCreated($ticket);
+       }
+
+       private function getUserEmails(Ticket $ticket)
+       {
+           $emails = Department::getUserEmails($ticket->department_id);
+           if ($ticket->category_id) {
+               $category = Category::find($ticket->category_id);
+               $departments = $category->departments()->select('id')->get()->toArray();
+               if ($departments) {
+                   foreach ($departments as $dep) {
+                       $emails = Department::getUserEmails($dep['id'], $emails);
+                   }
+               }
+           }
+           return $emails;
+       }
+
+       public function exportToExcel(Request $request)
+       {
+
+           $referer = $request->server('HTTP_REFERER');
+
+           $refererParts = explode('/', $referer);
+           $refererPath = end($refererParts);
+
+           if (false === in_array($refererPath, ['tickets', 'tickets-all'])) {
+               return redirect('/');
+           }
+
+           $ticketIdCookie = $request->cookie('ticket-export-ids');
+
+           $ticketIds = json_decode($ticketIdCookie);
+
+           if (false === $this->checkTicketIds($ticketIds)) {
+               return redirect('/')->with('danger', 'Provide Correct ticket Ids!');
+           }
+
+           $ticketExport = $this->makeExport([
+               'specificIds' => true,
+               'withUser' => false,
+               'idList' => $ticketIds
+           ]);
+
+           $this->saveExportLog($ticketIds);
+
+           return $ticketExport;
+       }
+
+       private function saveExportLog($ticketIds)
+       {
+           if (false === is_array($ticketIds) && false === is_string($ticketIds)) {
+               return;
+           }
+
+           $export = new Exports;
+           $export->user_id = auth()->user()->id;
+           $export->ticket_ids = (is_array($ticketIds)) ? serialize($ticketIds) : $ticketIds;
+
+           $export->save();
+       }
+
+       public function exportAll(Request $request)
+       {
+           $referer = $request->server('HTTP_REFERER');
+
+           $refererParts = explode('/', $referer);
+           $refererPath = end($refererParts);
+
+           if (false === in_array($refererPath, ['tickets', 'tickets-all'])) {
+               return redirect('/');
+           }
+
+           $withUser = ($refererPath === 'tickets-all') ? false : true;
+           $exported = ($refererPath === 'tickets-all') ? 'All Tickets' : 'Own Tickets';
 
 
-    public function messages(Ticket $ticket)
-    {
-        $messages = $ticket->message()->with(['file', 'user'])->get();
-        return $messages;
-    }
+           $ticketExport = $this->makeExport([
+               'specificIds' => false,
+               'withUser' => $withUser,
+               'idList' => []
+           ]);
 
-    public function downloadFile(File $file)
-    {
-        $pathToFile = asset('storage/tickets/' . $file->id . '/' . $file->name);
+           $this->saveExportLog($exported);
 
-        return response()->download($pathToFile);
-    }
+           return $ticketExport;
+       }
 
-    public function sendMessage(Request $request, Ticket $ticket)
-    {
+       private function makeExport(array $config = [
+                   'specificIds' => true,
+                   'withUser' => false,
+                   'idList' => []
+               ], $checkIdList = false)
+       {
+           
+           $isCorrectConfig = empty(array_diff_key(array_flip(['specificIds', 'withUser', 'idList']), $config));
 
-        $request->validate([
-            'message' => 'required'
-        ]);
-        
-        if ($request->hasFile('attachment')) {
-            $request->validate([
-                'attachment' => 'mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
-            ]);
-        }
+           if (false === $isCorrectConfig) {
+               return redirect('/');
+           }
 
-        $message = new Message();
-        $message->body = $request->message;
-        $message->answer = false;
-        $message->user_id = auth()->user()->id;
+           $exporter = new TicketsExport;
 
-        $ticket->message()->save($message);
+           if (false === $config['specificIds']) {
+               return $exporter->setWithCurrentUser($config['withUser'])->download();
+           }
 
-        $response = [
-            'body' => $message->body,
-            'created_at' => $message->created_at,
-            'user' => User::getName(auth()->user()->id)
-        ];
-        
-        if ( $request->hasFile('attachment') ) {
-            $fileName = date('Ymhs') . $request->file('attachment')->getClientOriginalName();
-            $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
-            $request->file('attachment')->move($destination, $fileName);
-            $message->file()->create([
-                'name' => $fileName
-            ]);
-            
-            $response = array_merge($response,[
-                'message_id' => $message->id,
-                'filename'  => $fileName
-            ]);
-        }
-        
-        return $response;
-    }
+           // Sometimes we dont need to check ticket ids because its already checked
+           if ($checkIdList) {
+               if (false === $this->checkTicketIds($config['idList'])) {
+                   return redirect('/');
+               }
+           }
 
-    public function answerMessage(Request $request, Ticket $ticket)
-    {
-        $request->validate([
-            'message' => 'required'
-        ]);
+           return $exporter->setIds($config['idList'])->download();
+       }
 
-        if ($request->hasFile('attachment')) {
-            $request->validate([
-                'attachment' => 'mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
-            ]);
-        }
-        
-        $message = new Message();
-       
-        $message->body = $request->message;
-        $message->answer = true;
-        $message->user_id = auth()->user()->id;
-        
-        $ticket->message()->save($message);
-        
-        $response = [
-            'body' => $message->body,
-            'created_at' => $message->created_at,
-            'user' => User::getName(auth()->user()->id)
-        ];
-        
-        if ( $request->hasFile('attachment') ) {
-            $fileName = date('Ymhs') . $request->file('attachment')->getClientOriginalName();
-            $destination = base_path() . '/storage/app/public/tickets/' . $message->id;
-            $request->file('attachment')->move($destination, $fileName);
-            $message->file()->create([
-                'name' => $fileName
-            ]);
-            
-            $response = array_merge($response,[
-                'message_id' => $message->id,
-                'filename'  => $fileName
-            ]);
-        }
-        
-        return $response;
-    }
+       public function exportLog()
+       {
+           $exportLogs = Exports::all();
 
-    public function getNotification(Ticket $ticket)
-    {
-        $authUser = auth()->user();
+           return view('backend.module.tickets.exports', [
+               'exportLogs' => $exportLogs
+           ]);
+       }
 
-        return $authUser->getNotificationTicketCreated($ticket);
-    }
+       private function checkTicketIds($ticketIds)
+       {
+           if (!is_array($ticketIds) || empty($ticketIds)) {
+               return false;
+           }
 
+           foreach ($ticketIds as $id) {
+               if (!ctype_digit($id)) {
+                   return false;
+               }
+           }
 
-    private function getUserEmails(Ticket $ticket)
-    {
-        $emails = Department::getUserEmails($ticket->department_id);
-        if ($ticket->category_id) {
-            $category = Category::find($ticket->category_id);
-            $departments = $category->departments()->select('id')->get()->toArray();
-            if ($departments) {
-                foreach ($departments as $dep) {
-                    $emails = Department::getUserEmails($dep['id'], $emails);
-                }
-            }
-        }
-        return $emails;
-    }
-    
-    public function exportToExcel(Request $request) 
-    {
-        
-        $referer = $request->server('HTTP_REFERER');
-        
-        $refererParts = explode('/',$referer);
-        $refererPath = end($refererParts );
-        
-        if (false === in_array($refererPath,['tickets','tickets-all'])) {
-            return redirect('/');
-        }
-        
-        $ticketIdCookie = $request->cookie('ticket-export-ids');
+           return true;
+       }
 
-        $ticketIds = json_decode($ticketIdCookie);
+       public function getExportsFromLog(Request $request, int $logId)
+       {
+           $referer = $request->server('HTTP_REFERER');
+           $explodedPath = explode('/', $referer);
+           $fromRoute = end($explodedPath);
 
-        if ( false === $this->checkTicketIds($ticketIds) ) {
-            return redirect('/')->with('danger', 'Provide Correct ticket Ids!');
-        }
-        
-        $ticketExport = (new TicketsExport)->setIds($ticketIds)->download();
-        $this->saveExportLog($ticketIds);
-        
-        return $ticketExport;
-    }
-    
-    private function saveExportLog($ticketIds)
-    {
-        if (false === is_array($ticketIds) && false === is_string($ticketIds)) {
-            return;
-        }
+           if ($fromRoute !== 'export-log') {
+               return redirect('/');
+           }
+
+           // Get export log
+
+           $exportLog = Exports::find($logId);
+
+           if (!$exportLog) {
+               return redirect()->back();
+           }
+
+           $exportedIds = $exportLog->ticket_ids;
+
+           if (in_array($exportedIds, ['Own Tickets', 'All Tickets'])) {
+               return $this->makeExport([
+                           'specificIds' => false,
+                           'withUser' => ($exportedIds === 'Own Tickets') ? true : false,
+                           'idList' => []
+               ]);
+           }
+
+           $ids = unserialize($exportedIds);
+
+           return $this->makeExport([
+                       'specificIds' => true,
+                       'withUser' => false,
+                       'idList' => $ids
+                           ], true);
+       }
+
+       private function getActiveFilters()
+       {
+           return array_filter(request()->cookie(), function ($value, $filter) {
+               return $this->validateFilter($filter, $value);
+           }, ARRAY_FILTER_USE_BOTH);
+       }
+
+   }
    
-        $export = new Exports;
-        $export->user_id = auth()->user()->id;
-        $export->ticket_ids = (is_array($ticketIds)) ? serialize($ticketIds) : $ticketIds;
-        
-        $export->save();
-    }
-    
-    public function exportAll(Request $request)
-    {
-        $referer = $request->server('HTTP_REFERER');
-        
-        $refererParts = explode('/',$referer);
-        $refererPath = end($refererParts );
-        
-        if (false === in_array($refererPath,['tickets','tickets-all'])) {
-            return redirect('/');
-        }
-        
-        $withUser = ($refererPath === 'tickets-all') ? false : true;
-        $exported = ($refererPath === 'tickets-all') ? 'All Tickets' : 'Own Tickets';
-        
-        $ticketExport = (new TicketsExport)->setWithCurrentUser($withUser)->download();
-       
-        $this->saveExportLog($exported);
-        
-        return $ticketExport;
-        
-    }
-    
-    public function exportLog()
-    {
-        $exportLogs = Exports::all();
-        
-        return view('backend.module.tickets.exports', [
-            'exportLogs' => $exportLogs
-        ]);  
-    }
-
-    private function checkTicketIds($ticketIds) 
-    {
-        if (!is_array($ticketIds) || empty($ticketIds)) {
-            return false;
-        }
-
-        foreach ($ticketIds as $id) {
-            if (!ctype_digit($id)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-    
-    private function getActiveFilters()
-    {
-       return array_filter(request()->cookie(), function ($value,$filter) {  
-           return $this->validateFilter($filter,$value);
-        },ARRAY_FILTER_USE_BOTH);
-        
-    }
-}

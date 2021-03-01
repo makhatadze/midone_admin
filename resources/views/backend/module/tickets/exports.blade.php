@@ -22,7 +22,7 @@
                     <th class="border-b-2 text-center whitespace-no-wrap">User</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Exported Ticket Ids</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Created At</th>
-
+                    <th class="border-b-2 text-center whitespace-no-wrap"></th>
 
                 </tr>
             </thead>
@@ -39,14 +39,17 @@
                     <td class="border-b">
                         <div class="flex items-center sm:justify-center "> 
                             <?php
-                            $ticketIdsSerialized = @unserialize($export['ticket_ids']);
-                            $ticketIdsStr = (is_array($ticketIdsSerialized)) ? implode(', ', $ticketIdsSerialized) : $export['ticket_ids'];
+                               $ticketIdsSerialized = @unserialize($export['ticket_ids']);
+                               $ticketIdsStr = (is_array($ticketIdsSerialized)) ? implode(', ', $ticketIdsSerialized) : $export['ticket_ids'];
                             ?>
                             {{ $ticketIdsStr }}
                         </div>
                     </td>
                     <td class="border-b">
                         <div class="flex items-center sm:justify-center "> {{$export['created_at']}}</div>
+                    </td>
+                    <td class="border-b">
+                         <button class="button text-white bg-theme-1 shadow-md mr-2 export_ticket_cls" value="{{ $export['id'] }}"  style="background-color: green"   >Export to Excel</button>
                     </td>
 
                 </tr>
@@ -60,5 +63,16 @@
 
 <script>
 
+   let exportButton = document.querySelectorAll('.export_ticket_cls');
+   exportButton.forEach( button => {
+       button.addEventListener('click',event => {
+            let logId = event.target.getAttribute('value');
+            let exportLoggedRoute = "{{ route('exportLoggedTickets', ':logId') }}".replace(':logId',parseInt(logId));      
+
+            window.location.href = exportLoggedRoute;
+       });
+   });
+   
+   
 </script>
 @endsection
