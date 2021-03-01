@@ -10,4 +10,6 @@ class TicketDepartments extends Model
     use HasFactory;
     
     protected $table = 'ticket_departments';
+    
+     protected $fillable = ['ticket_id','additional_departments'];
 }
