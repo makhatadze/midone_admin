@@ -20,6 +20,7 @@
    use App\Exports\TicketsExport;
    use App\Models\Exports;
    use App\Traits\TicketFilters;
+   use App\Models\TicketDepartments;
 
    class TicketsController extends BackendController
    {
@@ -108,7 +109,8 @@
                    'file' => 'required|mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
                ]);
            }
-
+           
+           
            $ticket = new Ticket();
            $ticket->user_id = auth()->user()->id;
            $ticket->department_id = $request->ticket_department;
@@ -131,6 +133,14 @@
 
            $ticket->save();
 
+           /////
+           
+           $additionalDepartments = array_filter($request->get('additional_departments',[]));
+           
+           if (!empty( $additionalDepartments )) {
+               $this->setAdditionalDepartments($ticket->id,$additionalDepartments);
+           }
+           
            $message = new Message();
            $message->body = $request->ticket_message;
            $message->user_id = auth()->user()->id;
@@ -162,6 +172,16 @@
 //        TicketCreated::dispatch($ticket);
 
            return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
+       }
+       
+       
+       protected function setAdditionalDepartments (int $ticketId, array $additionalDepartments) 
+       {
+            return TicketDepartments::create([
+                'ticket_id' => $ticketId,
+                'additional_departments' => serialize($additionalDepartments)
+            ]);
+            
        }
 
        /**
@@ -485,6 +505,7 @@
 
        public function getExportsFromLog(Request $request, int $logId)
        {
+           // May refactor for full route matching in future.
            $fromRoute = $this->getRoutePathForFilter($request->server('HTTP_REFERER'));
            
            if ($fromRoute !== 'export-log') {
