@@ -112,6 +112,10 @@ Route::prefix('admin')->group(function () {
 
         Route::get('tickets/export-log',[TicketsController::class,'exportLog'])->name('ticketExportLog');
         
+        Route::get('tickets/export-logged/{logId}',[TicketsController::class,'getExportsFromLog'])
+                ->middleware('role:admin')
+                ->name('exportLoggedTickets');
+        
         Route::get('tickets/export-all',[TicketsController::class,'exportAll'])->name('exportAll');
         
     });
