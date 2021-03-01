@@ -265,7 +265,7 @@
                         <select name="ticket_department" id="department-select2"
                                 class="select2  w-full">
                             @if($departments)
-                            <option value="">Select Department</option>
+                              <option value="">Select Department</option>
                             @foreach($departments as $department)
                             <option value="{{$department->id}}">{{$department->name}}</option>
                             @endforeach
@@ -275,6 +275,7 @@
                     <span class="help-block help-ticket-department mt-1">
                     </span>
                 </div>
+                
                 <div class="col-span-12 sm:col-span-12 error-ticket-category" id="category_box">
                     <label>Category</label>
                     <div class="mt-2 category-container">
@@ -284,6 +285,23 @@
                         </select>
                     </div>
                 </div>
+                
+               <!--- ################### ----> 
+                <div class="col-span-12 sm:col-span-12 error-ticket-category" id="category_box">
+                    <label>Additional Departments</label>
+                    <div class="mt-2 category-container">
+                        <select name="additional_departments[]" id="additional_departments-select2"
+                                class="select2  w-full" multiple>
+                            @if($departments)
+                                <option value=""></option>
+                               @foreach($departments as $department)
+                                  <option value="{{$department->id}}">{{$department->name}}</option>
+                               @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <!--- #################### ----> 
                 <div class="col-span-12 sm:col-span-12 error-ticket-name">
                     <label>title</label>
                     <input type="text" name="ticket_name" class="input w-full border mt-2 flex-1"

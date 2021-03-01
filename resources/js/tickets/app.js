@@ -30,18 +30,24 @@ $(document).ready(function () {
         let name = $('input[name="ticket_name"]').val()
         let deadline = $('input[name="ticket_deadline"]').val()
         let level = $('select[name="ticket_level"]').val()
+        let additional_departments = $('select[name="additional_departments[]"]').val();
+        
         // Loading state
         $('#btn-ticket-create').html('<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>').svgLoader()
         await helper.delay(1500)
 
-        axios.post(`tickets/store`, {
+        let ticketFormObject = {
             ticket_department: department,
             ticket_category: category,
             ticket_name: name,
             ticket_deadline: deadline,
             ticket_level: level,
             ticket_message: message,
-        }).then(res => {
+            additional_departments: additional_departments
+        };
+ 
+        
+        axios.post(`tickets/store`, ticketFormObject).then(res => {
             if (res.data) {
                 $('.ticket-form').attr('action', `/admin/tickets/store`);
                 $('.ticket-form').attr('method', 'post');
@@ -88,13 +94,19 @@ $(document).ready(function () {
     })
 
     $('select[name="ticket_department"]').on('change', function (e) {
+        // Exclude department from additional departments if checked
+        let selectedValue = e.target.value;
+       
+        let addionalDepartments = document.getElementById('additional_departments-select2');
+        
         let content = `<option value="">Custom</option>`;
-        if (e.target.value != '') {
+        if (selectedValue != '') {
             $.ajax({
                 url: `/admin/tickets/departments/${e.target.value}`,
                 method: 'get',
                 dataType: 'json',
             }).done(function (data) {
+                console.log(data);
                 if (data.length > 0) {
                     data.forEach(e => {
                         content = `${content} <option value="${e.id}">${e.name}</option>`
@@ -103,10 +115,17 @@ $(document).ready(function () {
 
                 }
             });
+            
+            // Get Departments
+            
         } else {
             $('select[name="ticket_category"]').html(content);
             $('.error-ticket-name').show();
         }
+        
+        
+        
+        
     })
 
     $('select[name="ticket_category"]').on('change', function (e) {
