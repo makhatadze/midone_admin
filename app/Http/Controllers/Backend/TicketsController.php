@@ -369,10 +369,7 @@
        public function exportToExcel(Request $request)
        {
 
-           $referer = $request->server('HTTP_REFERER');
-
-           $refererParts = explode('/', $referer);
-           $refererPath = end($refererParts);
+           $refererPath = $this->getRoutePathForFilter($request->server('HTTP_REFERER'));
 
            if (false === in_array($refererPath, ['tickets', 'tickets-all'])) {
                return redirect('/');
@@ -412,10 +409,7 @@
 
        public function exportAll(Request $request)
        {
-           $referer = $request->server('HTTP_REFERER');
-
-           $refererParts = explode('/', $referer);
-           $refererPath = end($refererParts);
+           $refererPath = $this->getRoutePathForFilter($request->server('HTTP_REFERER'));
 
            if (false === in_array($refererPath, ['tickets', 'tickets-all'])) {
                return redirect('/');
@@ -491,10 +485,8 @@
 
        public function getExportsFromLog(Request $request, int $logId)
        {
-           $referer = $request->server('HTTP_REFERER');
-           $explodedPath = explode('/', $referer);
-           $fromRoute = end($explodedPath);
-
+           $fromRoute = $this->getRoutePathForFilter($request->server('HTTP_REFERER'));
+           
            if ($fromRoute !== 'export-log') {
                return redirect('/');
            }
