@@ -14,31 +14,35 @@
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0 mt-5">
         <h1>Ticket List</h1>
     </div>
-
+    @if($loggedin_user->hasPermission('export_ticket'))
     <div class="w-full sm:w-auto flex  sm:mt-0 mt-5">
         <a href="{{ route('exportAll') }}" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: green; margin-top: 10px;">Export All Tickets</a>
     </div>
+    @endif
 
     <div class="intro-y datatable-wrapper box p-5 mt-5">
         <table class="table table-report table-report--bordered display datatable w-full">
             <thead>
-                <tr>
-                    <th class="border-b-2 whitespace-no-wrap">Id</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">title</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">department</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">level</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">deadline</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">created at</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">closed at</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">tools</th>
-
+            <tr>
+                <th class="border-b-2 whitespace-no-wrap">Id</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">title</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">department</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">level</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">deadline</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">created at</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">closed at</th>
+                <th class="border-b-2 text-center whitespace-no-wrap">tools</th>
+                @if($loggedin_user->hasPermission('export_ticket'))
                     <th class="border-b-2 text-center whitespace-no-wrap">
-                        <button class="button text-white bg-theme-1 shadow-md mr-2" onclick="exportTicket()" style="background-color: green">Export to Excel</button>
+                        <button class="button text-white bg-theme-1 shadow-md mr-2" onclick="exportTicket()"
+                                style="background-color: green">Export to Excel
+                        </button>
                     </th>
-                </tr>
+                @endif
+            </tr>
             </thead>
             <tbody class="ticket-body">
-                @foreach($tickets as $ticket)
+            @foreach($tickets as $ticket)
                 <tr>
                     <td class="border-b">
                         <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $ticket['id'] }}</div>
@@ -241,22 +245,24 @@
                                data-toggle="modal"
                                onclick="confirmModal({{$ticket['id']}})"
                                data-target="#confirmModal"> <i data-feather="stop-circle"
-                                                            class="w-4 h-4 mr-1"></i>
+                                                               class="w-4 h-4 mr-1"></i>
                                 Confirm
                             </a>
-                            @endif
-                            @endif
+                                    @endif
+                                @endif
                             @endif
                         </div>
 
                     </td>
-                    <td class="border-b">
-                        <div class="flex items-center sm:justify-center">
-                            <input type="checkbox" class="dt-checkboxes" value="{{ $ticket['id'] }}">
-                        </div>
-                    </td>
+                    @if($loggedin_user->hasPermission('export_ticket'))
+                        <td class="border-b">
+                            <div class="flex items-center sm:justify-center">
+                                <input type="checkbox" class="dt-checkboxes" value="{{ $ticket['id'] }}">
+                            </div>
+                        </td>
+                    @endif
                 </tr>
-                @endforeach
+            @endforeach
             </tbody>
         </table>
         <div class="modal" id="messagenger">
@@ -440,25 +446,25 @@
         let month = parseInt(sec / (60 * 60 * 24 * 30))
                 if (day > 0) {
         return `${day} month ago`
-        }
-        }
-
-
-  function sendMessage() {
-        let message = $('textarea[name="message-text"]').val();
-        let id = $('input[name="ticket_id"]').val()
-                var formData = new FormData();
-        formData.append('message', message);
-        formData.append('attachment', false);
-        // add file 
-        let attachment = document.getElementById('msgfile')
-                if (attachment.files.length > 0) {
-        formData.set('attachment', attachment.files[0]);
+                }
         }
 
-        if (message.trim().length > 0) {
-        axios.post(`tickets/answer-message/${id}`, formData).then(res => {
-        $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+
+        function sendMessage() {
+            let message = $('textarea[name="message-text"]').val();
+            let id = $('input[name="ticket_id"]').val()
+            var formData = new FormData();
+            formData.append('message', message);
+            formData.append('attachment', false);
+            // add file
+            let attachment = document.getElementById('msgfile')
+            if (attachment.files.length > 0) {
+                formData.set('attachment', attachment.files[0]);
+            }
+
+            if (message.trim().length > 0) {
+                axios.post(`tickets/answer-message/${id}`, formData).then(res => {
+                    $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                             <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                    ${res.data.body}
                                 <div class="mt-1 text-xs text-theme-25">${getTime(res.data.created_at)}</div>
