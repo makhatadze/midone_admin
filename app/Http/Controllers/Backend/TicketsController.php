@@ -53,7 +53,7 @@
 
            //$ticket = Ticket::where('id', 2)->first();
            //TicketCreated::dispatch($ticket);
-
+           unset($tickets['total_count_of_tickets']);
            return view('backend.module.tickets.index', [
                'tickets' => $tickets,
                'departments' => $departments,
@@ -212,11 +212,7 @@
            unset($tickets['total_count_of_tickets']);
 
            $numOfPages = (int) ceil($totalCount / $perPage);
-          
-           if (($currentPage > $numOfPages)) {
-               return redirect('/admin/tickets-all?page=1');
-           }
-
+           
            return view('backend.module.tickets.tickets', [
                'tickets' => $tickets,
                'totalCount' => $totalCount,
