@@ -387,9 +387,9 @@
                if ($currentPage <= 6) {
                    $i = 1;
                }
-               if ($i  >= 4) {
+               if ($i  >= 2) {
                    ?>
-              <a class="active" href="?page=1">1</a>
+              <a href="?page=1">1</a>
               
                    <span>...</span>
             <?php

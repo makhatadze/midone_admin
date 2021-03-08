@@ -407,11 +407,29 @@
 
 </div>
    <div class="pagination">
-            <a href="?page=<?php $currentPage - 1; ?>">&laquo;</a>
+      <a href="?page=<?php $currentPage - 1; ?>">&laquo;</a>
             <?php
+               $withLastSearch = false;
                $withRaquo = false;
-               for ($i = 1; $i <= $numOfPages; $i++) {
-
+               
+               $pagesLeft = 0;
+               $i = $currentPage - 6;
+               
+               if ($currentPage <= 6) {
+                   $i = 1;
+               }  
+               if ($i  >= 2) {
+                   ?>
+              <a  href="?page=1">1</a>
+              
+                   <span>...</span>
+            <?php
+               }
+               $iteration = 0;
+               
+               for ($i; $i <= $numOfPages; $i++) {
+                   $iteration++;
+               
                    if ($i == $currentPage) {
                        ?>
                        <a class="active" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
@@ -428,12 +446,28 @@
                    if (($currentPage + 1) <= $numOfPages) {
                        $withRaquo = true;
                    }
+                   
+                   if ($iteration > 6) {
+                       $pagesLeft = $numOfPages - $currentPage;
+                       $withLastSearch = ($pagesLeft == 1)? false : true;
+                       break;
+                   }
                }
             ?>
+
+            <?php
+               if ($withLastSearch) {
+                   ?>
+                   <span>...</span>
+
+                   <a href="?page=<?php echo $numOfPages; ?>"><?php echo $numOfPages; ?></a>
+               <?php }
+            ?>  
 
             <?php if ($withRaquo): ?>
                    <a href="?page=<?php $currentPage + 1; ?>">&raquo;</a>
                <?php endif; ?>
+
 
         </div>
 <script>
