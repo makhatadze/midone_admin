@@ -32,7 +32,7 @@
         *
         * @return Application|Factory|Response|View|Application|Factory|View
         */
-       public function index()
+       public function index(Request $request)
        {
            //  $tickets = Ticket::where('user_id', auth()->user()->id)->with('user')->get();
 
@@ -47,18 +47,39 @@
            // get tickets
            $filteredOptions = $this->getActiveFilters();
 
-           $authUser = auth()->user();
-           $tickets = (empty($filteredOptions)) ?
-                   $authUser->getTickets(true) : $authUser->getTickets(true, $filteredOptions);
-
            //$ticket = Ticket::where('id', 2)->first();
-           //TicketCreated::dispatch($ticket);
+           //TicketCreated::dispatch($ticket);\
+           $perPage = 10;
+           $currentPage = (ctype_digit($request->get('page'))) ? (int) $request->get('page') : 1;
+           if ($currentPage < 1) {
+               $currentPage = 1;
+           }
+
+           $offset = ($currentPage === 1) ? 0 : $perPage * ($currentPage - 1); // count of previous data
+
+
+           $authUser = auth()->user();
+
+           $tickets = (empty($filteredOptions)) ?
+                   $authUser->getTickets(true, [], true, $offset, $perPage) :
+                   $authUser->getTickets(true, $filteredOptions, true, $offset, $perPage);
+
+           $totalCount = $tickets['total_count_of_tickets'];
            unset($tickets['total_count_of_tickets']);
-           return view('backend.module.tickets.index', [
+
+           $pages = (int) ceil($totalCount / $perPage);
+           $numOfPages = ($pages == 0 ) ? 1 : $pages;
+           
+           $data = [
                'tickets' => $tickets,
+               'totalCount' => $totalCount,
+               'numOfPages' => $numOfPages,
+               'currentPage' => $currentPage,
                'departments' => $departments,
                'categories' => $categories
-           ]);
+           ];
+           
+           return view('backend.module.tickets.index', $data);
        }
 
        /**
@@ -211,8 +232,9 @@
            $totalCount = $tickets['total_count_of_tickets'];
            unset($tickets['total_count_of_tickets']);
 
-           $numOfPages = (int) ceil($totalCount / $perPage);
-           
+           $pages = (int) ceil($totalCount / $perPage);
+           $numOfPages = ($pages == 0 ) ? 1 : $pages;
+
            return view('backend.module.tickets.tickets', [
                'tickets' => $tickets,
                'totalCount' => $totalCount,

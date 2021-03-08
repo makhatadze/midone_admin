@@ -2,7 +2,7 @@ import dt from 'datatables.net'
 import dtResponsive from 'datatables.net-responsive-dt'
 
 
-let cPath = window.location.pathname.split('/');
+        let cPath = window.location.pathname.split('/');
 let currentRoute = cPath[cPath.length - 1];
 
 (function ($) {
@@ -12,7 +12,7 @@ let currentRoute = cPath[cPath.length - 1];
 
     if (!['tickets', 'tickets-all'].includes(currentRoute)) {
         $('.datatable').DataTable({
-            dom: 'l<"#add">frtip',
+//            dom: 'l<"#add">frtip',
             responsive: true,
             order: [[0, 'desc']]
         });
@@ -23,10 +23,6 @@ let currentRoute = cPath[cPath.length - 1];
 
 
 
-
-
-
-let addDiv = $('#add');
 
 if (['tickets', 'tickets-all'].includes(currentRoute)) {
     const FILTERS = {
@@ -40,6 +36,9 @@ if (['tickets', 'tickets-all'].includes(currentRoute)) {
 
     let statusSelect = $('.status-select');
     let inputStyle = getDropdownStyle();
+    if (currentRoute == 'tickets') {
+        inputStyle.top = '167px';
+    }
 
     //inputStyle.right = '310px';
     inputStyle.left = '1450px';
