@@ -9,9 +9,9 @@
     <div class="flex">
         <!-- BEGIN: Simple Menu -->
         <nav class="side-nav side-nav--simple">
-            <a href="" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6"
-                     src="{{ asset('dist/images/logo.svg') }}">
+            <a href="/" class="intro-x flex items-center pl-5 pt-4">
+                <img alt="Investgroup" class="w-25"
+                     src="{{ asset('logo.svg') }}">
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>

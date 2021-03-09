@@ -10,7 +10,7 @@
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="/" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-25"
+                <img alt="Investgroup" class="w-25"
                      src="{{ asset('logo.svg') }}">
             </a>
 

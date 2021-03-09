@@ -10,11 +10,9 @@
     <div class="border-b border-theme-24 -mt-10 md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 pt-3 md:pt-0 mb-10">
         <div class="top-bar-boxed flex items-center">
             <!-- BEGIN: Logo -->
-            <a href="" class="-intro-x hidden md:flex">
-                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
-                <span class="text-white text-lg ml-3">
-                    Mid<span class="font-medium">one</span>
-                </span>
+            <a href="/" class="intro-x flex items-center pl-5 pt-4">
+                <img alt="investgroup" class="w-25"
+                     src="{{ asset('logo.svg') }}">
             </a>
             <!-- END: Logo -->
             <!-- BEGIN: Breadcrumb -->
@@ -75,65 +73,66 @@
             </div>
         </div>
     </div>
-    </div>
     <!-- END: Notifications -->
     <!-- BEGIN: Account Menu -->
 
     <!-- END: Account Menu -->
-    </div>
-    </div>
     <!-- END: Top Bar -->
     <!-- BEGIN: Top Menu -->
     <nav class="top-nav">
         <ul>
             @foreach ($menuItems as $menu)
-                <li>
-                    <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : 'javascript:;' }}"
-                       class="top-menu">
-                        <div class="top-menu__icon">
-                            <i data-feather="{{ $menu['icon'] }}"></i>
-                        </div>
-                        <div class="top-menu__title">
-                            {{ $menu['title'] }}
-                            @if (isset($menu['sub_menu']))
-                                <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
-                            @endif
-                        </div>
-                    </a>
-                    @if (isset($menu['sub_menu']))
-                        <ul class="">
-                            @foreach ($menu['sub_menu'] as $subMenu)
-                                <li>
-                                    <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}" class="top-menu">
-                                        <div class="top-menu__icon">
-                                            <i data-feather="activity"></i>
-                                        </div>
-                                        <div class="top-menu__title">
-                                            {{ $subMenu['title'] }}
-                                            @if (isset($subMenu['sub_menu']))
-                                                <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
-                                            @endif
-                                        </div>
-                                    </a>
-                                    @if (isset($subMenu['sub_menu']))
-                                        <ul class="">
-                                            @foreach ($subMenu['sub_menu'] as $lastSubMenu)
-                                                <li>
-                                                    <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}" class="top-menu">
-                                                        <div class="top-menu__icon">
-                                                            <i data-feather="zap"></i>
-                                                        </div>
-                                                        <div class="top-menu__title">{{ $lastSubMenu['title'] }}</div>
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
-                </li>
+                @if($menu['permission'] == '' || $loggedin_user->hasPermission($menu['permission']))
+                    <li>
+                        <a href="{{ isset($menu['layout']) ? route('page', ['layout' => $menu['layout'], 'pageName' => $menu['page_name']]) : $menu['route'] }}"
+                           class="top-menu">
+                            <div class="top-menu__icon">
+                                <i data-feather="{{ $menu['icon'] }}"></i>
+                            </div>
+                            <div class="top-menu__title">
+                                {{ $menu['title'] }}
+                                @if (isset($menu['sub_menu']))
+                                    <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
+                                @endif
+                            </div>
+                        </a>
+                        @if (isset($menu['sub_menu']))
+                            <ul class="">
+                                @foreach ($menu['sub_menu'] as $subMenu)
+                                    <li>
+                                        <a href="{{ isset($subMenu['layout']) ? route('page', ['layout' => $subMenu['layout'], 'pageName' => $subMenu['page_name']]) : 'javascript:;' }}"
+                                           class="top-menu">
+                                            <div class="top-menu__icon">
+                                                <i data-feather="activity"></i>
+                                            </div>
+                                            <div class="top-menu__title">
+                                                {{ $subMenu['title'] }}
+                                                @if (isset($subMenu['sub_menu']))
+                                                    <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
+                                                @endif
+                                            </div>
+                                        </a>
+                                        @if (isset($subMenu['sub_menu']))
+                                            <ul class="">
+                                                @foreach ($subMenu['sub_menu'] as $lastSubMenu)
+                                                    <li>
+                                                        <a href="{{ isset($lastSubMenu['layout']) ? route('page', ['layout' => $lastSubMenu['layout'], 'pageName' => $lastSubMenu['page_name']]) : 'javascript:;' }}"
+                                                           class="top-menu">
+                                                            <div class="top-menu__icon">
+                                                                <i data-feather="zap"></i>
+                                                            </div>
+                                                            <div class="top-menu__title">{{ $lastSubMenu['title'] }}</div>
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endif
             @endforeach
         </ul>
     </nav>
