@@ -83,7 +83,7 @@ class User extends Authenticatable
         // we should find out which scope methods should be applied.
         $filterScopes = $this->getFilterScopes();
 
-        $tickets = $owner ? Ticket::where('user_id', $this->id) : Ticket::where('user_id', '!=', 100000);
+        $tickets = $owner ? Ticket::where('user_id', $this->id) : Ticket::where('user_id', '!=', $this->id);
 
         foreach ($activeFilters as $filter => $value) {
             if (!array_key_exists($filter, $filterScopes)) {

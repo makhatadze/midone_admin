@@ -106,7 +106,8 @@
 
            if ($request->hasFile('file')) {
                $request->validate([
-                   'file' => 'required|mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
+                   // remove mimes.
+                   'file' => 'required'
                ]);
            }
            
