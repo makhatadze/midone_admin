@@ -2,6 +2,27 @@
 
 @section('subhead')
 <title>LLC - My Tickets</title>
+<style>
+    .pagination {
+        display: inline-block;
+        margin-top: -40px;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .pagination a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .pagination a:hover:not(.active) {background-color: #ddd;}
+
+</style>
 @endsection
 
 @section('subcontent')
@@ -15,11 +36,14 @@
         <a href="javascript:;" id="create-ticket"
            class="button text-white bg-theme-1 shadow-md mr-2">Create New Ticket</a>
     </div>
-    
+
     <div class="w-full sm:w-auto flex  sm:mt-0 mt-5">
-      <a href="{{ route('exportAll') }}" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: green; margin-top: 10px;">Export My Tickets</a>
+        <a href="{{ route('exportAll') }}" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: green; margin-top: 10px;">Export My Tickets</a>
     </div>
     
+    
+    <div id="add"></div>
+
     <div class="intro-y datatable-wrapper box p-5 mt-5">
         <table class="table table-report table-report--bordered display datatable w-full">
             <thead>
@@ -56,7 +80,7 @@
                         <div class="flex items-center  sm:justify-center text-gray-600 text-xs">
                             @if($ticket['closed_at'] != null)
                             <?php
-                            echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
+                               echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
                             ?>
                             @endif
                         </div>
@@ -107,7 +131,7 @@
                                                 @if($ticket['deadline'] != null && $ticket['closed_at'] != null)
 
                                                 <?php
-                                                echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
+                                                   echo (\Carbon\Carbon::createFromTimestamp($ticket['deadline']) <= \Carbon\Carbon::createFromTimestamp($ticket['closed_at'])) ? '<span class="text-theme-9">Success</span>' : '<span class="text-theme-6">Fail</span>'
                                                 ?>
 
                                                 @endif
@@ -265,7 +289,7 @@
                         <select name="ticket_department" id="department-select2"
                                 class="select2  w-full">
                             @if($departments)
-                              <option value="">Select Department</option>
+                            <option value="">Select Department</option>
                             @foreach($departments as $department)
                             <option value="{{$department->id}}">{{$department->name}}</option>
                             @endforeach
@@ -275,7 +299,7 @@
                     <span class="help-block help-ticket-department mt-1">
                     </span>
                 </div>
-                
+
                 <div class="col-span-12 sm:col-span-12 error-ticket-category" id="category_box">
                     <label>Category</label>
                     <div class="mt-2 category-container">
@@ -285,18 +309,18 @@
                         </select>
                     </div>
                 </div>
-                
-               <!--- ################### ----> 
+
+                <!--- ################### ----> 
                 <div class="col-span-12 sm:col-span-12 error-ticket-category" id="category_box">
                     <label>Additional Departments</label>
                     <div class="mt-2 category-container">
                         <select name="additional_departments[]" id="additional_departments-select2"
                                 class="select2  w-full" multiple>
                             @if($departments)
-                                <option value=""></option>
-                               @foreach($departments as $department)
-                                  <option value="{{$department->id}}">{{$department->name}}</option>
-                               @endforeach
+                            <option value=""></option>
+                            @foreach($departments as $department)
+                            <option value="{{$department->id}}">{{$department->name}}</option>
+                            @endforeach
                             @endif
                         </select>
                     </div>
@@ -378,10 +402,74 @@
             </form>
 
         </div>
+
     </div>
 
 </div>
+   <div class="pagination">
+      <a href="?page=<?php $currentPage - 1; ?>">&laquo;</a>
+            <?php
+               $withLastSearch = false;
+               $withRaquo = false;
+               
+               $pagesLeft = 0;
+               $i = $currentPage - 6;
+               
+               if ($currentPage <= 6) {
+                   $i = 1;
+               }  
+               if ($i  >= 2) {
+                   ?>
+              <a  href="?page=1">1</a>
+              
+                   <span>...</span>
+            <?php
+               }
+               $iteration = 0;
+               
+               for ($i; $i <= $numOfPages; $i++) {
+                   $iteration++;
+               
+                   if ($i == $currentPage) {
+                       ?>
+                       <a class="active" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                       <?php
+                       continue;
+                   }
+                   ?>
 
+
+                   <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+
+
+                   <?php
+                   if (($currentPage + 1) <= $numOfPages) {
+                       $withRaquo = true;
+                   }
+                   
+                   if ($iteration > 6) {
+                       $pagesLeft = $numOfPages - $currentPage;
+                       $withLastSearch = ($pagesLeft == 1)? false : true;
+                       break;
+                   }
+               }
+            ?>
+
+            <?php
+               if ($withLastSearch) {
+                   ?>
+                   <span>...</span>
+
+                   <a href="?page=<?php echo $numOfPages; ?>"><?php echo $numOfPages; ?></a>
+               <?php }
+            ?>  
+
+            <?php if ($withRaquo): ?>
+                   <a href="?page=<?php $currentPage + 1; ?>">&raquo;</a>
+               <?php endif; ?>
+
+
+        </div>
 <script>
     function showMessages(id, user) {
     $('#messenger-body').html('');
@@ -483,18 +571,16 @@
     function sendMessage() {
     let message = $('textarea[name="message-text"]').val();
     let id = $('input[name="ticket_id"]').val()
-    var formData = new FormData();
-    
+            var formData = new FormData();
     formData.append('message', message);
     formData.append('attachment', false);
- 
-        // add file 
+    // add file 
     let attachment = document.getElementById('msgfile')
-    if (attachment.files.length > 0) {
-        formData.set('attachment', attachment.files[0]);
+            if (attachment.files.length > 0) {
+    formData.set('attachment', attachment.files[0]);
     }
 
-            if (message.trim().length > 0) {
+    if (message.trim().length > 0) {
     axios.post(`tickets/send-message/${id}`, formData).then(res => {
     $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                             <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
@@ -506,8 +592,8 @@
                                     <p>${res.data.user}</p>
                             </div>
                         </div>`)
-                                        if (attachment.files.length > 0) {
-        $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
+            if (attachment.files.length > 0) {
+    $('#messenger-body').prepend(`<div class="clear-both"></div><div style="align-self: flex-end" class="chat__box__text-box flex items-end float-right mb-4">
                             <div class="bg-theme-1 px-4 py-3 text-white rounded-l-md rounded-t-md">
                                  <a href="/storage/tickets/${res.data.message_id}/${res.data.filename}" target=_blank class="bg-gray-200 px-4 py-3 text-gray-700 rounded-r-md rounded-t-md" style="background-color: #1C3FAA;color: white;">
                                    File - ${res.data.filename}
@@ -519,9 +605,9 @@
                                     <p>${res.data.user}</p>
                             </div>
                         </div>`);
-        attachment.value = '';
-        }
-            $('textarea[name="message-text"]').val('')
+    attachment.value = '';
+    }
+    $('textarea[name="message-text"]').val('')
     }).catch(err => {
     alert('something wrong')
     })
@@ -537,22 +623,18 @@
 
 
     function exportTicket () {
-       $checkBoxes = $(".table input:checkbox:checked");
-       
-       if ($checkBoxes.length === 0) {
-           alert('You have to check tickets for export.');
-           return;
-       }
-       
-       $ticketIds = $checkBoxes.map(function () {
-           return $(this).attr('value')
-       }).get();
+    $checkBoxes = $(".table input:checkbox:checked");
+    if ($checkBoxes.length === 0) {
+    alert('You have to check tickets for export.');
+    return;
+    }
 
-      let cookieKey = 'ticket-export-ids';
-      document.cookie = cookieKey + '=' + encodeURIComponent(JSON.stringify($ticketIds));
-      
-      window.location.href = '{{ route("exportToExcel") }}';
-      
+    $ticketIds = $checkBoxes.map(function () {
+    return $(this).attr('value')
+    }).get();
+    let cookieKey = 'ticket-export-ids';
+    document.cookie = cookieKey + '=' + encodeURIComponent(JSON.stringify($ticketIds));
+    window.location.href = '{{ route("exportToExcel") }}';
     }
 
 </script>

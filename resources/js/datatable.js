@@ -1,20 +1,27 @@
 import dt from 'datatables.net'
 import dtResponsive from 'datatables.net-responsive-dt'
 
-        (function ($) {
-            "use strict";
 
-            // Datatable
-            $('.datatable').DataTable({
-                dom: 'l<"#add">frtip',
-                responsive: true,
-                order: [[0, 'desc']]
-            });
-        })($);
-
-
-let cPath = window.location.pathname.split('/');
+        let cPath = window.location.pathname.split('/');
 let currentRoute = cPath[cPath.length - 1];
+
+(function ($) {
+    "use strict";
+
+    // Datatable
+
+    if (!['tickets', 'tickets-all'].includes(currentRoute)) {
+        $('.datatable').DataTable({
+//            dom: 'l<"#add">frtip',
+            responsive: true,
+            order: [[0, 'desc']]
+        });
+    }
+
+
+})($);
+
+
 
 
 if (['tickets', 'tickets-all'].includes(currentRoute)) {
@@ -23,12 +30,18 @@ if (['tickets', 'tickets-all'].includes(currentRoute)) {
         'department': 'filter-ticket-department'
     };
 
-    $('<select class="status-select"/>').appendTo('#add');
+    let statusSelectHTML = '<select class="status-select"/>';
+    $('<select class="status-select"/>').appendTo("#add");
+    //  $().appendTo('#add');
 
     let statusSelect = $('.status-select');
     let inputStyle = getDropdownStyle();
+    if (currentRoute == 'tickets') {
+        inputStyle.top = '167px';
+    }
 
-    inputStyle.right = '310px';
+    //inputStyle.right = '310px';
+    inputStyle.left = '1450px';
 
     statusSelect.css(inputStyle);
 
@@ -44,7 +57,7 @@ if (['tickets', 'tickets-all'].includes(currentRoute)) {
     setDatatableDropdownValue(FILTERS.status, statusSelect, ['', 'success', 'pending', 'closed']);
 
     statusSelect.on('change', function () {
-        // some TODOS here.
+        //  f  // some TODOS here.
         let status = $(this).val();
         document.cookie = FILTERS.status + '=' + encodeURIComponent(status.trim());
         window.location.reload();
@@ -54,7 +67,9 @@ if (['tickets', 'tickets-all'].includes(currentRoute)) {
     // Create Search bar for departments
     $('<select id="department_search" class="department_select"/>').appendTo('#add');
     let departmentSelect = $('.department_select');
-    inputStyle.right = '460px';
+    // inputStyle.right = '460px';
+    inputStyle.left = '1260px';
+
     departmentSelect.css(inputStyle);
 
     // Populate departments from ajax call
@@ -119,7 +134,7 @@ function getDropdownStyle() {
 
     return {
         'position': 'absolute',
-        'top': '22px',
+        'top': '105px',
         'background-image': 'url("' + imgX + '")',
         'background-size': '15px',
         'background-position': "center right 0.6rem",

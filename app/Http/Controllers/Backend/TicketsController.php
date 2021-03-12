@@ -32,7 +32,7 @@
         *
         * @return Application|Factory|Response|View|Application|Factory|View
         */
-       public function index()
+       public function index(Request $request)
        {
            //  $tickets = Ticket::where('user_id', auth()->user()->id)->with('user')->get();
 
@@ -47,18 +47,39 @@
            // get tickets
            $filteredOptions = $this->getActiveFilters();
 
-           $authUser = auth()->user();
-           $tickets = (empty($filteredOptions)) ?
-                   $authUser->getTickets(true) : $authUser->getTickets(true, $filteredOptions);
-
            //$ticket = Ticket::where('id', 2)->first();
-           //TicketCreated::dispatch($ticket);
+           //TicketCreated::dispatch($ticket);\
+           $perPage = 10;
+           $currentPage = (ctype_digit($request->get('page'))) ? (int) $request->get('page') : 1;
+           if ($currentPage < 1) {
+               $currentPage = 1;
+           }
 
-           return view('backend.module.tickets.index', [
+           $offset = ($currentPage === 1) ? 0 : $perPage * ($currentPage - 1); // count of previous data
+
+
+           $authUser = auth()->user();
+
+           $tickets = (empty($filteredOptions)) ?
+                   $authUser->getTickets(true, [], true, $offset, $perPage) :
+                   $authUser->getTickets(true, $filteredOptions, true, $offset, $perPage);
+
+           $totalCount = $tickets['total_count_of_tickets'];
+           unset($tickets['total_count_of_tickets']);
+
+           $pages = (int) ceil($totalCount / $perPage);
+           $numOfPages = ($pages == 0 ) ? 1 : $pages;
+           
+           $data = [
                'tickets' => $tickets,
+               'totalCount' => $totalCount,
+               'numOfPages' => $numOfPages,
+               'currentPage' => $currentPage,
                'departments' => $departments,
                'categories' => $categories
-           ]);
+           ];
+           
+           return view('backend.module.tickets.index', $data);
        }
 
        /**
@@ -110,8 +131,8 @@
                    'file' => 'required'
                ]);
            }
-           
-           
+
+
            $ticket = new Ticket();
            $ticket->user_id = auth()->user()->id;
            $ticket->department_id = $request->ticket_department;
@@ -135,13 +156,13 @@
            $ticket->save();
 
            /////
-           
-           $additionalDepartments = array_filter($request->get('additional_departments',[]));
-           
-           if (!empty( $additionalDepartments )) {
-               $this->setAdditionalDepartments($ticket->id,$additionalDepartments);
+
+           $additionalDepartments = array_filter($request->get('additional_departments', []));
+
+           if (!empty($additionalDepartments)) {
+               $this->setAdditionalDepartments($ticket->id, $additionalDepartments);
            }
-           
+
            $message = new Message();
            $message->body = $request->ticket_message;
            $message->user_id = auth()->user()->id;
@@ -174,15 +195,13 @@
 
            return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');
        }
-       
-       
-       protected function setAdditionalDepartments (int $ticketId, array $additionalDepartments) 
+
+       protected function setAdditionalDepartments(int $ticketId, array $additionalDepartments)
        {
-            return TicketDepartments::create([
-                'ticket_id' => $ticketId,
-                'additional_departments' => serialize($additionalDepartments)
-            ]);
-            
+           return TicketDepartments::create([
+                       'ticket_id' => $ticketId,
+                       'additional_departments' => serialize($additionalDepartments)
+           ]);
        }
 
        /**
@@ -190,18 +209,38 @@
         *
         * @return Application|Factory|Response|View|Application|Factory|View
         */
-       public function getAllTickets()
+       public function getAllTickets(Request $request)
        {
            $filteredOptions = $this->getActiveFilters();
            // check if filter has correct value TODO...
 
+           $perPage = 10;
+
+           $currentPage = (ctype_digit($request->get('page'))) ? (int) $request->get('page') : 1;
+           if ($currentPage < 1) {
+               $currentPage = 1;
+           }
+
+           $offset = ($currentPage === 1) ? 0 : $perPage * ($currentPage - 1); // count of previous data
+
+
            $authUser = auth()->user();
 
            $tickets = (empty($filteredOptions)) ?
-                   $authUser->getTickets() : $authUser->getTickets(false, $filteredOptions);
+                   $authUser->getTickets(false, [], true, $offset, $perPage) :
+                   $authUser->getTickets(false, $filteredOptions, true, $offset, $perPage);
+
+           $totalCount = $tickets['total_count_of_tickets'];
+           unset($tickets['total_count_of_tickets']);
+
+           $pages = (int) ceil($totalCount / $perPage);
+           $numOfPages = ($pages == 0 ) ? 1 : $pages;
 
            return view('backend.module.tickets.tickets', [
                'tickets' => $tickets,
+               'totalCount' => $totalCount,
+               'numOfPages' => $numOfPages,
+               'currentPage' => $currentPage
            ]);
        }
 
@@ -457,7 +496,7 @@
                    'idList' => []
                ], $checkIdList = false)
        {
-           
+
            $isCorrectConfig = empty(array_diff_key(array_flip(['specificIds', 'withUser', 'idList']), $config));
 
            if (false === $isCorrectConfig) {
@@ -508,7 +547,7 @@
        {
            // May refactor for full route matching in future.
            $fromRoute = $this->getRoutePathForFilter($request->server('HTTP_REFERER'));
-           
+
            if ($fromRoute !== 'export-log') {
                return redirect('/');
            }
