@@ -30,8 +30,8 @@ class TicketMail extends Mailable
      */
     public function build()
     {
-        return $this->from('vitalimakhatadze@gmail.com', $this->data['user'])
-            ->subject($this->data['subject'])
+        return $this->from('info@insite.ge', $this->data['user'])
+            ->subject('Insite International new ticket')
             ->view('backend.mail.create', ['data' => $this->data]);
     }
 }
