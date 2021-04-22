@@ -12,7 +12,7 @@
             <!-- BEGIN: Logo -->
             <a href="/" class="intro-x flex items-center pl-5 pt-4">
                 <img alt="investgroup" class="w-25"
-                     src="{{ asset('logo.svg') }}">
+                     src="{{ asset('insite.png') }}">
             </a>
             <!-- END: Logo -->
             <!-- BEGIN: Breadcrumb -->
@@ -55,7 +55,7 @@
 
         <div class="intro-x dropdown w-8 h-8 relative">
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110">
-                <img alt="Midone Laravel Admin Dashboard Starter Kit"
+                <img alt="Insite Logo"
                      src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
             </div>
             <div class="dropdown-box mt-10 absolute w-56 top-0 right-0 z-20">

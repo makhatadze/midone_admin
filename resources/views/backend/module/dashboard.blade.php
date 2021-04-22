@@ -296,13 +296,13 @@
                                     <td class="w-40">
                                         <div class="flex">
                                             <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][0]) }}" title="Uploaded at {{ $faker['dates'][0] }}">
+                                                <img alt="Insite Logo" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][0]) }}" title="Uploaded at {{ $faker['dates'][0] }}">
                                             </div>
                                             <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][1]) }}" title="Uploaded at {{ $faker['dates'][1] }}">
+                                                <img alt="Insite Logo" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][1]) }}" title="Uploaded at {{ $faker['dates'][1] }}">
                                             </div>
                                             <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone Laravel Admin Dashboard Starter Kit" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][2]) }}" title="Uploaded at {{ $faker['dates'][2] }}">
+                                                <img alt="Insite Logo" class="tooltip rounded-full" src="{{ asset('dist/images/' . $faker['images'][2]) }}" title="Uploaded at {{ $faker['dates'][2] }}">
                                             </div>
                                         </div>
                                     </td>
@@ -401,7 +401,7 @@
                         <div class="intro-x relative flex items-center mb-3">
                             <div class="report-timeline__image">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone Laravel Admin Dashboard Starter Kit" src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
+                                    <img alt="Insite Logo" src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
                                 </div>
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -415,7 +415,7 @@
                         <div class="intro-x relative flex items-center mb-3">
                             <div class="report-timeline__image">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone Laravel Admin Dashboard Starter Kit" src="{{ asset('dist/images/' . $fakers[8]['photos'][0]) }}">
+                                    <img alt="Insite Logo" src="{{ asset('dist/images/' . $fakers[8]['photos'][0]) }}">
                                 </div>
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -427,13 +427,13 @@
                                     <div class="mt-1">Added 3 new photos</div>
                                     <div class="flex mt-2">
                                         <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in" title="{{ $fakers[0]['products'][0]['name'] }}">
-                                            <img alt="Midone Laravel Admin Dashboard Starter Kit" class="rounded-md border border-white" src="{{ asset('dist/images/' . $fakers[8]['images'][0]) }}">
+                                            <img alt="Insite Logo" class="rounded-md border border-white" src="{{ asset('dist/images/' . $fakers[8]['images'][0]) }}">
                                         </div>
                                         <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in" title="{{ $fakers[1]['products'][0]['name'] }}">
-                                            <img alt="Midone Laravel Admin Dashboard Starter Kit" class="rounded-md border border-white" src="{{ asset('dist/images/' . $fakers[8]['images'][1]) }}">
+                                            <img alt="Insite Logo" class="rounded-md border border-white" src="{{ asset('dist/images/' . $fakers[8]['images'][1]) }}">
                                         </div>
                                         <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in" title="{{ $fakers[2]['products'][0]['name'] }}">
-                                            <img alt="Midone Laravel Admin Dashboard Starter Kit" class="rounded-md border border-white" src="{{ asset('dist/images/' . $fakers[8]['images'][2]) }}">
+                                            <img alt="Insite Logo" class="rounded-md border border-white" src="{{ asset('dist/images/' . $fakers[8]['images'][2]) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -443,7 +443,7 @@
                         <div class="intro-x relative flex items-center mb-3">
                             <div class="report-timeline__image">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone Laravel Admin Dashboard Starter Kit" src="{{ asset('dist/images/' . $fakers[7]['photos'][0]) }}">
+                                    <img alt="Insite Logo" src="{{ asset('dist/images/' . $fakers[7]['photos'][0]) }}">
                                 </div>
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -457,7 +457,7 @@
                         <div class="intro-x relative flex items-center mb-3">
                             <div class="report-timeline__image">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone Laravel Admin Dashboard Starter Kit" src="{{ asset('dist/images/' . $fakers[6]['photos'][0]) }}">
+                                    <img alt="Insite Logo" src="{{ asset('dist/images/' . $fakers[6]['photos'][0]) }}">
                                 </div>
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">

@@ -1,7 +1,7 @@
 @extends('backend/layout/login')
 
 @section('head')
-    <title>Login - LLC</title>
+    <title>Login - Insite</title>
 @endsection
 
 @section('content')
@@ -10,8 +10,8 @@
             <!-- BEGIN: Login Info -->
             <div class="hidden xl:flex flex-col min-h-screen">
                 <div class="my-auto">
-                    <img alt="Midone Laravel Admin Dashboard Starter Kit" class="-intro-x w-1/2 -mt-16"
-                         src="{{ asset('logo.svg') }}">
+                    <img alt="Insite logo" class="-intro-x w-1/4 -mt-16"
+                         src="{{ asset('insite.png') }}">
                 </div>
             </div>
             <!-- END: Login Info -->

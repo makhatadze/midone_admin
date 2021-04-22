@@ -11,7 +11,7 @@
         <nav class="side-nav">
             <a href="/" class="intro-x flex items-center pl-5 pt-4">
                 <img alt="Investgroup" class="w-25"
-                     src="{{ asset('logo.svg') }}">
+                     src="{{ asset('insite.png') }}">
             </a>
 
             <div class="side-nav__devider my-6"></div>

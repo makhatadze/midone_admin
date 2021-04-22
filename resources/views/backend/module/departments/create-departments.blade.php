@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-    <title>LLC - Create Departments</title>
+    <title>Insite - Create Departments</title>
 @endsection
 
 @section('subcontent')

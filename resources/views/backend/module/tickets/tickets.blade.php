@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-<title>LLC - User Tickets</title>
+<title>Insite - User Tickets</title>
 <style>
     .pagination {
         display: inline-block;
@@ -15,7 +15,7 @@
     }
 
     .pagination a.active {
-        background-color: #4CAF50;
+        background-color: #090909;
         color: white;
     }
 

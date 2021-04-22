@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-    <title>LLC - Edit roles</title>
+    <title>Insite - Edit roles</title>
 @endsection
 
 @section('subcontent')

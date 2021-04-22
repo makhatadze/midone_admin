@@ -1,7 +1,7 @@
 .login {
     @apply relative bg-white;
     @media (max-width: $xl) {
-        background: linear-gradient(to bottom, #1C3FAA, #2B51B4);
+        background: linear-gradient(to bottom, $main-color, $main-color-gradient);
         background-repeat: no-repeat;
         background-attachment: fixed;
     }

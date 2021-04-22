@@ -1,5 +1,5 @@
 .jq-toast-single {
-    background: #0e2c88;
+    background: $main-color;
     @apply font-roboto text-sm shadow-md leading-relaxed p-5;
     .close-jq-toast-single {
         right: 10px;

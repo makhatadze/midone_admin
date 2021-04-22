@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-<title>LLC - My Tickets</title>
+<title>Insite - My Tickets</title>
 @endsection
 
 @section('subcontent')
@@ -49,7 +49,7 @@
                         <div class="flex items-center sm:justify-center "> {{$export['created_at']}}</div>
                     </td>
                     <td class="border-b">
-                         <button class="button text-white bg-theme-1 shadow-md mr-2 export_ticket_cls" value="{{ $export['id'] }}"  style="background-color: green"   >Export to Excel</button>
+                         <button class="button text-white bg-theme-3 shadow-md mr-2 export_ticket_cls" value="{{ $export['id'] }}">Export to Excel</button>
                     </td>
 
                 </tr>

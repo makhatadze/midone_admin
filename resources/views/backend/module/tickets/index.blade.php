@@ -1,7 +1,7 @@
 @extends('backend/layout/'.$layout)
 
 @section('subhead')
-<title>LLC - My Tickets</title>
+<title>Insite - My Tickets</title>
 <style>
     .pagination {
         display: inline-block;
@@ -16,7 +16,7 @@
     }
 
     .pagination a.active {
-        background-color: #4CAF50;
+        background-color: #090909;
         color: white;
     }
 
@@ -38,7 +38,7 @@
     </div>
 
     <div class="w-full sm:w-auto flex  sm:mt-0 mt-5">
-        <a href="{{ route('exportAll') }}" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: green; margin-top: 10px;">Export My Tickets</a>
+        <a href="{{ route('exportAll') }}" class="button text-white bg-theme-3 shadow-md mr-2" style=" margin-top: 10px;">Export My Tickets</a>
     </div>
     
     
@@ -57,7 +57,7 @@
                     <th class="border-b-2 text-center whitespace-no-wrap">tools</th>
 
                     <th class="border-b-2 text-center whitespace-no-wrap">
-                        <button class="button text-white bg-theme-1 shadow-md mr-2" onclick="exportTicket()" style="background-color: green">Export to Excel</button>
+                        <button class="button text-white bg-theme-3 shadow-md mr-2" onclick="exportTicket()">Export to Excel</button>
                     </th>
                 </tr>
             </thead>

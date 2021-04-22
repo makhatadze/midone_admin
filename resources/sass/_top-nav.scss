@@ -103,7 +103,7 @@
             ul {
                 left: 100%;
                 margin-left: -4px;
-                background: #1a389fed;
+                background: $main-color;
                 box-shadow: 0px 3px 20px #0000000b;
                 @apply hidden w-56 absolute rounded-md z-20 px-0 top-0 -mt-5;
                 li {
@@ -122,7 +122,7 @@
                     }
                 }
                 ul {
-                    background: #1a389fed;
+                    background: $main-color;
                     @apply hidden rounded-md mt-0 ml-0;
                 }
             }

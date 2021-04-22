@@ -12,7 +12,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN: Head -->
 <head>
     <meta charset="utf-8">
-    <link href="{{ asset('logo.svg') }}" rel="shortcut icon">
+    <link href="{{ asset('insite.png') }}" rel="shortcut icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
