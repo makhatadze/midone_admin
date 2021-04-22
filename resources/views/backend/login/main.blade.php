@@ -21,10 +21,10 @@
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Sign In</h2>
                     <div class="intro-x mt-8">
                         <form id="login-form">
-                            <input type="text" id="input-username" value=""
+                            <input type="text" id="input-email" value=""
                                    class="intro-x login__input input input--lg border border-gray-300 block"
-                                   placeholder="Username">
-                            <div id="error-username" class="input__error w-5/6 text-theme-6 mt-2"></div>
+                                   placeholder="Email">
+                            <div id="error-email" class="input__error w-5/6 text-theme-6 mt-2"></div>
                             <input type="password" id="input-password" value=""
                                    class="intro-x login__input input input--lg border border-gray-300 block mt-4"
                                    placeholder="Password">
@@ -56,7 +56,7 @@
                 $('#login-form').find('.input__error').html('')
 
                 // Post form
-                let username = $('#input-username').val()
+                let email = $('#input-email').val()
                 let password = $('#input-password').val()
                 let rememberMe = $('#input-remember-me').val()
 
@@ -65,16 +65,21 @@
                 await helper.delay(1500)
 
                 axios.post(`login`, {
-                    username: username,
+                    email: email,
                     password: password,
                     remember_me: rememberMe
                 }).then(res => {
                     location.reload()
                 }).catch(err => {
                     $('#btn-login').html('Login')
-                    for (const [key, val] of Object.entries(err.response.data.errors)) {
-                        $(`#input-${key}`).addClass('border-theme-6')
-                        $(`#error-${key}`).html(val)
+                    if (err.response.data.errors) {
+                        for (const [key, val] of Object.entries(err.response.data.errors)) {
+                            $(`#input-${key}`).addClass('border-theme-6')
+                            $(`#error-${key}`).html(val)
+                        }
+                    } else {
+                        $(`#input-password`).addClass('border-theme-6')
+                        $(`#error-password`).html(`${err.response.data.message}`)
                     }
                 })
             }
