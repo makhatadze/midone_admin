@@ -30,8 +30,8 @@ class TicketMail extends Mailable
      */
     public function build()
     {
-//        return $this->from('vitalimakhatadze@gmail.com', $this->data['user'])
-//            ->subject($this->data['subject'])
-//            ->view('backend.mail.create', ['data' => $this->data]);
+        return $this->from('vitalimakhatadze@gmail.com', $this->data['user'])
+            ->subject($this->data['subject'])
+            ->view('backend.mail.create', ['data' => $this->data]);
     }
 }
