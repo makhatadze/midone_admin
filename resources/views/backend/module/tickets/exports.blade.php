@@ -34,7 +34,7 @@
                         <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $export['id'] }}</div>
                     </td>
                     <td class="border-b">
-                        <div class="flex items-center sm:justify-center "> {{$export->user->username  }}</div>
+                        <div class="flex items-center sm:justify-center "> {{$export->user->email  }}</div>
                     </td>
                     <td class="border-b">
                         <div class="flex items-center sm:justify-center "> 

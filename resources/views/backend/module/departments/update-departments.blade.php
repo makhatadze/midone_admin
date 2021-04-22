@@ -32,7 +32,7 @@
                                 multiple>
                             @if($users)
                                 @foreach($users as $user)
-                                    <option value="{{$user->id}}" {{in_array($user->id,array_column($departmentHead,'id')) ? 'selected' : ''}}>{{$user->username}}</option>
+                                    <option value="{{$user->id}}" {{in_array($user->id,array_column($departmentHead,'id')) ? 'selected' : ''}}>{{$user->email}}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -46,7 +46,7 @@
                                 multiple>
                             @if($users)
                                 @foreach($users as $user)
-                                    <option value="{{$user->id}}" {{in_array($user->id,array_column($departmentStaff,'id')) ? 'selected' : ''}}>{{$user->username}}</option>
+                                    <option value="{{$user->id}}" {{in_array($user->id,array_column($departmentStaff,'id')) ? 'selected' : ''}}>{{$user->email}}</option>
                                 @endforeach
                             @endif
                         </select>

@@ -214,7 +214,7 @@ class UsersController extends BackendController
             ]);
         }
         $user->name = $request->first_name . ' ' . $request->last_name;
-        $user->username = $request->username;
+        $user->email = $request->email;
         if ($request->password != null) {
             $user->password = Hash::make($request->password);
         }
