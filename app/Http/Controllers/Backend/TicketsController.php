@@ -2,6 +2,7 @@
 
    namespace App\Http\Controllers\Backend;
 
+   use App\Mail\TicketMail;
    use App\Models\Approve;
    use App\Models\Category;
    use App\Models\Department;
