@@ -21,6 +21,7 @@
    use App\Models\Exports;
    use App\Traits\TicketFilters;
    use App\Models\TicketDepartments;
+   use Illuminate\Support\Facades\Mail;
 
    class TicketsController extends BackendController
    {
