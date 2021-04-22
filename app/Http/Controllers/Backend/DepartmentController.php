@@ -86,7 +86,7 @@ class DepartmentController extends BackendController
 
         }
 
-        $users = User::where('username', '!=', 'investgroup')->get();
+        $users = User::get();
 
         return view('backend.module.departments.create-departments')->with('users', $users);
 
@@ -145,7 +145,7 @@ class DepartmentController extends BackendController
         $departmentStaff = $department->users()->select('id')->get()->toArray();
         $departmentHead = $department->head()->select('id')->get()->toArray();
 
-        $users = User::where('username', '!=', 'investgroup')->get();
+        $users = User::get();
 
         return view('backend.module.departments.update-departments', [
             'users' => $users,

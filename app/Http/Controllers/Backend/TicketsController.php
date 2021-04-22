@@ -188,9 +188,9 @@
                ]);
            }
            $emails = $this->getUserEmails($ticket);
-//        if ($emails) {
-//            Mail::to($emails)->send(new TicketMail($data));
-//        }
+        if ($emails) {
+            Mail::to($emails)->send(new TicketMail($data));
+        }
 //        TicketCreated::dispatch($ticket);
 
            return redirect('/admin/tickets')->with('success', 'Ticket successfully created!');

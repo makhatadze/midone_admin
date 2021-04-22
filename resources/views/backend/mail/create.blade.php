@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ticket System</title>
+    <title>Insite Support</title>
     <!--<link type="image/x-icon" rel="icon" href="images/icon.ico">-->
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -35,7 +35,7 @@
             width: 92%;
             max-width: 600px;
             padding: 29px 4% 10px 4%;
-            background: #fd8d0f no-repeat right bottom;
+            background: #e81747 no-repeat right bottom;
             background-size: auto 100%;
             margin: 50px auto;
         }
@@ -72,7 +72,7 @@
         }
 
         #content h2 {
-            color: #fd8d0f;
+            color: #e81747;
             font-size: 15px;
             margin-bottom: 20px;
             font-family: 'Conv_BPG DejaVu Sans ExtraLight 2012';
