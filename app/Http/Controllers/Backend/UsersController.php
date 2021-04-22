@@ -34,7 +34,7 @@ class UsersController extends BackendController
      */
     public function index()
     {
-        $users = User::where('username', '!=', 'investgroup')->get();
+        $users = User::get();
 
         // Get Roles for user
         $roles = Role::get();
@@ -83,7 +83,7 @@ class UsersController extends BackendController
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'birthday' => 'date',
-            'username' => 'required|unique:users|max:255',
+            'email' => 'required|email|unique:users|max:255',
             'password' => 'required|between:8,255|confirmed',
             'password_confirmation' => 'required'
         ]);
@@ -94,7 +94,7 @@ class UsersController extends BackendController
 
         $user = new User;
         $user->name = $request->first_name . ' ' . $request->last_name;
-        $user->username = $request->username;
+        $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
         $profile = new Profile([
@@ -201,9 +201,9 @@ class UsersController extends BackendController
             'last_name' => 'required|max:255',
             'birthday' => 'date',
         ]);
-        if ($user->username != $request->username) {
+        if ($user->email != $request->email) {
             $request->validate([
-                'username' => 'required|unique:users|max:255',
+                'email' => 'required|email|unique:users|max:255',
             ]);
         }
 

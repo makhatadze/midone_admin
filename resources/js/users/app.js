@@ -8,9 +8,9 @@ $(document).ready(function () {
             $('.help-user-last_name').html(errors['last_name'][0])
             $('.error-user-last_name').addClass('has-error')
         }
-        if (errors['username']) {
-            $('.help-user-username').html(errors['username'][0])
-            $('.error-user-username').addClass('has-error')
+        if (errors['email']) {
+            $('.help-user-email').html(errors['email'][0])
+            $('.error-user-email').addClass('has-error')
         }
         if (errors['birthday']) {
             $('.help-user-birthday').html(errors['birthday'][0])
@@ -37,7 +37,7 @@ $(document).ready(function () {
         let phone = $('input[name="phone"]').val()
         let country = $('select[name="country"]').val()
         let birthday = $('input[name="birthday"]').val()
-        let username = $('input[name="username"]').val()
+        let email = $('input[name="email"]').val()
         let password = $('input[name="password"]').val()
         let password_confirm = $('input[name="password_confirmation"]').val()
         let role = $('select[name="user_role"]').val();
@@ -57,7 +57,7 @@ $(document).ready(function () {
                 phone: phone,
                 country: country,
                 birthday: birthday,
-                username: username,
+                email: email,
                 password: password,
                 password_confirmation: password_confirm,
                 role: role,
@@ -83,7 +83,7 @@ $(document).ready(function () {
                 phone: phone,
                 country: country,
                 birthday: birthday,
-                username: username,
+                email: email,
                 password: password,
                 password_confirmation: password_confirm,
                 role: role,
@@ -168,7 +168,7 @@ $(document).ready(function () {
                 $('select[name="country"]').val(data.profile.country).trigger('change')
                 $('input[name="birthday"]').val(data.profile.birthday)
             }
-            $('input[name="username"]').val(data.user.username)
+            $('input[name="email"]').val(data.user.email)
             $('input[name="password"]').val('')
             $('input[name="password_confirmation"]').val('')
 
@@ -219,7 +219,7 @@ $(document).ready(function () {
         let Cont = $('#user_view_modal');
         $('.view-fullName').text('')
         $('.view-birthday').text('')
-        $('.view-username').text('')
+        $('.view-email').text('')
         $('.view-role').text('')
         $('.view-permissions').text('')
 
@@ -231,7 +231,7 @@ $(document).ready(function () {
         }).done(function (data) {
             $('.view-fullName').text(data.user.name)
             $('.view-birthday').text(data.profile.birthday)
-            $('.view-username').text(data.user.username)
+            $('.view-email').text(data.user.email)
             if (data.country.length) {
                 $('.view-country').text(data.country[0].name)
 

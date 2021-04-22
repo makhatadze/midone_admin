@@ -24,7 +24,7 @@
                     <th class="border-b-2 whitespace-no-wrap">Id</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">First Name</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Last Name</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">UserName</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">Email</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Role</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Permissions</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Tools</th>
@@ -43,7 +43,7 @@
                             <div class="flex items-center sm:justify-center "> {{ (!empty($user->profile)) ? $user->profile->last_name : '' }}</div>
                         </td>
                         <td class="border-b">
-                            <div class="flex items-center sm:justify-center "> {{ $user->username }}</div>
+                            <div class="flex items-center sm:justify-center "> {{ $user->email }}</div>
                         </td>
                         <td class="text-center border-b">
                             @if($user->roles->isNotEmpty())
@@ -140,11 +140,11 @@
                                 <span class="help-block help-user-birthday">
                             </span>
                             </div>
-                            <div class="col-span-12 sm:col-span-6 error-user-username">
-                                <label>UserName</label>
-                                <input type="text" name="username" class="input w-full border mt-2 flex-1"
-                                       placeholder="Username ...">
-                                <span class="help-block help-user-username">
+                            <div class="col-span-12 sm:col-span-6 error-user-email">
+                                <label>Email</label>
+                                <input type="text" name="email" class="input w-full border mt-2 flex-1"
+                                       placeholder="Email ...">
+                                <span class="help-block help-user-email">
                             </span>
                             </div>
                             <div class="col-span-12 sm:col-span-6 error-user-password">
@@ -200,7 +200,7 @@
                     <div class="md:flex bg-white rounded-lg p-6">
                         <div class="text-center md:text-left">
                             <h2 class="text-lg view-fullName"></h2>
-                            <div class="text-gray-600 view-username mt-3"></div>
+                            <div class="text-gray-600 view-email mt-3"></div>
                             <div class="text-gray-600 view-country mt-1"></div>
                             <div class="text-gray-600 view-birthday mt-1"></div>
                             <div class="text-gray-600 view-phone mt-1"></div>
