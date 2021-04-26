@@ -311,20 +311,20 @@
                 </div>
 
                 <!--- ################### ----> 
-                <div class="col-span-12 sm:col-span-12 error-ticket-category" id="category_box">
-                    <label>Additional Departments</label>
-                    <div class="mt-2 category-container">
-                        <select name="additional_departments[]" id="additional_departments-select2"
-                                class="select2  w-full" multiple>
-                            @if($departments)
-                            <option value=""></option>
-                            @foreach($departments as $department)
-                            <option value="{{$department->id}}">{{$department->name}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
+{{--                <div class="col-span-12 sm:col-span-12 error-ticket-category" id="category_box">--}}
+{{--                    <label>Additional Departments</label>--}}
+{{--                    <div class="mt-2 category-container">--}}
+{{--                        <select name="additional_departments[]" id="additional_departments-select2"--}}
+{{--                                class="select2  w-full" multiple>--}}
+{{--                            @if($departments)--}}
+{{--                            <option value=""></option>--}}
+{{--                            @foreach($departments as $department)--}}
+{{--                            <option value="{{$department->id}}">{{$department->name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                            @endif--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <!--- #################### ----> 
                 <div class="col-span-12 sm:col-span-12 error-ticket-name">
                     <label>title</label>
