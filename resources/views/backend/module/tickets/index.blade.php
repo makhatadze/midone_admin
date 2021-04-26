@@ -332,17 +332,17 @@
                            placeholder="Name...">
                     <span class="help-block help-ticket-name mt-1"></span>
                 </div>
-                <div class="col-span-12 sm:col-span-12 error-ticket-deadline">
-                    <label>Deadline</label>
-                    <input type="text" name="ticket_deadline" class="datepicker input w-full border mt-2 flex-1"
-                           placeholder="deadline">
-                    <span class="help-block help-ticket-deadline mt-1">
-                    </span>
-                    <input type="time" name="ticket_deadline_time" class="input w-full border mt-2 flex-1"
-                           placeholder="deadline">
-                    <span class="help-block help-ticket-deadline mt-1">
-                    </span>
-                </div>
+{{--                <div class="col-span-12 sm:col-span-12 error-ticket-deadline">--}}
+{{--                    <label>Deadline</label>--}}
+{{--                    <input type="text" name="ticket_deadline" class="datepicker input w-full border mt-2 flex-1"--}}
+{{--                           placeholder="deadline">--}}
+{{--                    <span class="help-block help-ticket-deadline mt-1">--}}
+{{--                    </span>--}}
+{{--                    <input type="time" name="ticket_deadline_time" class="input w-full border mt-2 flex-1"--}}
+{{--                           placeholder="deadline">--}}
+{{--                    <span class="help-block help-ticket-deadline mt-1">--}}
+{{--                    </span>--}}
+{{--                </div>--}}
                 <div class="col-span-12 sm:col-span-12 error-ticket-level">
                     <label>Level</label>
                     <div class="mt-2 category-container">
