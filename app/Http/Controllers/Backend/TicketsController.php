@@ -322,11 +322,9 @@
 
        public function sendMessage(Request $request, Ticket $ticket)
        {
-
            $request->validate([
                'message' => 'required'
            ]);
-
            if ($request->hasFile('attachment')) {
                $request->validate([
                    'attachment' => 'mimes:pdf,xlx,text,csv,jpeg,png,bmp,gif,svg,webp'
@@ -334,7 +332,7 @@
            }
 
            $message = new Message();
-           $message->body = $request->message;
+           $message->body = nl2br(htmlspecialchars($request->message, ENT_QUOTES));
            $message->answer = false;
            $message->user_id = auth()->user()->id;
 
